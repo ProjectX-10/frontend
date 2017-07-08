@@ -24729,3 +24729,9 @@ ion-navbar.toolbar {
     padding-top: calc(16px + 20px);
   }
 }
+
+page-home on-buttons {
+  -webkit-order: 1;
+  -ms-flex-order: 1;
+  order: 1;
+}

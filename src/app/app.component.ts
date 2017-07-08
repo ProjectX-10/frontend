@@ -2,10 +2,13 @@ import { Component, ViewChild } from '@angular/core';
 
 import { Platform, MenuController, Nav } from 'ionic-angular';
 
-import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
-import { ListPage } from '../pages/list/list';
+//import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
+//import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
-//import { HomePage } from '../pages/home/home';
+import { LogoutPage } from '../pages/logout/logout';
+import { HomePage } from '../pages/home/home';
+import { ProfilePage } from '../pages/profile/profile';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -31,9 +34,11 @@ export class MyApp {
 
     // set our app's pages
     this.pages = [
-      { title: 'Hello Ionic', component: HelloIonicPage },
-      { title: 'My First List', component: ListPage },
-      { title: 'Login', component: LoginPage }
+      //{ title: 'Hello Ionic', component: HelloIonicPage },
+      //{ title: 'My First List', component: ListPage },
+      { title: 'Home', component: HomePage },
+      { title: 'Profile', component: ProfilePage },
+      { title: 'Logout', component: LogoutPage }
     ];
   }
 
@@ -50,6 +55,12 @@ export class MyApp {
     // close the menu when clicking a link from the menu
     this.menu.close();
     // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component);
+    if (page.title == 'Logout') {
+      // code...
+      this.nav.setRoot(this.rootPage);
+    } else {
+      this.nav.setRoot(page.component);
+    }
+    
   }
 }

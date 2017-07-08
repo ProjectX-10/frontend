@@ -12,16 +12,15 @@
     <ion-title>Home</ion-title>
     <ion-buttons end>
 		<button (click)="openModal()">
-			Modal
+			+
 		</button>
 	</ion-buttons>
-  </ion-navbar>
- </ion-buttons>
   
  </ion-navbar>
 </ion-header>
 
 <ion-content>
+  <ion-searchbar></ion-searchbar>
   <ion-list>
     <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
       <ion-icon name="{{item.icon}}" item-left></ion-icon>
