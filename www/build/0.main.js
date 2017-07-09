@@ -1,14 +1,14 @@
 webpackJsonp([0],{
 
-/***/ 274:
+/***/ 270:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__register__ = __webpack_require__(276);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RegisterModule", function() { return RegisterModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_secret__ = __webpack_require__(276);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddSecretModule", function() { return AddSecretModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,26 +18,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var RegisterModule = (function () {
-    function RegisterModule() {
+var AddSecretModule = (function () {
+    function AddSecretModule() {
     }
-    return RegisterModule;
+    return AddSecretModule;
 }());
-RegisterModule = __decorate([
+AddSecretModule = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["a" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__register__["a" /* RegisterPage */],
+            __WEBPACK_IMPORTED_MODULE_2__add_secret__["a" /* AddSecret */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__register__["a" /* RegisterPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__add_secret__["a" /* AddSecret */]),
         ],
         exports: [
-            __WEBPACK_IMPORTED_MODULE_2__register__["a" /* RegisterPage */]
+            __WEBPACK_IMPORTED_MODULE_2__add_secret__["a" /* AddSecret */]
         ]
     })
-], RegisterModule);
+], AddSecretModule);
 
-//# sourceMappingURL=register.module.js.map
+//# sourceMappingURL=add-secret.module.js.map
 
 /***/ }),
 
@@ -46,8 +46,8 @@ RegisterModule = __decorate([
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisterPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(18);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddSecret; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -60,31 +60,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 /**
- * Generated class for the Register page.
+ * Generated class for the AddSecret page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-var RegisterPage = (function () {
-    function RegisterPage(navCtrl, navParams) {
+var AddSecret = (function () {
+    function AddSecret(navCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
     }
-    RegisterPage.prototype.ionViewDidLoad = function () {
-        debugger;
-        console.log('ionViewDidLoad Register');
+    AddSecret.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad AddSecret');
     };
-    return RegisterPage;
+    return AddSecret;
 }());
-RegisterPage = __decorate([
+AddSecret = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
-        selector: 'page-register',template:/*ion-inline-start:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/register/register.html"*/'<!--\n  Generated template for the Register page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<!--<ion-header>\n\n  <ion-navbar>\n    <ion-title>register</ion-title>\n  </ion-navbar>\n\n</ion-header>-->\n\n<ion-header>\n  <ion-toolbar>\n    <ion-title>register</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content>\n  <ion-list>\n    <form [formGroup]="myForm">\n      <ion-item>\n        <ion-label floating primary>Name</ion-label>\n        <ion-input formControlName="name" type="text"\n                   id="name" spellcheck="false" autocapitalize="off">\n        </ion-input>\n      </ion-item>\n      <!--<p *ngIf="!isValid(\'name\')" danger padding-left>Invalid Name</p>-->\n      <ion-item>\n        <ion-label floating primary>Email</ion-label>\n        <ion-input formControlName="email"\n                   type="text" id="email" spellcheck="false" autocapitalize="off">\n        </ion-input>\n      </ion-item>\n      <!--<p *ngIf="!isValid(\'email\')" danger padding-left>Invalid Email</p>-->\n      <ion-item>\n        <ion-label floating primary>Phone</ion-label>\n        <ion-input formControlName="phone" type="text" id="phone">\n        </ion-input>\n      </ion-item>\n      <!--<p *ngIf="!isValid(\'phone\')" danger padding-left>Invalid Phone</p>-->\n      <button type="submit" block primary >Submit</button>\n    </form>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/register/register.html"*/,
+        selector: 'page-add-secret',template:/*ion-inline-start:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/add-secret/add-secret.html"*/'<!--\n  Generated template for the AddSecret page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>addSecret</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/add-secret/add-secret.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
-], RegisterPage);
+], AddSecret);
 
-//# sourceMappingURL=register.js.map
+//# sourceMappingURL=add-secret.js.map
 
 /***/ })
 

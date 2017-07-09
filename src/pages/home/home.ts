@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { ItemDetailsPage } from '../item-details/item-details';
+import { RegisterPage } from '../register/register';
 
 /**
  * Generated class for the Home page.
@@ -33,9 +34,8 @@ export class HomePage {
   }
 
   itemTapped(event, item) {
-    this.navCtrl.push(ItemDetailsPage, {
-      item: item
-    });
+    this.navCtrl.push(ItemDetailsPage);
   }
+
 }
 

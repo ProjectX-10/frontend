@@ -21,6 +21,7 @@
 
 <ion-content>
   <ion-searchbar></ion-searchbar>
+  <button ion-button class="register-btn" block clear (click)="createAccount($event)">Create New Account</button>
   <ion-list>
     <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
       <ion-icon name="{{item.icon}}" item-left></ion-icon>
