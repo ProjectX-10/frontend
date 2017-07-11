@@ -56097,8 +56097,10 @@ var RegisterPage = (function () {
     RegisterPage.prototype.ngOnInit = function () {
         this.myForm = this.formBuilder.group({
             'name': ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].minLength(3), this.nameValidator.bind(this)]],
-            'phone': ['', this.phoneValidator.bind(this)],
-            'email': ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].required, this.emailValidator.bind(this)]]
+            'email': ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].required, this.emailValidator.bind(this)]],
+            'password': ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].required, this.passwordValidator.bind(this)]],
+            'confirmPassword': ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].required, this.passwordValidator.bind(this)]],
+            'sceretKey': ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].required, this.passwordValidator.bind(this)]]
         });
     };
     RegisterPage.prototype.onSubmit = function () {
@@ -56121,9 +56123,21 @@ var RegisterPage = (function () {
             }
         }
     };
+    RegisterPage.prototype.passwordValidator = function (control) {
+        if (control.value !== '') {
+            //if (!control.value.match('\\(?\\d{3}\\)?-? *\\d{3}-? *-?\\d{4}')) {
+            return { invalidPassword: true };
+            //}
+        }
+    };
     RegisterPage.prototype.emailValidator = function (control) {
         if (!(control.value.toLowerCase().match('^[a-zA-Z]\\w*@gmail\\.com$') || control.value.toLowerCase().match('^[a-zA-Z]\\w*@yahoo\\.com$'))) {
             return { invalidEmail: true };
+        }
+    };
+    RegisterPage.prototype.confirmEmailValidator = function (email, confirmEmail) {
+        if (!(email.value.toLowerCase() == confirmEmail.value.toLowerCase())) {
+            return { invalidConfirmEmail: true };
         }
     };
     RegisterPage.prototype.openModal = function () {
@@ -56133,12 +56147,12 @@ var RegisterPage = (function () {
 RegisterPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
-        selector: 'page-register',template:/*ion-inline-start:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/register/register.html"*/'<!--\n  Generated template for the Register page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<!--<ion-header>\n\n  <ion-navbar>\n    <ion-title>register</ion-title>\n  </ion-navbar>\n\n</ion-header>-->\n\n<ion-header>\n  <ion-navbar>\n    <button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Register</ion-title>\n    \n    <ion-buttons end>\n    <button (click)="openModal()">\n    +\n    </button>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <ion-list>\n    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">\n      <ion-item>\n        <ion-label floating primary>Name</ion-label>\n        <ion-input [(ngModel)]="userInfo.name" formControlName="name" type="text"\n                   id="name" spellcheck="false" autocapitalize="off">\n        </ion-input>\n      </ion-item>\n      <p *ngIf="!isValid(\'name\')" danger padding-left>Invalid Name</p>\n      <ion-item>\n        <ion-label floating primary>Email</ion-label>\n        <ion-input [(ngModel)]="userInfo.email" formControlName="email"\n                   type="text" id="email" spellcheck="false" autocapitalize="off">\n        </ion-input>\n      </ion-item>\n      <p *ngIf="!isValid(\'email\')" danger padding-left>Invalid Email</p>\n      <ion-item>\n        <ion-label floating primary>Phone</ion-label>\n        <ion-input [(ngModel)]="userInfo.phone" formControlName="phone" type="text" id="phone">\n        </ion-input>\n      </ion-item>\n      <p *ngIf="!isValid(\'phone\')" danger padding-left>Invalid Phone</p>\n      <button type="submit" block primary [disabled]="!myForm.valid">Submit</button>\n    </form>\n  </ion-list>\n</ion-content>\n\n\n\n\n'/*ion-inline-end:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/register/register.html"*/,
+        selector: 'page-register',template:/*ion-inline-start:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/register/register.html"*/'<!--\n  Generated template for the Register page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<!--<ion-header>\n\n  <ion-navbar>\n    <ion-title>register</ion-title>\n  </ion-navbar>\n\n</ion-header>-->\n\n<ion-header>\n  <ion-navbar>\n    <button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Register</ion-title>\n    \n    <ion-buttons end>\n    <button (click)="openModal()">\n    +\n    </button>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n<!--<ion-content>\n  <ion-list>\n    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">\n      <ion-item>\n        <ion-label floating primary>Name</ion-label>\n        <ion-input [(ngModel)]="userInfo.name" formControlName="name" type="text"\n                   id="name" spellcheck="false" autocapitalize="off">\n        </ion-input>\n      </ion-item>\n      <p *ngIf="!isValid(\'name\')" danger padding-left>Invalid Name</p>\n      <ion-item>\n        <ion-label floating primary>Email</ion-label>\n        <ion-input [(ngModel)]="userInfo.email" formControlName="email"\n                   type="text" id="email" spellcheck="false" autocapitalize="off">\n        </ion-input>\n      </ion-item>\n      <p *ngIf="!isValid(\'email\')" danger padding-left>Invalid Email</p>\n      <ion-item>\n        <ion-label floating primary>Phone</ion-label>\n        <ion-input [(ngModel)]="userInfo.phone" formControlName="phone" type="text" id="phone">\n        </ion-input>\n      </ion-item>\n      <p *ngIf="!isValid(\'phone\')" danger padding-left>Invalid Phone</p>\n      <button type="submit" block primary [disabled]="!myForm.valid">Submit</button>\n    </form>\n  </ion-list>\n</ion-content>-->\n<ion-content>\n\n  <ion-list>\n    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">\n      <ion-item>\n        <ion-label floating primary>Name</ion-label>\n        <ion-input [(ngModel)]="userInfo.name" formControlName="name" type="text"\n                   id="name" spellcheck="false" autocapitalize="off">\n        </ion-input>\n      </ion-item>\n      <p *ngIf="!isValid(\'name\')" danger padding-left>Invalid Name</p>\n      <ion-item>\n        <ion-label floating primary>Email</ion-label>\n        <ion-input type="text" [(ngModel)]="userInfo.email" formControlName="email"\n                   id="email" spellcheck="false" autocapitalize="off">\n        </ion-input>\n      </ion-item>\n      <p *ngIf="!isValid(\'email\')" danger padding-left>Invalid Email</p>\n      <ion-item>\n        <ion-label floating primary>Password</ion-label>\n        <ion-input type="password" [(ngModel)]="userInfo.password" formControlName="password"\n                   id="password" spellcheck="false" autocapitalize="off">\n        </ion-input>\n      </ion-item>\n      <p *ngIf="!isValid(\'password\')" danger padding-left>Invalid Email</p>\n      <ion-item>\n        <ion-label floating primary>Confirm Password</ion-label>\n        <ion-input type="confirmPassword" [(ngModel)]="userInfo.confirmPassword" formControlName="confirmPassword"\n                   type="text" id="confirmPassword" spellcheck="false" autocapitalize="off">\n        </ion-input>\n      </ion-item>\n      <p *ngIf="!isValid(\'confirmPassword\')" danger padding-left>Invalid Password</p>\n      <ion-item>\n        <ion-label floating primary>Secret Key</ion-label>\n        <ion-input type="sceretKey" [(ngModel)]="userInfo.sceretKey" formControlName="sceretKey"\n                   type="text" id="sceretKey" spellcheck="false" autocapitalize="off">\n        </ion-input>\n      </ion-item>\n      <p *ngIf="!isValid(\'sceretKey\')" danger padding-left>Invalid Key</p>\n    </form>\n  </ion-list>\n\n  <div padding>\n    <button ion-button color="primary" block>Create Account</button>\n  </div>\n\n\n</ion-content>\n\n\n\n\n'/*ion-inline-end:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/register/register.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* FormBuilder */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* FormBuilder */]) === "function" && _c || Object])
 ], RegisterPage);
 
+var _a, _b, _c;
 //# sourceMappingURL=register.js.map
 
 /***/ }),

@@ -29,9 +29,11 @@ export class RegisterPage implements OnInit {
 
   ngOnInit(): any {
     this.myForm = this.formBuilder.group({
-      'name': ['', [Validators.required, Validators.minLength(3), this.nameValidator.bind(this)]],
-      'phone': ['', this.phoneValidator.bind(this)],
-      'email': ['', [Validators.required, this.emailValidator.bind(this)]]
+      'name': ['', [Validators.required, Validators.minLength(3), this.nameValidator.bind(this)]],      
+      'email': ['', [Validators.required, this.emailValidator.bind(this)]],
+      'password': ['', [Validators.required, this.passwordValidator.bind(this)]],
+      'confirmPassword': ['', [Validators.required, this.passwordValidator.bind(this)]],
+      'sceretKey': ['', [Validators.required, this.passwordValidator.bind(this)]]
     });
   }
 
@@ -59,13 +61,28 @@ export class RegisterPage implements OnInit {
     }
   }
 
+  passwordValidator(control: FormControl): {[s: string]: boolean} {
+    if (control.value !== '') {
+      //if (!control.value.match('\\(?\\d{3}\\)?-? *\\d{3}-? *-?\\d{4}')) {
+        return {invalidPassword: true};
+      //}
+    }
+  }
+
   emailValidator(control: FormControl): {[s: string]: boolean} {
     if (!(control.value.toLowerCase().match('^[a-zA-Z]\\w*@gmail\\.com$') || control.value.toLowerCase().match('^[a-zA-Z]\\w*@yahoo\\.com$'))) {
       return {invalidEmail: true};
     }
   }
 
+  confirmEmailValidator(email: FormControl, confirmEmail: FormControl): {[s: string]: boolean} {
+    if (!(email.value.toLowerCase() == confirmEmail.value.toLowerCase())) {
+      return {invalidConfirmEmail: true};
+    }
+
+  }
+
   openModal() {
-    
+
   }
 }
