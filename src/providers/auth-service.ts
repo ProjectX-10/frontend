@@ -14,7 +14,7 @@ export class User {
  
 @Injectable()
 export class AuthService {
-  currentUser: User;
+  currentUser: User;  
  
   public login(credentials) {
     if (credentials.email === null || credentials.password === null) {
@@ -28,7 +28,7 @@ export class AuthService {
         observer.complete();
       });
     }
-  }
+  }  
  
   public register(credentials) {
     if (credentials.email === null || credentials.password === null) {

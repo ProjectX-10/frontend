@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, AlertController, LoadingController, Loading, IonicPage } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import { RegisterPage } from '../../pages/register/register';
+import { DefaultApi } from '../../providers/api/DefaultApi';
+
+import * as models  from '../../providers/model/models';
 
 /**
  * Generated class for the Login page.
@@ -16,27 +19,45 @@ import { RegisterPage } from '../../pages/register/register';
 })
 export class LoginPage {
   loading: Loading;
-  registerCredentials = { email: '', password: '' };
+  registerCredentials = { email: '', password: '' };  
  
-  constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController, private loadingCtrl: LoadingController) { }
+  constructor(private nav: NavController, private auth: AuthService, 
+    private alertCtrl: AlertController, private loadingCtrl: LoadingController,
+    private api: DefaultApi) { }
  
   public createAccount(event) {
     this.nav.push(RegisterPage);
   }
  
-  public login() {
+  public login1() {
     this.showLoading()
     this.auth.login(this.registerCredentials).subscribe(allowed => {
-      // if (allowed) {  
+      if (allowed) {  
             debugger;
         this.nav.setRoot('HomePage');
-      // } else {
-      //   this.showError("Access Denied");
-      // }
+      } else {
+         this.showError("Access Denied");
+      }
     },
       error => {
         this.showError(error);
       });
+  }
+
+  public login() {
+    this.showLoading();
+    debugger;
+    if (this.registerCredentials.email === null || this.registerCredentials.password === null) {
+      return this.showError("Please insert credentials");
+    } else {
+      let request: models.LoginUserRequest = {} as models.LoginUserRequest;
+      request.email = this.registerCredentials.email;
+      request.password = this.registerCredentials.password;
+      this.api.loginPost(request).subscribe(response => {
+        console.log(response);
+      });
+      
+    }
   }
  
   showLoading() {
