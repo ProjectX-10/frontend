@@ -1,9 +1,11 @@
 import { OnInit, Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AlertController, IonicPage, NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
 //import { IonicPage } from 'ionic-angular';
 //import {OnInit, Component} from "@angular/core";
 import {FormGroup, FormBuilder, FormControl, Validators} from "@angular/forms";
+import { DefaultApi } from '../../providers/api/DefaultApi';
 
+import * as models  from '../../providers/model/models';
 
 
 /**
@@ -19,11 +21,13 @@ import {FormGroup, FormBuilder, FormControl, Validators} from "@angular/forms";
 })
 export class RegisterPage implements OnInit {
 
+  loading: Loading;
   myForm: FormGroup;
-  userInfo: {name: string, email: string, phone: string} = {name: '', email: '', phone: ''};
+  userInfo: {name: string, email: string, password: string, confirmPassword: string, secretKey: string} = 
+            {name: '', email: '', password: '', confirmPassword: '', secretKey: ''};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, 
-  	public formBuilder: FormBuilder) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController,
+  	public formBuilder: FormBuilder, private api: DefaultApi, private loadingCtrl: LoadingController) {
 
   }
 
@@ -33,12 +37,28 @@ export class RegisterPage implements OnInit {
       'email': ['', [Validators.required, this.emailValidator.bind(this)]],
       'password': ['', [Validators.required, this.passwordValidator.bind(this)]],
       'confirmPassword': ['', [Validators.required, this.passwordValidator.bind(this)]],
-      'sceretKey': ['', [Validators.required, this.passwordValidator.bind(this)]]
+      'secretKey': ['', [Validators.required, this.passwordValidator.bind(this)]]
     });
   }
 
   onSubmit() {
     console.log('submitting form');
+    var request: models.RegisterUserRequest = {} as models.RegisterUserRequest;
+    request.password = this.userInfo.password;
+    request.displayName = this.userInfo.name;
+    request.email = this.userInfo.email;    
+    request.secretKey = this.userInfo.secretKey;
+    request.imageUrl = 'imageUrl';
+
+    console.log(request);
+    debugger;
+    this.api.registerPost(request).subscribe(response => {
+        console.log(response);
+      },
+        error => {
+          this.showError(error);
+        
+      });
   }
 
   isValid(field: string) {
@@ -82,7 +102,16 @@ export class RegisterPage implements OnInit {
 
   }
 
-  openModal() {
-
+  showError(text) {
+    debugger;
+    this.loading.dismiss();
+ 
+    let alert = this.alertCtrl.create({
+      title: 'Fail',
+      subTitle: text,
+      buttons: ['OK']
+    });
+    alert.present(prompt);
   }
+  
 }

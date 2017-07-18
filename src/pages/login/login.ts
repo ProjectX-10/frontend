@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, LoadingController, Loading, IonicPage } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
-import { RegisterPage } from '../../pages/register/register';
 import { DefaultApi } from '../../providers/api/DefaultApi';
 
 import * as models  from '../../providers/model/models';
@@ -26,14 +25,13 @@ export class LoginPage {
     private api: DefaultApi) { }
  
   public createAccount(event) {
-    this.nav.push(RegisterPage);
+    this.nav.push('RegisterPage');
   }
  
   public login1() {
     this.showLoading()
     this.auth.login(this.registerCredentials).subscribe(allowed => {
       if (allowed) {  
-            debugger;
         this.nav.setRoot('HomePage');
       } else {
          this.showError("Access Denied");
@@ -46,7 +44,6 @@ export class LoginPage {
 
   public login() {
     this.showLoading();
-    debugger;
     if (this.registerCredentials.email === null || this.registerCredentials.password === null) {
       return this.showError("Please insert credentials");
     } else {
@@ -55,9 +52,17 @@ export class LoginPage {
       request.password = this.registerCredentials.password;
       this.api.loginPost(request).subscribe(response => {
         console.log(response);
+        if (response.token !== null) {
+          this.nav.setRoot('HomePage');
+        } else {
+          this.showError("Access Denied");
+        }
+      },
+        error => {
+          this.showError(error);
+        
       });
-      
-    }
+    }          
   }
  
   showLoading() {

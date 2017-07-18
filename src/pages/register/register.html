@@ -19,11 +19,11 @@
     </button>
     <ion-title>Register</ion-title>
     
-    <ion-buttons end>
+    <!--<ion-buttons end>
     <button (click)="openModal()">
     +
     </button>
-    </ion-buttons>
+    </ion-buttons>-->
   </ion-navbar>
 </ion-header>
 <!--<ion-content>
@@ -54,51 +54,49 @@
   </ion-list>
 </ion-content>-->
 <ion-content>
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <ion-list>    
+        <ion-item>
+          <ion-label floating primary>Name</ion-label>
+          <ion-input [(ngModel)]="userInfo.name" formControlName="name" type="text"
+                     id="name" spellcheck="false" autocapitalize="off">
+          </ion-input>
+        </ion-item>
+        <p *ngIf="!isValid('name')" danger padding-left>Invalid Name</p>
+        <ion-item>
+          <ion-label floating primary>Email</ion-label>
+          <ion-input type="text" [(ngModel)]="userInfo.email" formControlName="email"
+                     id="email" spellcheck="false" autocapitalize="off">
+          </ion-input>
+        </ion-item>
+        <p *ngIf="!isValid('email')" danger padding-left>Invalid Email</p>
+        <ion-item>
+          <ion-label floating primary>Password</ion-label>
+          <ion-input type="password" [(ngModel)]="userInfo.password" formControlName="password"
+                     id="password" spellcheck="false" autocapitalize="off">
+          </ion-input>
+        </ion-item>
+        <p *ngIf="!isValid('password')" danger padding-left>Invalid Email</p>
+        <ion-item>
+          <ion-label floating primary>Confirm Password</ion-label>
+          <ion-input type="confirmPassword" [(ngModel)]="userInfo.confirmPassword" formControlName="confirmPassword"
+                     type="text" id="confirmPassword" spellcheck="false" autocapitalize="off">
+          </ion-input>
+        </ion-item>
+        <p *ngIf="!isValid('confirmPassword')" danger padding-left>Invalid Password</p>
+        <ion-item>
+          <ion-label floating primary>Secret Key</ion-label>
+          <ion-input type="secretKey" [(ngModel)]="userInfo.secretKey" formControlName="secretKey"
+                     type="text" id="secretKey" spellcheck="false" autocapitalize="off">
+          </ion-input>
+        </ion-item>
+        <p *ngIf="!isValid('secretKey')" danger padding-left>Invalid Key</p>
+    </ion-list>
 
-  <ion-list>
-    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-      <ion-item>
-        <ion-label floating primary>Name</ion-label>
-        <ion-input [(ngModel)]="userInfo.name" formControlName="name" type="text"
-                   id="name" spellcheck="false" autocapitalize="off">
-        </ion-input>
-      </ion-item>
-      <p *ngIf="!isValid('name')" danger padding-left>Invalid Name</p>
-      <ion-item>
-        <ion-label floating primary>Email</ion-label>
-        <ion-input type="text" [(ngModel)]="userInfo.email" formControlName="email"
-                   id="email" spellcheck="false" autocapitalize="off">
-        </ion-input>
-      </ion-item>
-      <p *ngIf="!isValid('email')" danger padding-left>Invalid Email</p>
-      <ion-item>
-        <ion-label floating primary>Password</ion-label>
-        <ion-input type="password" [(ngModel)]="userInfo.password" formControlName="password"
-                   id="password" spellcheck="false" autocapitalize="off">
-        </ion-input>
-      </ion-item>
-      <p *ngIf="!isValid('password')" danger padding-left>Invalid Email</p>
-      <ion-item>
-        <ion-label floating primary>Confirm Password</ion-label>
-        <ion-input type="confirmPassword" [(ngModel)]="userInfo.confirmPassword" formControlName="confirmPassword"
-                   type="text" id="confirmPassword" spellcheck="false" autocapitalize="off">
-        </ion-input>
-      </ion-item>
-      <p *ngIf="!isValid('confirmPassword')" danger padding-left>Invalid Password</p>
-      <ion-item>
-        <ion-label floating primary>Secret Key</ion-label>
-        <ion-input type="sceretKey" [(ngModel)]="userInfo.sceretKey" formControlName="sceretKey"
-                   type="text" id="sceretKey" spellcheck="false" autocapitalize="off">
-        </ion-input>
-      </ion-item>
-      <p *ngIf="!isValid('sceretKey')" danger padding-left>Invalid Key</p>
-    </form>
-  </ion-list>
-
-  <div padding>
-    <button ion-button color="primary" block>Create Account</button>
-  </div>
-
+    <div padding>
+      <button ion-button color="primary" block>Create Account</button>
+    </div>
+  </form>
 
 </ion-content>
 
