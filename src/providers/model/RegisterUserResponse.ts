@@ -13,6 +13,6 @@
 import * as models from './models';
 
 export interface RegisterUserResponse {
-    item?: models.InlineResponse200Item;
+    item?: models.User;
 
 }

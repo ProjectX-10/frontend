@@ -13,7 +13,7 @@
 import * as models from './models';
 
 export interface LoginUserResponse {
-    item?: models.InlineResponse200Item;
+    item?: models.User;
 
     type?: string;
 
@@ -21,6 +21,6 @@ export interface LoginUserResponse {
 
     expires?: number;
 
-    auth?: models.InlineResponse2001Auth;
+    auth?: models.AWSAuth;
 
 }

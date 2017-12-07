@@ -12,7 +12,7 @@
 
 import * as models from './models';
 
-export interface InlineResponse200 {
-    item?: models.InlineResponse200Item;
+export interface SecretResponse {
+    item?: models.Secret;
 
 }

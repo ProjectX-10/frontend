@@ -12,7 +12,19 @@
 
 import * as models from './models';
 
-export interface ActivateUserRequest1 {
-    activateCode?: string;
+export interface Secret {
+    note?: string;
+
+    createdAt?: Date;
+
+    password?: string;
+
+    domain?: string;
+
+    id?: string;
+
+    userId?: string;
+
+    username?: string;
 
 }

@@ -13,7 +13,7 @@
 import * as models from './models';
 
 export interface AWSAuth {
-    credentials?: models.InlineResponse2001AuthCredentials;
+    credentials?: models.UserCredentials;
 
     identityId?: string;
 

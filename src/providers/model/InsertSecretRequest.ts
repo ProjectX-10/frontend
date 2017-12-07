@@ -12,9 +12,15 @@
 
 import * as models from './models';
 
-export interface LogoutRequest1 {
-    pushToken?: string;
+export interface InsertSecretRequest {
+    note?: string;
+
+    password?: string;
+
+    domain?: string;
 
     userId?: string;
+
+    username?: string;
 
 }

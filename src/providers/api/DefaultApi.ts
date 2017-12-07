@@ -28,7 +28,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class DefaultApi {
 
-    protected basePath = 'https://dgc6cf118b.execute-api.us-east-1.amazonaws.com/dev';
+    protected basePath = 'https://dyfq02qhr1.execute-api.us-east-1.amazonaws.com/dev';
     public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
 
@@ -43,9 +43,23 @@ export class DefaultApi {
 
     /**
      * 
+     */
+    public activateOptions(extraHttpRequestParams?: any): Observable<{}> {
+        return this.activateOptionsWithHttpInfo(extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
+                }
+            });
+    }
+
+    /**
+     * 
      * @param activateUserRequest 
      */
-    public activatePost(activateUserRequest: models.ActivateUserRequest, extraHttpRequestParams?: any): Observable<models.InlineResponse200> {
+    public activatePost(activateUserRequest: models.ActivateUserRequest, extraHttpRequestParams?: any): Observable<models.UserResponse> {
         return this.activatePostWithHttpInfo(activateUserRequest, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
@@ -74,7 +88,7 @@ export class DefaultApi {
      * 
      * @param loginUserRequest 
      */
-    public loginPost(loginUserRequest: models.LoginUserRequest, extraHttpRequestParams?: any): Observable<models.InlineResponse2001> {
+    public loginPost(loginUserRequest: models.LoginUserRequest, extraHttpRequestParams?: any): Observable<models.LoginUserResponse> {
         return this.loginPostWithHttpInfo(loginUserRequest, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
@@ -103,7 +117,7 @@ export class DefaultApi {
      * 
      * @param logoutRequest 
      */
-    public logoutPost(logoutRequest: models.LogoutRequest, extraHttpRequestParams?: any): Observable<models.InlineResponse2002> {
+    public logoutPost(logoutRequest: models.LogoutRequest, extraHttpRequestParams?: any): Observable<models.LogoutResponse> {
         return this.logoutPostWithHttpInfo(logoutRequest, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
@@ -132,8 +146,98 @@ export class DefaultApi {
      * 
      * @param registerUserRequest 
      */
-    public registerPost(registerUserRequest: models.RegisterUserRequest, extraHttpRequestParams?: any): Observable<models.InlineResponse200> {
+    public registerPost(registerUserRequest: models.RegisterUserRequest, extraHttpRequestParams?: any): Observable<models.RegisterUserResponse> {
         return this.registerPostWithHttpInfo(registerUserRequest, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
+                }
+            });
+    }
+
+    /**
+     * 
+     * @param id 
+     */
+    public secretsIdDelete(id: string, extraHttpRequestParams?: any): Observable<models.SecretResponse> {
+        return this.secretsIdDeleteWithHttpInfo(id, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
+                }
+            });
+    }
+
+    /**
+     * 
+     * @param id 
+     */
+    public secretsIdGet(id: string, extraHttpRequestParams?: any): Observable<models.SecretResponse> {
+        return this.secretsIdGetWithHttpInfo(id, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
+                }
+            });
+    }
+
+    /**
+     * 
+     * @param id 
+     */
+    public secretsIdOptions(id: string, extraHttpRequestParams?: any): Observable<{}> {
+        return this.secretsIdOptionsWithHttpInfo(id, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
+                }
+            });
+    }
+
+    /**
+     * 
+     * @param id 
+     * @param updateSecretRequest 
+     */
+    public secretsIdPut(id: string, updateSecretRequest: models.UpdateSecretRequest, extraHttpRequestParams?: any): Observable<models.SecretResponse> {
+        return this.secretsIdPutWithHttpInfo(id, updateSecretRequest, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
+                }
+            });
+    }
+
+    /**
+     * 
+     */
+    public secretsOptions(extraHttpRequestParams?: any): Observable<{}> {
+        return this.secretsOptionsWithHttpInfo(extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
+                }
+            });
+    }
+
+    /**
+     * 
+     * @param insertSecretRequest 
+     */
+    public secretsPost(insertSecretRequest: models.InsertSecretRequest, extraHttpRequestParams?: any): Observable<models.SecretResponse> {
+        return this.secretsPostWithHttpInfo(insertSecretRequest, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -161,7 +265,7 @@ export class DefaultApi {
      * 
      * @param changePasswordRequest 
      */
-    public usersChangepasswordPost(changePasswordRequest: models.ChangePasswordRequest, extraHttpRequestParams?: any): Observable<models.InlineResponse2001> {
+    public usersChangepasswordPost(changePasswordRequest: models.ChangePasswordRequest, extraHttpRequestParams?: any): Observable<models.LoginUserResponse> {
         return this.usersChangepasswordPostWithHttpInfo(changePasswordRequest, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
@@ -190,7 +294,7 @@ export class DefaultApi {
      * 
      * @param fogotPasswordRequest 
      */
-    public usersForgetpasswordPost(fogotPasswordRequest: models.FogotPasswordRequest, extraHttpRequestParams?: any): Observable<models.InlineResponse200> {
+    public usersForgetpasswordPost(fogotPasswordRequest: models.FogotPasswordRequest, extraHttpRequestParams?: any): Observable<models.UserResponse> {
         return this.usersForgetpasswordPostWithHttpInfo(fogotPasswordRequest, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
@@ -205,7 +309,7 @@ export class DefaultApi {
      * 
      * @param id 
      */
-    public usersIdDelete(id: string, extraHttpRequestParams?: any): Observable<models.InlineResponse200> {
+    public usersIdDelete(id: string, extraHttpRequestParams?: any): Observable<models.UserResponse> {
         return this.usersIdDeleteWithHttpInfo(id, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
@@ -220,7 +324,7 @@ export class DefaultApi {
      * 
      * @param id 
      */
-    public usersIdGet(id: string, extraHttpRequestParams?: any): Observable<models.InlineResponse200> {
+    public usersIdGet(id: string, extraHttpRequestParams?: any): Observable<models.UserResponse> {
         return this.usersIdGetWithHttpInfo(id, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
@@ -251,7 +355,7 @@ export class DefaultApi {
      * @param id 
      * @param updateUserRequest 
      */
-    public usersIdPut(id: string, updateUserRequest: models.UpdateUserRequest, extraHttpRequestParams?: any): Observable<models.InlineResponse200> {
+    public usersIdPut(id: string, updateUserRequest: models.UpdateUserRequest, extraHttpRequestParams?: any): Observable<models.UserResponse> {
         return this.usersIdPutWithHttpInfo(id, updateUserRequest, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
@@ -280,7 +384,7 @@ export class DefaultApi {
      * 
      * @param loginWithTokenRequest 
      */
-    public usersLoginwithfacebookPost(loginWithTokenRequest: models.LoginWithTokenRequest, extraHttpRequestParams?: any): Observable<models.InlineResponse2001> {
+    public usersLoginwithfacebookPost(loginWithTokenRequest: models.LoginWithTokenRequest, extraHttpRequestParams?: any): Observable<models.LoginUserResponse> {
         return this.usersLoginwithfacebookPostWithHttpInfo(loginWithTokenRequest, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
@@ -309,7 +413,7 @@ export class DefaultApi {
      * 
      * @param loginWithTokenRequest 
      */
-    public usersLoginwithgooglePost(loginWithTokenRequest: models.LoginWithTokenRequest2, extraHttpRequestParams?: any): Observable<models.InlineResponse2001> {
+    public usersLoginwithgooglePost(loginWithTokenRequest: models.LoginWithTokenRequest, extraHttpRequestParams?: any): Observable<models.LoginUserResponse> {
         return this.usersLoginwithgooglePostWithHttpInfo(loginWithTokenRequest, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
@@ -320,6 +424,39 @@ export class DefaultApi {
             });
     }
 
+
+    /**
+     * 
+     * 
+     */
+    public activateOptionsWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/activate';
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            'application/json'
+        ];
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Options,
+            headers: headers,
+            search: queryParameters,
+            withCredentials:this.configuration.withCredentials
+        });
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
 
     /**
      * 
@@ -493,7 +630,7 @@ export class DefaultApi {
             'application/json'
         ];
 
-        // authentication (secretAuthorizer1) required
+        // authentication (secretAuthorizer2) required
         if (this.configuration.apiKey) {
             headers.set('Authorization', this.configuration.apiKey);
         }
@@ -592,6 +729,259 @@ export class DefaultApi {
     /**
      * 
      * 
+     * @param id 
+     */
+    public secretsIdDeleteWithHttpInfo(id: string, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/secrets/${id}'
+                    .replace('${' + 'id' + '}', String(id));
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling secretsIdDelete.');
+        }
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            'application/json'
+        ];
+
+        // authentication (secretAuthorizer2) required
+        if (this.configuration.apiKey) {
+            headers.set('Authorization', this.configuration.apiKey);
+        }
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Delete,
+            headers: headers,
+            search: queryParameters,
+            withCredentials:this.configuration.withCredentials
+        });
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * 
+     * 
+     * @param id 
+     */
+    public secretsIdGetWithHttpInfo(id: string, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/secrets/${id}'
+                    .replace('${' + 'id' + '}', String(id));
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling secretsIdGet.');
+        }
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            'application/json'
+        ];
+
+        // authentication (secretAuthorizer2) required
+        if (this.configuration.apiKey) {
+            headers.set('Authorization', this.configuration.apiKey);
+        }
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Get,
+            headers: headers,
+            search: queryParameters,
+            withCredentials:this.configuration.withCredentials
+        });
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * 
+     * 
+     * @param id 
+     */
+    public secretsIdOptionsWithHttpInfo(id: string, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/secrets/${id}'
+                    .replace('${' + 'id' + '}', String(id));
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling secretsIdOptions.');
+        }
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            'application/json'
+        ];
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Options,
+            headers: headers,
+            search: queryParameters,
+            withCredentials:this.configuration.withCredentials
+        });
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param updateSecretRequest 
+     */
+    public secretsIdPutWithHttpInfo(id: string, updateSecretRequest: models.UpdateSecretRequest, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/secrets/${id}'
+                    .replace('${' + 'id' + '}', String(id));
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling secretsIdPut.');
+        }
+        // verify required parameter 'updateSecretRequest' is not null or undefined
+        if (updateSecretRequest === null || updateSecretRequest === undefined) {
+            throw new Error('Required parameter updateSecretRequest was null or undefined when calling secretsIdPut.');
+        }
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            'application/json'
+        ];
+
+        // authentication (secretAuthorizer2) required
+        if (this.configuration.apiKey) {
+            headers.set('Authorization', this.configuration.apiKey);
+        }
+
+        headers.set('Content-Type', 'application/json');
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Put,
+            headers: headers,
+            body: updateSecretRequest == null ? '' : JSON.stringify(updateSecretRequest), // https://github.com/angular/angular/issues/10612
+            search: queryParameters,
+            withCredentials:this.configuration.withCredentials
+        });
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * 
+     * 
+     */
+    public secretsOptionsWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/secrets';
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            'application/json'
+        ];
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Options,
+            headers: headers,
+            search: queryParameters,
+            withCredentials:this.configuration.withCredentials
+        });
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * 
+     * 
+     * @param insertSecretRequest 
+     */
+    public secretsPostWithHttpInfo(insertSecretRequest: models.InsertSecretRequest, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/secrets';
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // verify required parameter 'insertSecretRequest' is not null or undefined
+        if (insertSecretRequest === null || insertSecretRequest === undefined) {
+            throw new Error('Required parameter insertSecretRequest was null or undefined when calling secretsPost.');
+        }
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            'application/json'
+        ];
+
+        headers.set('Content-Type', 'application/json');
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Post,
+            headers: headers,
+            body: insertSecretRequest == null ? '' : JSON.stringify(insertSecretRequest), // https://github.com/angular/angular/issues/10612
+            search: queryParameters,
+            withCredentials:this.configuration.withCredentials
+        });
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * 
+     * 
      */
     public usersChangepasswordOptionsWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
         const path = this.basePath + '/users/changepassword';
@@ -646,7 +1036,7 @@ export class DefaultApi {
             'application/json'
         ];
 
-        // authentication (secretAuthorizer1) required
+        // authentication (secretAuthorizer2) required
         if (this.configuration.apiKey) {
             headers.set('Authorization', this.configuration.apiKey);
         }
@@ -767,7 +1157,7 @@ export class DefaultApi {
             'application/json'
         ];
 
-        // authentication (secretAuthorizer1) required
+        // authentication (secretAuthorizer2) required
         if (this.configuration.apiKey) {
             headers.set('Authorization', this.configuration.apiKey);
         }
@@ -811,7 +1201,7 @@ export class DefaultApi {
             'application/json'
         ];
 
-        // authentication (secretAuthorizer1) required
+        // authentication (secretAuthorizer2) required
         if (this.configuration.apiKey) {
             headers.set('Authorization', this.configuration.apiKey);
         }
@@ -899,7 +1289,7 @@ export class DefaultApi {
             'application/json'
         ];
 
-        // authentication (secretAuthorizer1) required
+        // authentication (secretAuthorizer2) required
         if (this.configuration.apiKey) {
             headers.set('Authorization', this.configuration.apiKey);
         }
@@ -1033,7 +1423,7 @@ export class DefaultApi {
      * 
      * @param loginWithTokenRequest 
      */
-    public usersLoginwithgooglePostWithHttpInfo(loginWithTokenRequest: models.LoginWithTokenRequest2, extraHttpRequestParams?: any): Observable<Response> {
+    public usersLoginwithgooglePostWithHttpInfo(loginWithTokenRequest: models.LoginWithTokenRequest, extraHttpRequestParams?: any): Observable<Response> {
         const path = this.basePath + '/users/loginwithgoogle';
 
         let queryParameters = new URLSearchParams();

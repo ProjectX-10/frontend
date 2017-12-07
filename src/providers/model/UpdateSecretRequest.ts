@@ -12,7 +12,11 @@
 
 import * as models from './models';
 
-export interface FogotPasswordRequest1 {
-    email?: string;
+export interface UpdateSecretRequest {
+    note?: string;
+
+    password?: string;
+
+    id?: string;
 
 }
