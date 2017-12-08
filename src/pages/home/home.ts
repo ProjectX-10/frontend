@@ -36,5 +36,9 @@ export class HomePage {
     this.navCtrl.push(ItemDetailsPage);
   }
 
+  openAdd() {
+    this.navCtrl.push('AddSecret');
+  }
+
 }
 

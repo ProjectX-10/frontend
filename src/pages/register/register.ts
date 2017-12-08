@@ -24,7 +24,7 @@ export class RegisterPage implements OnInit {
   loading: Loading;
   myForm: FormGroup;
   userInfo: {name: string, email: string, password: string, confirmPassword: string, secretKey: string} = 
-            {name: '', email: '', password: '', confirmPassword: '', secretKey: ''};
+            {name: 'Phu', email: 'uyphu@yahoo.com', password: '12345', confirmPassword: '12345', secretKey: '12345'};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController,
   	public formBuilder: FormBuilder, private api: DefaultApi, private loadingCtrl: LoadingController) {
@@ -42,7 +42,7 @@ export class RegisterPage implements OnInit {
   }
 
   onSubmit() {
-    console.log('submitting form');
+    this.showLoading();
     var request: models.RegisterUserRequest = {} as models.RegisterUserRequest;
     request.password = this.userInfo.password;
     request.displayName = this.userInfo.name;
@@ -50,10 +50,8 @@ export class RegisterPage implements OnInit {
     request.secretKey = this.userInfo.secretKey;
     request.imageUrl = 'imageUrl';
 
-    console.log(request);
-    debugger;
     this.api.registerPost(request).subscribe(response => {
-        console.log(response);
+        this.navCtrl.push('ActivatePage');
       },
         error => {
           this.showError(error);
@@ -102,16 +100,26 @@ export class RegisterPage implements OnInit {
 
   }
 
+  showLoading() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...',
+      dismissOnPageChange: true
+    });
+    this.loading.present();
+  }
+
   showError(text) {
-    debugger;
     this.loading.dismiss();
+    
+    var object = JSON.parse(text._body);
+    console.log(object);
  
     let alert = this.alertCtrl.create({
       title: 'Fail',
-      subTitle: text,
+      subTitle: object.errorMessage,
       buttons: ['OK']
     });
-    alert.present(prompt);
+    //alert.present(prompt);
   }
   
 }

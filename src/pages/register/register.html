@@ -18,41 +18,8 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Register</ion-title>
-    
-    <!--<ion-buttons end>
-    <button (click)="openModal()">
-    +
-    </button>
-    </ion-buttons>-->
   </ion-navbar>
 </ion-header>
-<!--<ion-content>
-  <ion-list>
-    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-      <ion-item>
-        <ion-label floating primary>Name</ion-label>
-        <ion-input [(ngModel)]="userInfo.name" formControlName="name" type="text"
-                   id="name" spellcheck="false" autocapitalize="off">
-        </ion-input>
-      </ion-item>
-      <p *ngIf="!isValid('name')" danger padding-left>Invalid Name</p>
-      <ion-item>
-        <ion-label floating primary>Email</ion-label>
-        <ion-input [(ngModel)]="userInfo.email" formControlName="email"
-                   type="text" id="email" spellcheck="false" autocapitalize="off">
-        </ion-input>
-      </ion-item>
-      <p *ngIf="!isValid('email')" danger padding-left>Invalid Email</p>
-      <ion-item>
-        <ion-label floating primary>Phone</ion-label>
-        <ion-input [(ngModel)]="userInfo.phone" formControlName="phone" type="text" id="phone">
-        </ion-input>
-      </ion-item>
-      <p *ngIf="!isValid('phone')" danger padding-left>Invalid Phone</p>
-      <button type="submit" block primary [disabled]="!myForm.valid">Submit</button>
-    </form>
-  </ion-list>
-</ion-content>-->
 <ion-content>
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
     <ion-list>    
@@ -80,7 +47,7 @@
         <ion-item>
           <ion-label floating primary>Confirm Password</ion-label>
           <ion-input type="confirmPassword" [(ngModel)]="userInfo.confirmPassword" formControlName="confirmPassword"
-                     type="text" id="confirmPassword" spellcheck="false" autocapitalize="off">
+                     type="password" id="confirmPassword" spellcheck="false" autocapitalize="off">
           </ion-input>
         </ion-item>
         <p *ngIf="!isValid('confirmPassword')" danger padding-left>Invalid Password</p>
