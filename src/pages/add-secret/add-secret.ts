@@ -2,6 +2,7 @@ import { OnInit, Component } from '@angular/core';
 import { AlertController, IonicPage, NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
 
 import {FormGroup, FormBuilder, FormControl, Validators} from "@angular/forms";
+import { Storage } from '@ionic/storage';
 import { DefaultApi } from '../../providers/api/DefaultApi';
 import * as models  from '../../providers/model/models';
 import * as CryptoJS from 'crypto-js/crypto-js';
@@ -20,19 +21,23 @@ export class AddSecret implements OnInit {
 
   loading: Loading;
   myForm: FormGroup;
-  //cryptoJS: CryptoJS = null;
   SECERET_KEY: string = '12345';
-  secret: {domain: string, username: string, password: string, confirmPassword: string, note: string, secretKey: string} = 
-            {domain: 'yahoo.com', username: 'uyphu@yahoo.com', password: '12345', confirmPassword: '12345', note: '12345', secretKey: '12345'};
+  secret: {userId: string, domain: string, username: string, password: string, confirmPassword: string, note: string, secretKey: string} = 
+            {userId: '', domain: 'yahoo.com', username: 'uyphu@yahoo.com', password: '12345', confirmPassword: '12345', note: '12345', secretKey: '12345'};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController,
-  	public formBuilder: FormBuilder, private api: DefaultApi, private loadingCtrl: LoadingController) {
-  	//this.cryptoJS = require("crypto-js");
+  	public formBuilder: FormBuilder, private api: DefaultApi, private loadingCtrl: LoadingController, private storage: Storage
+    ) {
 
   }
 
   ngOnInit(): any {
 
+    this.storage.get('user').then((val) => {
+      console.log('Your age is', val);
+      debugger;
+      this.secret.userId = val.item.id;
+    });
     this.myForm = this.formBuilder.group({
       'domain': ['', [Validators.required, Validators.minLength(3), this.domainValidator.bind(this)]],
       'username': ['', [Validators.required, this.usernameValidator.bind(this)]],
@@ -43,21 +48,23 @@ export class AddSecret implements OnInit {
   }
 
   onSubmit() {
-  //   this.showLoading();
-  //   //var request: models.RegisterUserRequest = {} as models.RegisterUserRequest;
-  //   // request.password = this.secret.password;
-  //   // request.displayName = this.secret.name;
-  //   // request.email = this.secret.email;    
-  //   // request.secretKey = this.secret.secretKey;
-  //   // request.imageUrl = 'imageUrl';
+    this.showLoading();
+    debugger;
+    var request: models.InsertSecretRequest = {} as models.InsertSecretRequest;
+    request.userId = this.secret.userId;
+    request.domain = this.secret.domain;
+    request.username = this.secret.username;
+    request.password = this.secret.confirmPassword;    
+    request.note = this.secret.note;
 
-  //   // this.api.registerPost(request).subscribe(response => {
-  //   //     this.navCtrl.push('ActivatePage');
-  //   //   },
-  //   //     error => {
-  //   //       this.showError(error);
+    this.api.secretsPost(request).subscribe(response => {
+        debugger;
+        this.navCtrl.push('HomePage');
+      },
+        error => {
+          this.showError(error);
         
-  //   //   });
+      });
   }
 
   isValid(field: string) {
@@ -103,7 +110,7 @@ export class AddSecret implements OnInit {
   setPasswordEncrypted(pwd: string): void {
     // Encrypt 
     var ciphertext = CryptoJS.AES.encrypt(pwd, this.SECERET_KEY);
-    this.secret.confirmPassword = ciphertext;
+    this.secret.confirmPassword = ciphertext.toString();
   }
 
   showLoading() {

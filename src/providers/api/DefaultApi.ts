@@ -147,8 +147,10 @@ export class DefaultApi {
      * @param registerUserRequest 
      */
     public registerPost(registerUserRequest: models.RegisterUserRequest, extraHttpRequestParams?: any): Observable<models.RegisterUserResponse> {
+        debugger;
         return this.registerPostWithHttpInfo(registerUserRequest, extraHttpRequestParams)
             .map((response: Response) => {
+                debugger;
                 if (response.status === 204) {
                     return undefined;
                 } else {

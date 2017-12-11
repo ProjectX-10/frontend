@@ -13,6 +13,7 @@ import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
 import { ProfilePage } from '../pages/profile/profile';
 //import { RegisterPage } from '../pages/register/register';
+import { IonicStorageModule } from '@ionic/storage';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -31,7 +32,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

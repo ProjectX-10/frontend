@@ -50,6 +50,8 @@ export class RegisterPage implements OnInit {
     request.secretKey = this.userInfo.secretKey;
     request.imageUrl = 'imageUrl';
 
+    debugger;
+
     this.api.registerPost(request).subscribe(response => {
         this.navCtrl.push('ActivatePage');
       },

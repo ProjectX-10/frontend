@@ -3,6 +3,8 @@ import { NavController, AlertController, LoadingController, Loading, IonicPage }
 import { AuthService } from '../../providers/auth-service';
 import { DefaultApi } from '../../providers/api/DefaultApi';
 
+import { Storage } from '@ionic/storage';
+
 import * as models  from '../../providers/model/models';
 
 /**
@@ -22,7 +24,7 @@ export class LoginPage {
  
   constructor(private nav: NavController, private auth: AuthService, 
     private alertCtrl: AlertController, private loadingCtrl: LoadingController,
-    private api: DefaultApi) { }
+    private api: DefaultApi, private storage: Storage) { }
  
   public createAccount(event) {
     this.nav.push('RegisterPage');
@@ -54,6 +56,8 @@ export class LoginPage {
         console.log(response);
         if (response.token !== null) {
           this.nav.setRoot('HomePage');
+          //this.$sessionStorage.store('user', response);
+          this.storage.set('user', response);
         } else {
           this.showError("Access Denied");
         }
