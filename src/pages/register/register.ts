@@ -121,7 +121,7 @@ export class RegisterPage implements OnInit {
       subTitle: object.errorMessage,
       buttons: ['OK']
     });
-    //alert.present(prompt);
+    alert.present();
   }
   
 }

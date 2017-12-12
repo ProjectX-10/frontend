@@ -22,8 +22,7 @@ export class AddSecret implements OnInit {
   loading: Loading;
   myForm: FormGroup;
   SECERET_KEY: string = '12345';
-  secret: {userId: string, domain: string, username: string, password: string, confirmPassword: string, note: string, secretKey: string} = 
-            {userId: '', domain: 'yahoo.com', username: 'uyphu@yahoo.com', password: '12345', confirmPassword: '12345', note: '12345', secretKey: '12345'};
+  secret: {userId: string, domain: string, username: string, password: string, encryptedPassword: string, note: string, secretKey: string};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController,
   	public formBuilder: FormBuilder, private api: DefaultApi, private loadingCtrl: LoadingController, private storage: Storage
@@ -34,31 +33,27 @@ export class AddSecret implements OnInit {
   ngOnInit(): any {
 
     this.storage.get('user').then((val) => {
-      console.log('Your age is', val);
-      debugger;
       this.secret.userId = val.item.id;
     });
     this.myForm = this.formBuilder.group({
       'domain': ['', [Validators.required, Validators.minLength(3), this.domainValidator.bind(this)]],
       'username': ['', [Validators.required, this.usernameValidator.bind(this)]],
       'password': ['', [Validators.required, this.passwordValidator.bind(this)]],
-      'confirmPassword': ['', [Validators.required, this.passwordValidator.bind(this)]],
+      'encryptedPassword': ['', [Validators.required, this.passwordValidator.bind(this)]],
       'note': ['', [Validators.required, this.noteValidator.bind(this)]]
     });
   }
 
   onSubmit() {
     this.showLoading();
-    debugger;
     var request: models.InsertSecretRequest = {} as models.InsertSecretRequest;
     request.userId = this.secret.userId;
     request.domain = this.secret.domain;
     request.username = this.secret.username;
-    request.password = this.secret.confirmPassword;    
+    request.password = this.secret.encryptedPassword;    
     request.note = this.secret.note;
 
-    this.api.secretsPost(request).subscribe(response => {
-        debugger;
+    this.api.secretsPost(request).subscribe(response => {        
         this.navCtrl.push('HomePage');
       },
         error => {
@@ -97,7 +92,7 @@ export class AddSecret implements OnInit {
 
   onInputTime(password: string){
   	this.setPasswordEncrypted(password);
-    console.log(this.getPasswordEcrypted(this.secret.confirmPassword));
+    console.log(this.getPasswordEcrypted(this.secret.encryptedPassword));
   }
 
   getPasswordEcrypted(pwd: string): string {
@@ -110,7 +105,7 @@ export class AddSecret implements OnInit {
   setPasswordEncrypted(pwd: string): void {
     // Encrypt 
     var ciphertext = CryptoJS.AES.encrypt(pwd, this.SECERET_KEY);
-    this.secret.confirmPassword = ciphertext.toString();
+    this.secret.encryptedPassword = ciphertext.toString();
   }
 
   showLoading() {
@@ -132,6 +127,6 @@ export class AddSecret implements OnInit {
       subTitle: object.errorMessage,
       buttons: ['OK']
     });
-    //alert.present(prompt);
+    alert.present();
   }
 }
