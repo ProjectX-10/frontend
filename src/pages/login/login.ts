@@ -54,10 +54,9 @@ export class LoginPage {
       request.password = this.registerCredentials.password;
       this.api.loginPost(request).subscribe(response => {
         console.log(response);
-        if (response.token !== null) {
-          this.nav.setRoot('HomePage');
-          //this.$sessionStorage.store('user', response);
+        if (response.token !== null) {                    
           this.storage.set('user', response);
+          this.nav.setRoot('HomePage');
         } else {
           this.showError("Access Denied");
         }

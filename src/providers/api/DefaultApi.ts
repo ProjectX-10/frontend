@@ -147,10 +147,8 @@ export class DefaultApi {
      * @param registerUserRequest 
      */
     public registerPost(registerUserRequest: models.RegisterUserRequest, extraHttpRequestParams?: any): Observable<models.RegisterUserResponse> {
-        debugger;
         return this.registerPostWithHttpInfo(registerUserRequest, extraHttpRequestParams)
             .map((response: Response) => {
-                debugger;
                 if (response.status === 204) {
                     return undefined;
                 } else {
@@ -240,6 +238,37 @@ export class DefaultApi {
      */
     public secretsPost(insertSecretRequest: models.InsertSecretRequest, extraHttpRequestParams?: any): Observable<models.SecretResponse> {
         return this.secretsPostWithHttpInfo(insertSecretRequest, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
+                }
+            });
+    }
+
+    /**
+     * 
+     * @param query 
+     * @param limit 
+     * @param cursor 
+     */
+    public secretsSearchGet(query: string, limit: string, cursor?: string, extraHttpRequestParams?: any): Observable<models.SearchSecretResponse> {
+        return this.secretsSearchGetWithHttpInfo(query, limit, cursor, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
+                }
+            });
+    }
+
+    /**
+     * 
+     */
+    public secretsSearchOptions(extraHttpRequestParams?: any): Observable<{}> {
+        return this.secretsSearchOptionsWithHttpInfo(extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -970,6 +999,95 @@ export class DefaultApi {
             method: RequestMethod.Post,
             headers: headers,
             body: insertSecretRequest == null ? '' : JSON.stringify(insertSecretRequest), // https://github.com/angular/angular/issues/10612
+            search: queryParameters,
+            withCredentials:this.configuration.withCredentials
+        });
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * 
+     * 
+     * @param query 
+     * @param limit 
+     * @param cursor 
+     */
+    public secretsSearchGetWithHttpInfo(query: string, limit: string, cursor?: string, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/secrets/search';
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // verify required parameter 'query' is not null or undefined
+        if (query === null || query === undefined) {
+            throw new Error('Required parameter query was null or undefined when calling secretsSearchGet.');
+        }
+        // verify required parameter 'limit' is not null or undefined
+        if (limit === null || limit === undefined) {
+            throw new Error('Required parameter limit was null or undefined when calling secretsSearchGet.');
+        }
+        if (query !== undefined) {
+            queryParameters.set('query', <any>query);
+        }
+
+        if (cursor !== undefined) {
+            queryParameters.set('cursor', <any>cursor);
+        }
+
+        if (limit !== undefined) {
+            queryParameters.set('limit', <any>limit);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            'application/json'
+        ];
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Get,
+            headers: headers,
+            search: queryParameters,
+            withCredentials:this.configuration.withCredentials
+        });
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * 
+     * 
+     */
+    public secretsSearchOptionsWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/secrets/search';
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            'application/json'
+        ];
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Options,
+            headers: headers,
             search: queryParameters,
             withCredentials:this.configuration.withCredentials
         });

@@ -7,7 +7,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
-import { ItemDetailsPage } from '../pages/item-details/item-details';
+import { SecretDetailsPage } from '../pages/secret-details/secret-details';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
@@ -23,7 +23,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   declarations: [
     MyApp,
     HelloIonicPage,
-    ItemDetailsPage,
+    SecretDetailsPage,
     ListPage,
     LoginPage,
     LogoutPage,
@@ -39,7 +39,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   entryComponents: [
     MyApp,
     HelloIonicPage,
-    ItemDetailsPage,
+    SecretDetailsPage,
     ListPage,
     LoginPage,
     LogoutPage,

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { NavController, NavParams } from 'ionic-angular';
 
-import { ItemDetailsPage } from '../item-details/item-details';
+import { SecretDetailsPage } from '../secret-details/secret-details';
 
 @Component({
   selector: 'page-list',
@@ -27,7 +27,7 @@ export class ListPage {
   }
 
   itemTapped(event, item) {
-    this.navCtrl.push(ItemDetailsPage, {
+    this.navCtrl.push(SecretDetailsPage, {
       item: item
     });
   }

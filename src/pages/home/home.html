@@ -11,8 +11,8 @@
     </button>
     <ion-title>Home</ion-title>
     <ion-buttons end>
-		<button (click)="openAdd()">
-			+
+		<button (click)="openAdd()" ion-button>
+			Add
 		</button>
 	</ion-buttons>
   
@@ -24,10 +24,10 @@
   
   <ion-list>
     <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon name="{{item.icon}}" item-left></ion-icon>
-      {{item.title}}
+      <ion-icon name="star" color="bright" item-left></ion-icon>
+      {{item.domain}}
       <div class="item-note" item-right>
-        {{item.note}}
+        {{item.username}}
       </div>
     </button>
   </ion-list>

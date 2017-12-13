@@ -22,7 +22,8 @@ export class AddSecret implements OnInit {
   loading: Loading;
   myForm: FormGroup;
   SECERET_KEY: string = '12345';
-  secret: {userId: string, domain: string, username: string, password: string, encryptedPassword: string, note: string, secretKey: string};
+  secret: {userId: string, domain: string, username: string, password: string, encryptedPassword: string, note: string, secretKey: string} = 
+          {userId: '', domain: '', username: '', password: '', encryptedPassword: '', note: '', secretKey: ''};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController,
   	public formBuilder: FormBuilder, private api: DefaultApi, private loadingCtrl: LoadingController, private storage: Storage

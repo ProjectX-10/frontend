@@ -12,6 +12,7 @@ export * from './ModelDate';
 export * from './ModelError';
 export * from './RegisterUserRequest';
 export * from './RegisterUserResponse';
+export * from './SearchSecretResponse';
 export * from './Secret';
 export * from './SecretResponse';
 export * from './UpdateSecretRequest';

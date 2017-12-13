@@ -6,30 +6,18 @@
 
 // AWS Mobile Hub Project Constants
 const aws_app_analytics = 'enable';
-const aws_cognito_identity_pool_id = 'us-east-1:4b105ba9-6239-4632-a48d-b2ea451ff1bc';
+const aws_cognito_identity_pool_id = 'us-east-1:f9e05f70-fb05-4f92-a44b-e388c26f948c';
 const aws_cognito_region = 'us-east-1';
 const aws_content_delivery = 'enable';
-const aws_content_delivery_bucket = 'projectx-hosting-mobilehub-827917845';
+const aws_content_delivery_bucket = 'secretx-hosting-mobilehub-1283110391';
 const aws_content_delivery_bucket_region = 'us-east-1';
 const aws_content_delivery_cloudfront = 'enable';
-const aws_content_delivery_cloudfront_domain = 'dhvckuuhrqwv1.cloudfront.net';
-const aws_dynamodb = 'enable';
-const aws_dynamodb_all_tables_region = 'us-east-1';
-const aws_dynamodb_table_schemas = '[{"tableName":"ionic-mobile-hub-tasks1","attributes":[{"name":"userId","type":"S"},{"name":"taskId","type":"S"},{"name":"category","type":"S"},{"name":"created","type":"N"},{"name":"description","type":"S"}],"indexes":[{"indexName":"DateSorted","hashKey":"userId","rangeKey":"created"}],"region":"us-east-1","hashKey":"userId","rangeKey":"taskId"}]';
-const aws_mobile_analytics_app_id = '63d93d6d485f408b94e0d79d0509d0af';
-const aws_project_id = 'aeeb7aac-a25a-46a3-b34c-475048286a64';
-const aws_project_name = 'projectX';
+const aws_content_delivery_cloudfront_domain = 'd3ljtr2ruuckta.cloudfront.net';
+const aws_mobile_analytics_app_id = 'e1e8d219b3c140529ef2e76355911d05';
+const aws_project_id = '6105febe-95ad-4549-8ff6-e5e9ea556202';
+const aws_project_name = 'secretX';
 const aws_project_region = 'us-east-1';
-const aws_resource_name_prefix = 'projectx-mobilehub-827917845';
-const aws_sign_in_enabled = 'enable';
-const aws_user_files = 'enable';
-const aws_user_files_s3_bucket = 'projectx-userfiles-mobilehub-827917845';
-const aws_user_files_s3_bucket_region = 'us-east-1';
-const aws_user_pools = 'enable';
-const aws_user_pools_id = 'us-east-1_IlOdUzIuv';
-const aws_user_pools_mfa_type = 'OFF';
-const aws_user_pools_web_client_id = '2ka70n7gp8igegjpsokj9i6cs1';
-const aws_user_settings = 'enable';
+const aws_resource_name_prefix = 'secretx-mobilehub-1283110391';
 
 AWS.config.region = aws_project_region;
 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
