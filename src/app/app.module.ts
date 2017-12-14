@@ -12,6 +12,7 @@ import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
 import { ProfilePage } from '../pages/profile/profile';
+//import { SecretKeyPage } from '../pages/secret-key/secret-key';
 //import { RegisterPage } from '../pages/register/register';
 import { IonicStorageModule } from '@ionic/storage';
 

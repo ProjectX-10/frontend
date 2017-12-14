@@ -30,19 +30,19 @@ export class LoginPage {
     this.nav.push('RegisterPage');
   }
  
-  public login1() {
-    this.showLoading()
-    this.auth.login(this.registerCredentials).subscribe(allowed => {
-      if (allowed) {  
-        this.nav.setRoot('HomePage');
-      } else {
-         this.showError("Access Denied");
-      }
-    },
-      error => {
-        this.showError(error);
-      });
-  }
+  // public login1() {
+  //   this.showLoading()
+  //   this.auth.login(this.registerCredentials).subscribe(allowed => {
+  //     if (allowed) {  
+  //       this.nav.setRoot('HomePage');
+  //     } else {
+  //        this.showError("Access Denied");
+  //     }
+  //   },
+  //     error => {
+  //       this.showError(error);
+  //     });
+  // }
 
   public login() {
     this.showLoading();
@@ -56,7 +56,7 @@ export class LoginPage {
         console.log(response);
         if (response.token !== null) {                    
           this.storage.set('user', response);
-          this.nav.setRoot('HomePage');
+          this.nav.setRoot('SecretKeyPage');
         } else {
           this.showError("Access Denied");
         }
