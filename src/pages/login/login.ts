@@ -29,20 +29,6 @@ export class LoginPage {
   public createAccount(event) {
     this.nav.push('RegisterPage');
   }
- 
-  // public login1() {
-  //   this.showLoading()
-  //   this.auth.login(this.registerCredentials).subscribe(allowed => {
-  //     if (allowed) {  
-  //       this.nav.setRoot('HomePage');
-  //     } else {
-  //        this.showError("Access Denied");
-  //     }
-  //   },
-  //     error => {
-  //       this.showError(error);
-  //     });
-  // }
 
   public login() {
     this.showLoading();
@@ -53,9 +39,11 @@ export class LoginPage {
       request.email = this.registerCredentials.email;
       request.password = this.registerCredentials.password;
       this.api.loginPost(request).subscribe(response => {
-        console.log(response);
         if (response.token !== null) {                    
-          this.storage.set('user', response);
+          this.storage.set('user', response);          
+          this.storage.set('passcode', this.registerCredentials.password);
+          console.log(this.registerCredentials.password);
+          this.registerCredentials.password;
           this.nav.setRoot('SecretKeyPage');
         } else {
           this.showError("Access Denied");
@@ -78,12 +66,21 @@ export class LoginPage {
  
   showError(text) {
     this.loading.dismiss();
- 
+    let errorMsg = this.getErrorMessage(text)
     let alert = this.alertCtrl.create({
       title: 'Fail',
-      subTitle: text,
+      subTitle: errorMsg,
       buttons: ['OK']
     });
     alert.present();
+  }  
+
+  getErrorMessage(text): string {
+    try {
+      var object = JSON.parse(text._body);
+      return object.errorMessage;
+    } catch (e){
+      return text;
+    }
   }
 }

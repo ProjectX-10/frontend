@@ -15,6 +15,7 @@ export * from './RegisterUserResponse';
 export * from './SearchSecretResponse';
 export * from './Secret';
 export * from './SecretResponse';
+export * from './UpdateSecretKeyRequest';
 export * from './UpdateSecretRequest';
 export * from './UpdateUserRequest';
 export * from './User';

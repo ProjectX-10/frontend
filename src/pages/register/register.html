@@ -50,14 +50,7 @@
                      type="password" id="confirmPassword" spellcheck="false" autocapitalize="off">
           </ion-input>
         </ion-item>
-        <p *ngIf="!isValid('confirmPassword')" danger padding-left>Invalid Password</p>
-        <ion-item>
-          <ion-label floating primary>Secret Key</ion-label>
-          <ion-input type="secretKey" [(ngModel)]="userInfo.secretKey" formControlName="secretKey"
-                     type="text" id="secretKey" spellcheck="false" autocapitalize="off">
-          </ion-input>
-        </ion-item>
-        <p *ngIf="!isValid('secretKey')" danger padding-left>Invalid Key</p>
+        <p *ngIf="!isValid('confirmPassword')" danger padding-left>Invalid Password</p>        
     </ion-list>
 
     <div padding>

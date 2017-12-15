@@ -42,7 +42,16 @@ export class ActivatePage implements OnInit{
 
     this.api.activatePost(request).subscribe(response => {
         console.log(response);
-        this.navCtrl.push('HomePage');
+        debugger;
+        if (response.item !== null) {
+          if (response.item.secretKey === undefined || response.item.secretKey === null) {
+            this.navCtrl.push('SecretKeyPage');
+          } else {
+            this.navCtrl.push('HomePage');    
+          }
+        } else {
+          this.navCtrl.push('HomePage');  
+        }        
       },
         error => {
           this.showError(error);
@@ -83,7 +92,7 @@ export class ActivatePage implements OnInit{
       subTitle: object.errorMessage,
       buttons: ['OK']
     });
-    alert.present(prompt);
+    alert.present();
   }
   
 }

@@ -455,6 +455,35 @@ export class DefaultApi {
             });
     }
 
+    /**
+     * 
+     */
+    public usersUpdatesecretkeyOptions(extraHttpRequestParams?: any): Observable<{}> {
+        return this.usersUpdatesecretkeyOptionsWithHttpInfo(extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
+                }
+            });
+    }
+
+    /**
+     * 
+     * @param updateSecretKeyRequest 
+     */
+    public usersUpdatesecretkeyPost(updateSecretKeyRequest: models.UpdateSecretKeyRequest, extraHttpRequestParams?: any): Observable<models.UpdateSecretKeyRequest> {
+        return this.usersUpdatesecretkeyPostWithHttpInfo(updateSecretKeyRequest, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
+                }
+            });
+    }
+
 
     /**
      * 
@@ -1568,6 +1597,80 @@ export class DefaultApi {
             method: RequestMethod.Post,
             headers: headers,
             body: loginWithTokenRequest == null ? '' : JSON.stringify(loginWithTokenRequest), // https://github.com/angular/angular/issues/10612
+            search: queryParameters,
+            withCredentials:this.configuration.withCredentials
+        });
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * 
+     * 
+     */
+    public usersUpdatesecretkeyOptionsWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/users/updatesecretkey';
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            'application/json'
+        ];
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Options,
+            headers: headers,
+            search: queryParameters,
+            withCredentials:this.configuration.withCredentials
+        });
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * 
+     * 
+     * @param updateSecretKeyRequest 
+     */
+    public usersUpdatesecretkeyPostWithHttpInfo(updateSecretKeyRequest: models.UpdateSecretKeyRequest, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/users/updatesecretkey';
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // verify required parameter 'updateSecretKeyRequest' is not null or undefined
+        if (updateSecretKeyRequest === null || updateSecretKeyRequest === undefined) {
+            throw new Error('Required parameter updateSecretKeyRequest was null or undefined when calling usersUpdatesecretkeyPost.');
+        }
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            'application/json'
+        ];
+
+        headers.set('Content-Type', 'application/json');
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Post,
+            headers: headers,
+            body: updateSecretKeyRequest == null ? '' : JSON.stringify(updateSecretKeyRequest), // https://github.com/angular/angular/issues/10612
             search: queryParameters,
             withCredentials:this.configuration.withCredentials
         });

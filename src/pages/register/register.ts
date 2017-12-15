@@ -23,8 +23,8 @@ export class RegisterPage implements OnInit {
 
   loading: Loading;
   myForm: FormGroup;
-  userInfo: {name: string, email: string, password: string, confirmPassword: string, secretKey: string} = 
-            {name: 'Phu', email: 'uyphu@yahoo.com', password: '12345', confirmPassword: '12345', secretKey: '12345'};
+  userInfo: {name: string, email: string, password: string, confirmPassword: string} = 
+            {name: '', email: '', password: '', confirmPassword: ''};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController,
   	public formBuilder: FormBuilder, private api: DefaultApi, private loadingCtrl: LoadingController) {
@@ -36,8 +36,7 @@ export class RegisterPage implements OnInit {
       'name': ['', [Validators.required, Validators.minLength(3), this.nameValidator.bind(this)]],      
       'email': ['', [Validators.required, this.emailValidator.bind(this)]],
       'password': ['', [Validators.required, this.passwordValidator.bind(this)]],
-      'confirmPassword': ['', [Validators.required, this.passwordValidator.bind(this)]],
-      'secretKey': ['', [Validators.required, this.passwordValidator.bind(this)]]
+      'confirmPassword': ['', [Validators.required, this.passwordValidator.bind(this)]]
     });
   }
 
@@ -46,9 +45,8 @@ export class RegisterPage implements OnInit {
     var request: models.RegisterUserRequest = {} as models.RegisterUserRequest;
     request.password = this.userInfo.password;
     request.displayName = this.userInfo.name;
-    request.email = this.userInfo.email;    
-    request.secretKey = this.userInfo.secretKey;
-    request.imageUrl = 'imageUrl';
+    request.email = this.userInfo.email;        
+    //request.imageUrl = 'imageUrl';
 
     debugger;
 
