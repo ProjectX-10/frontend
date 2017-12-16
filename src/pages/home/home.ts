@@ -23,6 +23,10 @@ export class HomePage implements OnInit {
   icons: string[];
   items: Array<models.Secret>;
 
+  QUERY_STR: string = '';
+  LIMIT: string = '15'
+  CURSOR: string = undefined;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private api: DefaultApi,
               private storage: Storage, private loadingCtrl: LoadingController, private alertCtrl: AlertController) {
     this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
@@ -35,26 +39,58 @@ export class HomePage implements OnInit {
   ngOnInit(): any {
 
     this.storage.get('user').then((val) => {      
-      let query:string = 'userId:' + val.item.id;
-      let limit:string = '10';
-      let cursor:string = '';
-      this.api.secretsSearchGet(query, limit, cursor).subscribe(response => {        
+      this.QUERY_STR = 'userId:' + val.item.id;      
+      this.getSecrets();
+    });    
+  }
+
+  getSecrets() {
+    this.api.secretsSearchGet(this.QUERY_STR, this.LIMIT, this.CURSOR).subscribe(response => {        
         if (response != null) {
-          for (let i in response.items) {
-             console.log(response.items[i]); 
+          for (let i in response.items) {              
              this.items.push(response.items[i]);
           }
+          this.CURSOR = response.nextPageToken;
         }
       },
         error => {
           this.showError(error);
         
       });
-    });    
   }
+
+  doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      if (this.CURSOR !== undefined) {
+        this.getSecrets();
+      }
+
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+    }, 500);
+  }
+
 
   itemTapped(event, secret) {
     this.navCtrl.push(SecretDetailsPage, { 'secret': secret });
+  }
+
+  deleteItem(event, secret) {  
+  debugger;  
+    this.api.secretsIdDelete(secret.id).subscribe(response => {        
+        //if (response != null) {
+          let index: number = this.items.indexOf(secret);
+          if (index !== -1) {
+              this.items.splice(index, 1);
+          } 
+        //}
+      },
+        error => {
+          this.showError(error);
+        
+      });
   }
 
   openAdd() {
@@ -71,16 +107,23 @@ export class HomePage implements OnInit {
 
   showError(text) {
     this.loading.dismiss();
-    
-    var object = JSON.parse(text._body);
-    console.log(object);
- 
+   
+    let errorMsg = this.getErrorMessage(text)
     let alert = this.alertCtrl.create({
       title: 'Fail',
-      subTitle: object.errorMessage,
+      subTitle: errorMsg,
       buttons: ['OK']
     });
     alert.present();
+  }  
+
+  getErrorMessage(text): string {
+    try {
+      var object = JSON.parse(text._body);
+      return object.errorMessage;
+    } catch (e){
+      return text;
+    }
   }
 
 }

@@ -83,13 +83,17 @@ var AddSecret = (function () {
         this.api = api;
         this.loadingCtrl = loadingCtrl;
         this.storage = storage;
-        this.SECERET_KEY = '12345';
+        this.SECERET_KEY = '';
         this.secret = { userId: '', domain: '', username: '', password: '', encryptedPassword: '', note: '', secretKey: '' };
     }
     AddSecret.prototype.ngOnInit = function () {
         var _this = this;
         this.storage.get('user').then(function (val) {
             _this.secret.userId = val.item.id;
+            _this.storage.get('secretKey').then(function (value) {
+                _this.SECERET_KEY = value;
+                //this.inputTestData();
+            });
         });
         this.myForm = this.formBuilder.group({
             'domain': ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].minLength(3), this.domainValidator.bind(this)]],
@@ -113,6 +117,25 @@ var AddSecret = (function () {
         }, function (error) {
             _this.showError(error);
         });
+    };
+    AddSecret.prototype.inputTestData = function () {
+        var _this = this;
+        debugger;
+        var request = {};
+        for (var i = 0; i < 30; i++) {
+            request.userId = this.secret.userId;
+            request.domain = 'domain' + i;
+            request.username = 'username' + i;
+            var ciphertext = __WEBPACK_IMPORTED_MODULE_5_crypto_js_crypto_js__["AES"].encrypt('password' + i, this.SECERET_KEY);
+            request.password = ciphertext.toString();
+            request.note = 'note' + i;
+            this.api.secretsPost(request).subscribe(function (response) {
+                //this.navCtrl.push('HomePage');
+                console.log(response);
+            }, function (error) {
+                _this.showError(error);
+            });
+        }
     };
     AddSecret.prototype.isValid = function (field) {
         //let formField = this.myForm.find(field);

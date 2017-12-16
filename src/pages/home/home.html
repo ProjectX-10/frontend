@@ -20,15 +20,34 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar></ion-searchbar>
-  
+  <ion-searchbar></ion-searchbar>  
   <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
+    <!--<button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
       <ion-icon name="star" color="bright" item-left></ion-icon>
       {{item.domain}}
       <div class="item-note" item-right>
         {{item.username}}
       </div>
-    </button>
+    </button>-->
+    <ion-item-sliding *ngFor="let item of items">
+      <button ion-item (click)="itemTapped($event, item)">
+        <ion-icon name="star" color="bright" item-left></ion-icon>
+          {{item.domain}}
+        <div class="item-note" item-right>
+          {{item.username}}
+        </div>
+      </button>      
+      <!--<ion-item-options side="left">
+        <button ion-button (click)="favorite(item)">Favorite</button>
+        <button ion-button color="danger" (click)="share(item)">Share</button>
+      </ion-item-options>-->
+
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="deleteItem($event, item)">Delete</button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

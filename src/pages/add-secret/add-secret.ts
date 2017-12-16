@@ -21,7 +21,7 @@ export class AddSecret implements OnInit {
 
   loading: Loading;
   myForm: FormGroup;
-  SECERET_KEY: string = '12345';
+  SECERET_KEY: string = '';
   secret: {userId: string, domain: string, username: string, password: string, encryptedPassword: string, note: string, secretKey: string} = 
           {userId: '', domain: '', username: '', password: '', encryptedPassword: '', note: '', secretKey: ''};
 
@@ -35,7 +35,12 @@ export class AddSecret implements OnInit {
 
     this.storage.get('user').then((val) => {
       this.secret.userId = val.item.id;
+      this.storage.get('secretKey').then((value) => {
+        this.SECERET_KEY = value;
+        //this.inputTestData();
+      });
     });
+    
     this.myForm = this.formBuilder.group({
       'domain': ['', [Validators.required, Validators.minLength(3), this.domainValidator.bind(this)]],
       'username': ['', [Validators.required, this.usernameValidator.bind(this)]],
@@ -43,6 +48,7 @@ export class AddSecret implements OnInit {
       'encryptedPassword': ['', [Validators.required, this.passwordValidator.bind(this)]],
       'note': ['', [Validators.required, this.noteValidator.bind(this)]]
     });
+    
   }
 
   onSubmit() {
@@ -61,6 +67,28 @@ export class AddSecret implements OnInit {
           this.showError(error);
         
       });
+  }
+
+  inputTestData() {
+    debugger;
+    var request: models.InsertSecretRequest = {} as models.InsertSecretRequest;
+    for (var i = 0; i < 30; i++) {
+      request.userId = this.secret.userId;
+      request.domain = 'domain' + i;
+      request.username = 'username' + i;
+      var ciphertext = CryptoJS.AES.encrypt('password' + i, this.SECERET_KEY);
+      request.password = ciphertext.toString();   
+      request.note = 'note' + i;
+
+      this.api.secretsPost(request).subscribe(response => {        
+          //this.navCtrl.push('HomePage');
+          console.log(response);
+        },
+          error => {
+            this.showError(error);
+          
+        });
+    }
   }
 
   isValid(field: string) {
