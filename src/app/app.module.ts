@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 
 import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { SecretDetailsPage } from '../pages/secret-details/secret-details';
+import { EditSecretPage } from '../pages/edit-secret/edit-secret';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
@@ -25,6 +26,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HelloIonicPage,
     SecretDetailsPage,
+    EditSecretPage,
     ListPage,
     LoginPage,
     LogoutPage,
@@ -41,6 +43,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HelloIonicPage,
     SecretDetailsPage,
+    EditSecretPage,
     ListPage,
     LoginPage,
     LogoutPage,

@@ -70,7 +70,6 @@ export class AddSecret implements OnInit {
   }
 
   inputTestData() {
-    debugger;
     var request: models.InsertSecretRequest = {} as models.InsertSecretRequest;
     for (var i = 0; i < 30; i++) {
       request.userId = this.secret.userId;
@@ -121,7 +120,7 @@ export class AddSecret implements OnInit {
 
   onInputTime(password: string){
   	this.setPasswordEncrypted(password);
-    console.log(this.getPasswordEcrypted(this.secret.encryptedPassword));
+    //console.log(this.getPasswordEcrypted(this.secret.encryptedPassword));
   }
 
   getPasswordEcrypted(pwd: string): string {

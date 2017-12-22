@@ -54,21 +54,10 @@ export class SecretKeyPage implements OnInit{
     this.myForm = this.formBuilder.group({
       'secretKey': ['', [Validators.required, this.secretKeyValidator.bind(this)]]
     });
-
-    // debugger;
-    // var ciphertext = CryptoJS.AES.encrypt('pwd111', this.SECERET_KEY);
-    // console.log(ciphertext.toString());
-
-    // var bytes = CryptoJS.AES.decrypt(ciphertext.toString(), this.SECERET_KEY);
-    // var plaintext = bytes.toString(CryptoJS.enc.Utf8);
-    // console.log(plaintext);
-    // var shaString = SHA256(ciphertext.toString());
-    // console.log(shaString.toString());
   }
 
   onSubmit() {
     this.showLoading();   
-    debugger;
     if (this.SECERET_KEY === undefined || this.SECERET_KEY === null || this.SECERET_KEY === '') {
       this.setupSecretkey();
     } else {

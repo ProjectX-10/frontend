@@ -1,14 +1,14 @@
 webpackJsonp([3],{
 
-/***/ 278:
+/***/ 279:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__activate__ = __webpack_require__(286);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ActivatePageModule", function() { return ActivatePageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_secret__ = __webpack_require__(287);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddSecretModule", function() { return AddSecretModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,38 +18,41 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ActivatePageModule = (function () {
-    function ActivatePageModule() {
+var AddSecretModule = (function () {
+    function AddSecretModule() {
     }
-    return ActivatePageModule;
+    return AddSecretModule;
 }());
-ActivatePageModule = __decorate([
+AddSecretModule = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["a" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__activate__["a" /* ActivatePage */],
+            __WEBPACK_IMPORTED_MODULE_2__add_secret__["a" /* AddSecret */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__activate__["a" /* ActivatePage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__add_secret__["a" /* AddSecret */]),
         ],
         exports: [
-            __WEBPACK_IMPORTED_MODULE_2__activate__["a" /* ActivatePage */]
+            __WEBPACK_IMPORTED_MODULE_2__add_secret__["a" /* AddSecret */]
         ]
     })
-], ActivatePageModule);
+], AddSecretModule);
 
-//# sourceMappingURL=activate.module.js.map
+//# sourceMappingURL=add-secret.module.js.map
 
 /***/ }),
 
-/***/ 286:
+/***/ 287:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_api_DefaultApi__ = __webpack_require__(48);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ActivatePage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_api_DefaultApi__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_crypto_js_crypto_js__ = __webpack_require__(204);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_crypto_js_crypto_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_crypto_js_crypto_js__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddSecret; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -63,69 +66,122 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 /**
- * Generated class for the ActivatePage page.
+ * Generated class for the AddSecret page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-var ActivatePage = (function () {
-    function ActivatePage(navCtrl, navParams, alertCtrl, formBuilder, api, loadingCtrl) {
+var AddSecret = (function () {
+    function AddSecret(navCtrl, navParams, alertCtrl, formBuilder, api, loadingCtrl, storage) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.alertCtrl = alertCtrl;
         this.formBuilder = formBuilder;
         this.api = api;
         this.loadingCtrl = loadingCtrl;
-        this.userInfo = { activateCode: '' };
+        this.storage = storage;
+        this.SECERET_KEY = '';
+        this.secret = { userId: '', domain: '', username: '', password: '', encryptedPassword: '', note: '', secretKey: '' };
     }
-    ActivatePage.prototype.ngOnInit = function () {
+    AddSecret.prototype.ngOnInit = function () {
+        var _this = this;
+        this.storage.get('user').then(function (val) {
+            _this.secret.userId = val.item.id;
+            _this.storage.get('secretKey').then(function (value) {
+                _this.SECERET_KEY = value;
+                //this.inputTestData();
+            });
+        });
         this.myForm = this.formBuilder.group({
-            'activateCode': ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].required, this.activateCodeValidator.bind(this)]]
+            'domain': ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].minLength(3), this.domainValidator.bind(this)]],
+            'username': ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].required, this.usernameValidator.bind(this)]],
+            'password': ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].required, this.passwordValidator.bind(this)]],
+            'encryptedPassword': ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].required, this.passwordValidator.bind(this)]],
+            'note': ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].required, this.noteValidator.bind(this)]]
         });
     };
-    ActivatePage.prototype.onSubmit = function () {
+    AddSecret.prototype.onSubmit = function () {
         var _this = this;
         this.showLoading();
         var request = {};
-        request.activateCode = this.userInfo.activateCode;
-        this.api.activatePost(request).subscribe(function (response) {
-            console.log(response);
-            debugger;
-            if (response.item !== null) {
-                if (response.item.secretKey === undefined || response.item.secretKey === null) {
-                    _this.navCtrl.push('SecretKeyPage');
-                }
-                else {
-                    _this.navCtrl.push('HomePage');
-                }
-            }
-            else {
-                _this.navCtrl.push('HomePage');
-            }
+        request.userId = this.secret.userId;
+        request.domain = this.secret.domain;
+        request.username = this.secret.username;
+        request.password = this.secret.encryptedPassword;
+        request.note = this.secret.note;
+        this.api.secretsPost(request).subscribe(function (response) {
+            _this.navCtrl.push('HomePage');
         }, function (error) {
             _this.showError(error);
         });
     };
-    ActivatePage.prototype.isValid = function (field) {
+    AddSecret.prototype.inputTestData = function () {
+        var _this = this;
+        var request = {};
+        for (var i = 0; i < 30; i++) {
+            request.userId = this.secret.userId;
+            request.domain = 'domain' + i;
+            request.username = 'username' + i;
+            var ciphertext = __WEBPACK_IMPORTED_MODULE_5_crypto_js_crypto_js__["AES"].encrypt('password' + i, this.SECERET_KEY);
+            request.password = ciphertext.toString();
+            request.note = 'note' + i;
+            this.api.secretsPost(request).subscribe(function (response) {
+                //this.navCtrl.push('HomePage');
+                console.log(response);
+            }, function (error) {
+                _this.showError(error);
+            });
+        }
+    };
+    AddSecret.prototype.isValid = function (field) {
         //let formField = this.myForm.find(field);
         //return formField.valid || formField.pristine;
         return true;
     };
-    ActivatePage.prototype.activateCodeValidator = function (control) {
+    AddSecret.prototype.domainValidator = function (control) {
         if (control.value !== '') {
-            return { invalidActivateCode: true };
+            return { invalidDomain: true };
         }
     };
-    ActivatePage.prototype.showLoading = function () {
+    AddSecret.prototype.usernameValidator = function (control) {
+        if (control.value !== '') {
+            return { invalidUsername: true };
+        }
+    };
+    AddSecret.prototype.passwordValidator = function (control) {
+        if (control.value !== '') {
+            return { invalidPassword: true };
+        }
+    };
+    AddSecret.prototype.noteValidator = function (control) {
+        return { invalidNote: true };
+    };
+    AddSecret.prototype.onInputTime = function (password) {
+        this.setPasswordEncrypted(password);
+        //console.log(this.getPasswordEcrypted(this.secret.encryptedPassword));
+    };
+    AddSecret.prototype.getPasswordEcrypted = function (pwd) {
+        // Decrypt 
+        var bytes = __WEBPACK_IMPORTED_MODULE_5_crypto_js_crypto_js__["AES"].decrypt(pwd.toString(), this.SECERET_KEY);
+        var plaintext = bytes.toString(__WEBPACK_IMPORTED_MODULE_5_crypto_js_crypto_js__["enc"].Utf8);
+        return plaintext;
+    };
+    AddSecret.prototype.setPasswordEncrypted = function (pwd) {
+        // Encrypt 
+        var ciphertext = __WEBPACK_IMPORTED_MODULE_5_crypto_js_crypto_js__["AES"].encrypt(pwd, this.SECERET_KEY);
+        this.secret.encryptedPassword = ciphertext.toString();
+    };
+    AddSecret.prototype.showLoading = function () {
         this.loading = this.loadingCtrl.create({
             content: 'Please wait...',
             dismissOnPageChange: true
         });
         this.loading.present();
     };
-    ActivatePage.prototype.showError = function (text) {
-        debugger;
+    AddSecret.prototype.showError = function (text) {
         this.loading.dismiss();
         var object = JSON.parse(text._body);
         console.log(object);
@@ -136,18 +192,18 @@ var ActivatePage = (function () {
         });
         alert.present();
     };
-    return ActivatePage;
+    return AddSecret;
 }());
-ActivatePage = __decorate([
+AddSecret = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
-        selector: 'page-activate',template:/*ion-inline-start:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/activate/activate.html"*/'<!--\n  Generated template for the ActivatePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>activate</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">\n    <ion-list>    \n        <ion-item>\n          <ion-label floating primary>Code</ion-label>\n          <ion-input [(ngModel)]="userInfo.activateCode" formControlName="activateCode" type="activateCode"\n                     id="activateCode" spellcheck="false" autocapitalize="off">\n          </ion-input>\n        </ion-item>\n        <p *ngIf="!isValid(\'activateCode\')" danger padding-left>Invalid activateCode</p>        \n    </ion-list>\n\n    <div padding>\n      <button ion-button color="primary" block>Activate</button>\n    </div>\n  </form>\n\n</ion-content>\n'/*ion-inline-end:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/activate/activate.html"*/,
+        selector: 'page-add-secret',template:/*ion-inline-start:"C:\Users\FPT LA\samples\projectX\frontend\src\pages\add-secret\add-secret.html"*/'<!--\n\n  Generated template for the AddSecret page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>addSecret</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n	<form [formGroup]="myForm" (ngSubmit)="onSubmit()">\n\n		<ion-list>\n\n			<ion-item>\n\n				<ion-label floating primary>Domain</ion-label>\n\n				<ion-input [(ngModel)]="secret.domain" formControlName="domain" type="text"\n\n                     id="domain" spellcheck="false" autocapitalize="off">\n\n          		</ion-input>\n\n			</ion-item>\n\n			<p *ngIf="!isValid(\'domain\')" danger padding-left>Invalid Domain</p>\n\n			<ion-item>\n\n	          <ion-label floating primary>Username</ion-label>\n\n	          <ion-input type="text" [(ngModel)]="secret.username" formControlName="username"\n\n	                     id="username" spellcheck="false" autocapitalize="off">\n\n	          </ion-input>\n\n	        </ion-item>\n\n	        <p *ngIf="!isValid(\'username\')" danger padding-left>Invalid Username</p>\n\n	        <ion-item>\n\n	          <ion-label floating primary>Password</ion-label>\n\n	          <ion-input type="password" [(ngModel)]="secret.password" (input)=\'onInputTime($event.target.value)\' formControlName="password"\n\n	                     id="password" spellcheck="false" autocapitalize="off">\n\n	          </ion-input>\n\n	        </ion-item>\n\n	        <p *ngIf="!isValid(\'password\')" danger padding-left>Invalid Password</p>\n\n	        <ion-item>\n\n	          <ion-label floating primary>Generate Password</ion-label>\n\n	          <ion-input type="encryptedPassword" [(ngModel)]="secret.encryptedPassword" formControlName="encryptedPassword" disabled="true"\n\n	                     type="text" id="encryptedPassword" spellcheck="false" autocapitalize="off">\n\n	          </ion-input>\n\n	        </ion-item>\n\n	        <p *ngIf="!isValid(\'confirmPassword\')" danger padding-left>Invalid Password</p>\n\n	        <ion-item>\n\n	          <ion-label floating primary>Note</ion-label>\n\n	          <ion-input type="note" [(ngModel)]="secret.note" formControlName="note"\n\n	                     type="text" id="note" spellcheck="false" autocapitalize="off">\n\n	          </ion-input>\n\n	        </ion-item>\n\n	        <p *ngIf="!isValid(\'note\')" danger padding-left>Invalid Note</p>\n\n		</ion-list>\n\n		<div padding>\n\n	      <button ion-button color="primary" block>Add</button>\n\n	    </div>\n\n	</form>\n\n</ion-content>'/*ion-inline-end:"C:\Users\FPT LA\samples\projectX\frontend\src\pages\add-secret\add-secret.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* AlertController */],
-        __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_3__providers_api_DefaultApi__["a" /* DefaultApi */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* LoadingController */]])
-], ActivatePage);
+        __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_4__providers_api_DefaultApi__["a" /* DefaultApi */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]])
+], AddSecret);
 
-//# sourceMappingURL=activate.js.map
+//# sourceMappingURL=add-secret.js.map
 
 /***/ })
 
