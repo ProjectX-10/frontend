@@ -61,7 +61,7 @@ export class EditSecretPage implements OnInit {
     request.id = this.secret.id;
     request.password = this.secret.encryptedPassword;    
     request.note = this.secret.note;
-
+    debugger;
     this.api.secretsIdPut(request.id, request).subscribe(response => {        
         this.navCtrl.push('HomePage');
       },

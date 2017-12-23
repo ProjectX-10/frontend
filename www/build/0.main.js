@@ -1,13 +1,13 @@
 webpackJsonp([0],{
 
-/***/ 285:
+/***/ 287:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__secret_key__ = __webpack_require__(289);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__secret_key__ = __webpack_require__(291);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SecretKeyPageModule", function() { return SecretKeyPageModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -41,16 +41,16 @@ SecretKeyPageModule = __decorate([
 
 /***/ }),
 
-/***/ 289:
+/***/ 291:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_api_DefaultApi__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_crypto_js_sha256__ = __webpack_require__(291);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_api_DefaultApi__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_crypto_js_sha256__ = __webpack_require__(293);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_crypto_js_sha256___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_crypto_js_sha256__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SecretKeyPage; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -103,18 +103,9 @@ var SecretKeyPage = (function () {
         this.myForm = this.formBuilder.group({
             'secretKey': ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].required, this.secretKeyValidator.bind(this)]]
         });
-        // debugger;
-        // var ciphertext = CryptoJS.AES.encrypt('pwd111', this.SECERET_KEY);
-        // console.log(ciphertext.toString());
-        // var bytes = CryptoJS.AES.decrypt(ciphertext.toString(), this.SECERET_KEY);
-        // var plaintext = bytes.toString(CryptoJS.enc.Utf8);
-        // console.log(plaintext);
-        // var shaString = SHA256(ciphertext.toString());
-        // console.log(shaString.toString());
     };
     SecretKeyPage.prototype.onSubmit = function () {
         this.showLoading();
-        debugger;
         if (this.SECERET_KEY === undefined || this.SECERET_KEY === null || this.SECERET_KEY === '') {
             this.setupSecretkey();
         }
@@ -188,7 +179,7 @@ var SecretKeyPage = (function () {
 SecretKeyPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
-        selector: 'page-secret-key',template:/*ion-inline-start:"C:\Users\FPT LA\samples\projectX\frontend\src\pages\secret-key\secret-key.html"*/'<!--\n\n  Generated template for the ActivatePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Secret Key</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n  <ion-card-content>\n\n    <p>Please provide your key and remember it FOREVER. If you forget it, we cannot decrypt your data.</p>\n\n  </ion-card-content>\n\n  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">\n\n    <ion-list>    \n\n        <ion-item>\n\n          <ion-label floating primary>Code</ion-label>\n\n          <ion-input [(ngModel)]="userInfo.secretKey" formControlName="secretKey" type="activateCode"\n\n                     id="secretKey" spellcheck="false" autocapitalize="off">\n\n          </ion-input>\n\n        </ion-item>\n\n        <p *ngIf="!isValid(\'secretKey\')" danger padding-left>Invalid Secret Key</p>        \n\n    </ion-list>\n\n\n\n    <div padding>\n\n      <button ion-button color="primary" block>Setup</button>\n\n    </div>\n\n  </form>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\FPT LA\samples\projectX\frontend\src\pages\secret-key\secret-key.html"*/,
+        selector: 'page-secret-key',template:/*ion-inline-start:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/secret-key/secret-key.html"*/'<!--\n  Generated template for the ActivatePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Secret Key</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <ion-card-content>\n    <p>Please provide your key and remember it FOREVER. If you forget it, we cannot decrypt your data.</p>\n  </ion-card-content>\n  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">\n    <ion-list>    \n        <ion-item>\n          <ion-label floating primary>Code</ion-label>\n          <ion-input [(ngModel)]="userInfo.secretKey" formControlName="secretKey" type="activateCode"\n                     id="secretKey" spellcheck="false" autocapitalize="off">\n          </ion-input>\n        </ion-item>\n        <p *ngIf="!isValid(\'secretKey\')" danger padding-left>Invalid Secret Key</p>        \n    </ion-list>\n\n    <div padding>\n      <button ion-button color="primary" block>Setup</button>\n    </div>\n  </form>\n\n</ion-content>\n'/*ion-inline-end:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/secret-key/secret-key.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* AlertController */],
         __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_3__providers_api_DefaultApi__["a" /* DefaultApi */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* LoadingController */],
@@ -199,7 +190,7 @@ SecretKeyPage = __decorate([
 
 /***/ }),
 
-/***/ 290:
+/***/ 292:
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory) {
@@ -965,13 +956,13 @@ SecretKeyPage = __decorate([
 
 /***/ }),
 
-/***/ 291:
+/***/ 293:
 /***/ (function(module, exports, __webpack_require__) {
 
 ;(function (root, factory) {
 	if (true) {
 		// CommonJS
-		module.exports = exports = factory(__webpack_require__(290));
+		module.exports = exports = factory(__webpack_require__(292));
 	}
 	else if (typeof define === "function" && define.amd) {
 		// AMD

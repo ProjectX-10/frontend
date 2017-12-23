@@ -938,11 +938,6 @@ export class DefaultApi {
             'application/json'
         ];
 
-        // authentication (secretAuthorizer2) required
-        if (this.configuration.apiKey) {
-            headers.set('Authorization', this.configuration.apiKey);
-        }
-
         headers.set('Content-Type', 'application/json');
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
