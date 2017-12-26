@@ -71,7 +71,7 @@ export class AddSecret implements OnInit {
 
   inputTestData() {
     var request: models.InsertSecretRequest = {} as models.InsertSecretRequest;
-    for (var i = 0; i < 30; i++) {
+    for (var i = 0; i < 40; i++) {
       request.userId = this.secret.userId;
       request.domain = 'domain' + i;
       request.username = 'username' + i;
@@ -81,7 +81,7 @@ export class AddSecret implements OnInit {
 
       this.api.secretsPost(request).subscribe(response => {        
           //this.navCtrl.push('HomePage');
-          console.log(response);
+          //console.log(response);
         },
           error => {
             this.showError(error);

@@ -23,9 +23,12 @@ export class HomePage implements OnInit {
   icons: string[];
   items: Array<models.Secret>;
 
+  searchInput: string = '';
+
   QUERY_STR: string = '';
   LIMIT: string = '15'
   CURSOR: string = undefined;
+  SEARCH_TEXT: string = undefined;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private api: DefaultApi,
               private storage: Storage, private loadingCtrl: LoadingController, private alertCtrl: AlertController) {
@@ -40,12 +43,12 @@ export class HomePage implements OnInit {
 
     this.storage.get('user').then((val) => {      
       this.QUERY_STR = 'userId:' + val.item.id;      
-      this.getSecrets();
+      this.getSecrets(this.QUERY_STR);
     });    
   }
 
-  getSecrets() {
-    this.api.secretsSearchGet(this.QUERY_STR, this.LIMIT, this.CURSOR).subscribe(response => {        
+  getSecrets(query:string) {
+    this.api.secretsSearchGet(query, this.LIMIT, this.CURSOR).subscribe(response => {       
         if (response != null) {
           for (let i in response.items) {              
              this.items.push(response.items[i]);
@@ -60,16 +63,17 @@ export class HomePage implements OnInit {
   }
 
   doInfinite(infiniteScroll) {
-    console.log('Begin async operation');
-
-    setTimeout(() => {
-      if (this.CURSOR !== undefined) {
-        this.getSecrets();
-      }
-
-      console.log('Async operation has ended');
-      infiniteScroll.complete();
-    }, 500);
+    if (this.CURSOR !== undefined) {
+      setTimeout(() => {
+        if (this.SEARCH_TEXT !== undefined) {
+          this.getSecrets(this.SEARCH_TEXT);
+        } else {
+          this.getSecrets(this.QUERY_STR);
+        }
+        
+        infiniteScroll.complete();
+      }, 500);
+    }
   }
 
 
@@ -77,8 +81,27 @@ export class HomePage implements OnInit {
     this.navCtrl.push(SecretDetailsPage, { 'secret': secret });
   }
 
+  onInput(event) {
+    if (this.searchInput.length >= 3) {
+      this.items = [];
+      this.CURSOR = undefined;
+      console.log(this.searchInput);
+      this.SEARCH_TEXT = this.QUERY_STR + '&searchText:' + this.searchInput;
+      this.getSecrets(this.SEARCH_TEXT);
+    } else if (this.searchInput.length == 0) {
+      this.SEARCH_TEXT = undefined;
+      this.CURSOR = undefined;
+      this.items = [];
+      this.getSecrets(this.QUERY_STR);
+    } 
+    
+  }
+
+  onCancel(event) {
+
+  }
+
   deleteItem(event, secret) {  
-  debugger;  
     this.api.secretsIdDelete(secret.id).subscribe(response => {        
         //if (response != null) {
           let index: number = this.items.indexOf(secret);
