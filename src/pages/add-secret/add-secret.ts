@@ -4,6 +4,9 @@ import { AlertController, IonicPage, NavController, NavParams, LoadingController
 import {FormGroup, FormBuilder, FormControl, Validators} from "@angular/forms";
 import { Storage } from '@ionic/storage';
 import { DefaultApi } from '../../providers/api/DefaultApi';
+//import { Configuration } from '../../providers/configuration';
+import { Utils } from '../../utils/utils';
+
 import * as models  from '../../providers/model/models';
 import * as CryptoJS from 'crypto-js/crypto-js';
 /**
@@ -22,6 +25,7 @@ export class AddSecret implements OnInit {
   loading: Loading;
   myForm: FormGroup;
   SECERET_KEY: string = '';
+
   secret: {userId: string, domain: string, username: string, password: string, encryptedPassword: string, note: string, secretKey: string} = 
           {userId: '', domain: '', username: '', password: '', encryptedPassword: '', note: '', secretKey: ''};
 
@@ -34,11 +38,20 @@ export class AddSecret implements OnInit {
   ngOnInit(): any {
 
     this.storage.get('user').then((val) => {
-      this.secret.userId = val.item.id;
-      this.storage.get('secretKey').then((value) => {
-        this.SECERET_KEY = value;
-        //this.inputTestData();
-      });
+      let loginUser: models.LoginUserResponse = val;
+      this.SECERET_KEY = loginUser.item.secretKey;
+      this.secret.userId = loginUser.item.id;      
+      this.api.configuration = Utils.getConfiguration(loginUser);     
+      debugger
+      this.api.secretsIdGet('fee26f8d-5f51-46d1-ba2d-e6424785c9f3').subscribe(response => {        
+        //this.navCtrl.push('HomePage');
+        debugger;
+        console.log(response.item);
+      },
+        error => {
+          this.showError(error);
+        
+      }); 
     });
     
     this.myForm = this.formBuilder.group({
@@ -59,7 +72,7 @@ export class AddSecret implements OnInit {
     request.username = this.secret.username;
     request.password = this.secret.encryptedPassword;    
     request.note = this.secret.note;
-
+    debugger;
     this.api.secretsPost(request).subscribe(response => {        
         this.navCtrl.push('HomePage');
       },
@@ -146,15 +159,21 @@ export class AddSecret implements OnInit {
 
   showError(text) {
     this.loading.dismiss();
-    
-    var object = JSON.parse(text._body);
-    console.log(object);
- 
+    let errorMsg = this.getErrorMessage(text)
     let alert = this.alertCtrl.create({
       title: 'Fail',
-      subTitle: object.errorMessage,
+      subTitle: errorMsg,
       buttons: ['OK']
     });
     alert.present();
+  }  
+
+  getErrorMessage(text): string {
+    try {
+      var object = JSON.parse(text._body);
+      return object.errorMessage;
+    } catch (e){
+      return text;
+    }
   }
 }

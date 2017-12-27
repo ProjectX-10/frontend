@@ -4,6 +4,8 @@ import { AlertController, IonicPage, NavController, NavParams, LoadingController
 import {FormGroup, FormBuilder, FormControl, Validators} from "@angular/forms";
 import { Storage } from '@ionic/storage';
 import { DefaultApi } from '../../providers/api/DefaultApi';
+//import { Configuration } from '../../providers/configuration';
+import { Utils } from '../../utils/utils';
 import * as models  from '../../providers/model/models';
 import * as CryptoJS from 'crypto-js/crypto-js';
 /**
@@ -33,6 +35,12 @@ export class EditSecretPage implements OnInit {
   }
 
   ngOnInit(): any {
+
+    this.storage.get('user').then((val) => {
+      let loginUser: models.LoginUserResponse = val;
+      this.SECERET_KEY = loginUser.item.secretKey;
+      this.api.configuration = Utils.getConfiguration(loginUser);      
+    });
 
     this.storage.get('user').then((val) => {
       this.secret.userId = val.item.id;
@@ -127,15 +135,21 @@ export class EditSecretPage implements OnInit {
 
   showError(text) {
     this.loading.dismiss();
-    
-    var object = JSON.parse(text._body);
-    console.log(object);
- 
+    let errorMsg = this.getErrorMessage(text)
     let alert = this.alertCtrl.create({
       title: 'Fail',
-      subTitle: object.errorMessage,
+      subTitle: errorMsg,
       buttons: ['OK']
     });
     alert.present();
+  }  
+
+  getErrorMessage(text): string {
+    try {
+      var object = JSON.parse(text._body);
+      return object.errorMessage;
+    } catch (e){
+      return text;
+    }
   }
 }

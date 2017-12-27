@@ -6,6 +6,8 @@ import { DefaultApi } from '../../providers/api/DefaultApi';
 import { Storage } from '@ionic/storage';
 
 import * as models  from '../../providers/model/models';
+import { Configuration } from '../../providers/configuration';
+import { UserToken } from '../../providers/user-token';
 
 /**
  * Generated class for the Login page.
@@ -40,10 +42,9 @@ export class LoginPage {
       request.password = this.registerCredentials.password;
       this.api.loginPost(request).subscribe(response => {
         if (response.token !== null) {                    
-          this.storage.set('user', response);          
-          this.storage.set('passcode', this.registerCredentials.password);
-          console.log(this.registerCredentials.password);
-          this.registerCredentials.password;
+          debugger;
+          response.item = this.registerCredentials.password;          
+          this.storage.set('passcode', this.registerCredentials.password);          
           this.nav.setRoot('SecretKeyPage');
         } else {
           this.showError("Access Denied");
@@ -54,6 +55,15 @@ export class LoginPage {
         
       });
     }          
+  }
+
+  getConfiguration(login: models.LoginUserResponse): Configuration {
+    let configuration:Configuration = new Configuration();
+    configuration.apiKey = login.token;
+    configuration.accessToken = login.auth.token;
+    configuration.username = login.item.email;
+    configuration.withCredentials = true;
+    return configuration;
   }
  
   showLoading() {

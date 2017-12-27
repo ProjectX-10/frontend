@@ -5,7 +5,6 @@ import { DefaultApi } from '../../providers/api/DefaultApi';
 import { Storage } from '@ionic/storage';
 
 import * as models  from '../../providers/model/models';
-import * as CryptoJS from 'crypto-js/crypto-js';
 import * as SHA256 from 'crypto-js/sha256';
 
 /**
@@ -26,6 +25,8 @@ export class SecretKeyPage implements OnInit{
   SECERET_KEY: string = '';
   hasKey: boolean = false; 
 
+  loginUser: models.LoginUserResponse = {} as models.LoginUserResponse;
+
   userInfo: {secretKey: string, userId: string, passcode: string} = 
             {secretKey: '', userId: '', passcode: ''};
 
@@ -39,11 +40,11 @@ export class SecretKeyPage implements OnInit{
 
   ngOnInit(): any {
     this.storage.get('user').then((value) => {
-      let user: models.User = value.item;
-      this.userInfo.userId = user.id;
-      if (user.secretKey !== undefined && user.secretKey !== null) {
+      this.loginUser = value;
+      this.userInfo.userId = this.loginUser.item.id;
+      if (this.loginUser.item.secretKey !== undefined && this.loginUser.item.secretKey !== null) {
         this.hasKey = true;
-        this.SECERET_KEY = user.secretKey;
+        this.SECERET_KEY = this.loginUser.item.secretKey;
       }    
     });
 
@@ -73,12 +74,18 @@ export class SecretKeyPage implements OnInit{
     console.log(shaString.toString());
 
     this.api.usersUpdatesecretkeyPost(request).subscribe(response => {        
+        this.updateStorage();
         this.navCtrl.push('HomePage');
       },
         error => {
           this.showError(error);
         
       });
+  }
+
+  updateStorage(): void {
+    this.loginUser.item.secretKey = this.userInfo.secretKey;
+    this.storage.set('user', this.loginUser); 
   }
 
   validateSecretKey() {
@@ -89,7 +96,7 @@ export class SecretKeyPage implements OnInit{
     console.log(secretKey);
 
     if (secretKey === this.SECERET_KEY) {
-      this.storage.set('secretKey', this.userInfo.secretKey); 
+      this.updateStorage();
       this.navCtrl.push('HomePage');
     } else {
       this.showError("Secret Key incorrect!")

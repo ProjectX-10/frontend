@@ -1,5 +1,6 @@
 import { AuthService } from './../providers/auth-service';
 import { DefaultApi } from './../providers/api/DefaultApi';
+import { Utils } from './../utils/utils';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
@@ -13,6 +14,7 @@ import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
 import { ProfilePage } from '../pages/profile/profile';
+
 //import { SecretKeyPage } from '../pages/secret-key/secret-key';
 //import { RegisterPage } from '../pages/register/register';
 import { IonicStorageModule } from '@ionic/storage';
@@ -31,6 +33,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LoginPage,
     LogoutPage,
     ProfilePage
+
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
-    DefaultApi
+    DefaultApi,
+    Utils
   ]
 })
 export class AppModule {}
