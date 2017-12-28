@@ -866,7 +866,8 @@ export class DefaultApi {
             requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 debugger;
-        return this.http.request(path, requestOptions);
+        //return this.http.get
+        return this.http.get(path, requestOptions);
     }
 
     /**

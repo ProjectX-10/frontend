@@ -49,6 +49,7 @@ export class AddSecret implements OnInit {
         console.log(response.item);
       },
         error => {
+          debugger;
           this.showError(error);
         
       }); 

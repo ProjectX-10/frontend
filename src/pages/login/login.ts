@@ -43,7 +43,8 @@ export class LoginPage {
       this.api.loginPost(request).subscribe(response => {
         if (response.token !== null) {                    
           debugger;
-          response.item = this.registerCredentials.password;          
+          //response.item = this.registerCredentials.password;          
+          this.storage.set('user', response);          
           this.storage.set('passcode', this.registerCredentials.password);          
           this.nav.setRoot('SecretKeyPage');
         } else {
