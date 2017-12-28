@@ -1,7 +1,7 @@
+import { Http, XHRBackend, RequestOptions, HttpModule } from '@angular/http';
 import { AuthService } from './../providers/auth-service';
 import { DefaultApi } from './../providers/api/DefaultApi';
 import { Utils } from './../utils/utils';
-import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -15,8 +15,7 @@ import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
 import { ProfilePage } from '../pages/profile/profile';
 
-//import { SecretKeyPage } from '../pages/secret-key/secret-key';
-//import { RegisterPage } from '../pages/register/register';
+import { InterceptorHttp } from '../providers/http/interceptor-http';
 import { IonicStorageModule } from '@ionic/storage';
 
 
