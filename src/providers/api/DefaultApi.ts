@@ -24,6 +24,8 @@ import * as models                                           from '../model/mode
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
+import { HttpClient } from "@angular/common/http";
+
 
 @Injectable()
 export class DefaultApi {
@@ -32,7 +34,7 @@ export class DefaultApi {
     public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
 
-    constructor(protected http: Http, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+    constructor(private httpClient: HttpClient, protected http: Http, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
             this.basePath = basePath;
         }
@@ -865,9 +867,8 @@ export class DefaultApi {
         if (extraHttpRequestParams) {
             requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
-debugger;
-        //return this.http.get
-        return this.http.get(path, requestOptions);
+
+        return this.http.request(path, requestOptions);
     }
 
     /**
@@ -1346,11 +1347,6 @@ debugger;
             'application/json'
         ];
 
-        // authentication (secretAuthorizer2) required
-        if (this.configuration.apiKey) {
-            headers.set('Authorization', this.configuration.apiKey);
-        }
-
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
             headers: headers,
@@ -1363,6 +1359,7 @@ debugger;
         }
 
         return this.http.request(path, requestOptions);
+        //return this.httpClient.get(path, requestOptions);
     }
 
     /**
@@ -1677,5 +1674,7 @@ debugger;
 
         return this.http.request(path, requestOptions);
     }
+
+
 
 }
