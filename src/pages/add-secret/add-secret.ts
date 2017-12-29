@@ -4,8 +4,6 @@ import { AlertController, IonicPage, NavController, NavParams, LoadingController
 import {FormGroup, FormBuilder, FormControl, Validators} from "@angular/forms";
 import { Storage } from '@ionic/storage';
 import { DefaultApi } from '../../providers/api/DefaultApi';
-//import { Configuration } from '../../providers/configuration';
-import { HttpClient } from "@angular/common/http";
 import { Utils } from '../../utils/utils';
 
 import * as models  from '../../providers/model/models';
@@ -31,8 +29,7 @@ export class AddSecret implements OnInit {
           {userId: '', domain: '', username: '', password: '', encryptedPassword: '', note: '', secretKey: ''};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController,
-  	public formBuilder: FormBuilder, private api: DefaultApi, private loadingCtrl: LoadingController, private storage: Storage,
-    private httpClient: HttpClient
+  	public formBuilder: FormBuilder, private api: DefaultApi, private loadingCtrl: LoadingController, private storage: Storage
     ) {
 
   }
@@ -43,36 +40,20 @@ export class AddSecret implements OnInit {
       let loginUser: models.LoginUserResponse = val;
       this.SECERET_KEY = loginUser.item.secretKey;
       this.secret.userId = loginUser.item.id;      
-      //this.api.configuration = Utils.getConfiguration(loginUser);     
+      this.api.configuration = Utils.getConfiguration(loginUser);     
       
-      // let id: string = 'e9aa26e6-5bca-4924-b3ea-422e94eb36e6';
 
-    // var activate: models.ActivateUserRequest = {} as models.ActivateUserRequest;
-    // activate.activateCode = 'dfasdfasd';
-
-    //   this.api.activatePost(activate).subscribe(response => {        
-    //     //this.navCtrl.push('HomePage');
-    //     debugger;
-    //     console.log(response.item);
-    //   },
-    //     error => {
-    //       this.showError(error);
-    });
-
-    let id: string = 'e9aa26e6-5bca-4924-b3ea-422e94eb36e6';
-
-    var activate: models.ActivateUserRequest = {} as models.ActivateUserRequest;
-    activate.activateCode = 'dfasdfasd';
-
-      this.api.usersIdGet(id).subscribe(response => {        
+      this.api.secretsIdGet('fee26f8d-5f51-46d1-ba2d-e6424785c9f3').subscribe(response => {  
+      //this.api.usersIdGet('e9aa26e6-5bca-4924-b3ea-422e94eb36e6').subscribe(response => {       
         //this.navCtrl.push('HomePage');
-        debugger;
         console.log(response.item);
       },
         error => {
           this.showError(error);
         
       }); 
+    });
+
     
     this.myForm = this.formBuilder.group({
       'domain': ['', [Validators.required, Validators.minLength(3), this.domainValidator.bind(this)]],
@@ -92,50 +73,16 @@ export class AddSecret implements OnInit {
     request.username = this.secret.username;
     request.password = this.secret.encryptedPassword;    
     request.note = this.secret.note;  
-
-    this.httpClient.get("https://jsonplaceholder.typicode.com/users").subscribe(
-      success => {
-        console.log("Successfully Completed");
-        console.log(success);
-      }, 
-      error => {
-        this.showError(error);
-      }
-    );  
     
-    // this.api.secretsPost(request).subscribe(response => {        
-    //     this.navCtrl.push('HomePage');
-    //   },
-    //     error => {
-    //       this.showError(error);
-        
-    //   });
-    let id: string = 'e9aa26e6-5bca-4924-b3ea-422e94eb36e6';
-
-    var activate: models.ActivateUserRequest = {} as models.ActivateUserRequest;
-    activate.activateCode = 'dfasdfasd';
-
-      this.api.usersIdGet(id).subscribe(response => {        
-        //this.navCtrl.push('HomePage');
-        debugger;
-        console.log(response.item);
+    this.api.secretsPost(request).subscribe(response => {        
+        this.navCtrl.push('HomePage');
       },
         error => {
           this.showError(error);
         
-      }); 
+      });
 
-
-
-      this.api.secretsIdGet('fee26f8d-5f51-46d1-ba2d-e6424785c9f3').subscribe(response => {        
-        //this.navCtrl.push('HomePage');
-        debugger;
-        console.log(response.item);
-      },
-        error => {
-          this.showError(error);
-        
-      }); 
+      
   }
 
   inputTestData() {

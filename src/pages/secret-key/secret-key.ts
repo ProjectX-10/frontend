@@ -28,7 +28,7 @@ export class SecretKeyPage implements OnInit{
   loginUser: models.LoginUserResponse = {} as models.LoginUserResponse;
 
   userInfo: {secretKey: string, userId: string, passcode: string} = 
-            {secretKey: '', userId: '', passcode: ''};
+            {secretKey: 'phu12345', userId: '', passcode: ''};
 
 
 
@@ -90,7 +90,6 @@ export class SecretKeyPage implements OnInit{
 
   validateSecretKey() {
     
-
     let shaString = SHA256(this.userInfo.secretKey.toString());
     let secretKey: string = shaString.toString();
     console.log(secretKey);

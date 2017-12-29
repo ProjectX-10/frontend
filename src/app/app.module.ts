@@ -6,7 +6,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-
 import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { SecretDetailsPage } from '../pages/secret-details/secret-details';
 import { EditSecretPage } from '../pages/edit-secret/edit-secret';
@@ -14,16 +13,8 @@ import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
 import { ProfilePage } from '../pages/profile/profile';
-
 import { HttpInterceptor } from '../providers/http/http-interceptor';
-//import { HttpFactory } from '../providers/http/http-interceptor';
-
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-//import { MyHttpInterceptor } from '../providers/http/my'
-
-
 import { IonicStorageModule } from '@ionic/storage';
-
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -43,7 +34,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   imports: [
     BrowserModule,
     HttpModule,
-    HttpClientModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],
@@ -62,7 +52,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},    
-    
     AuthService,
     DefaultApi,
     Utils

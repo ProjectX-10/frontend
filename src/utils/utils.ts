@@ -11,10 +11,8 @@ export class Utils {
 	    configuration.apiKey = loginUser.token;
 	    configuration.accessToken = loginUser.auth.token;
 	    configuration.username = loginUser.item.email;
-	    configuration.withCredentials = true;
+	    configuration.withCredentials = false;
 	    return configuration;
 	  }	
-	 static httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Http {
-	    return new HttpInterceptor(xhrBackend, requestOptions);
-	}
+	 
 }
