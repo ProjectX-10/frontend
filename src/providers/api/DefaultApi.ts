@@ -25,7 +25,6 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-
 @Injectable()
 export class DefaultApi {
 
@@ -812,6 +811,11 @@ export class DefaultApi {
             'application/json'
         ];
 
+        // authentication (secretAuthorizer2) required
+        if (this.configuration.apiKey) {
+            headers.set('Authorization', this.configuration.apiKey);
+        }
+
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Delete,
             headers: headers,
@@ -938,6 +942,11 @@ export class DefaultApi {
         let produces: string[] = [
             'application/json'
         ];
+
+        // authentication (secretAuthorizer2) required
+        if (this.configuration.apiKey) {
+            headers.set('Authorization', this.configuration.apiKey);
+        }
 
         headers.set('Content-Type', 'application/json');
 
@@ -1076,6 +1085,11 @@ export class DefaultApi {
         let produces: string[] = [
             'application/json'
         ];
+
+        // authentication (secretAuthorizer2) required
+        if (this.configuration.apiKey) {
+            headers.set('Authorization', this.configuration.apiKey);
+        }
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
@@ -1346,6 +1360,11 @@ export class DefaultApi {
             'application/json'
         ];
 
+        // authentication (secretAuthorizer2) required
+        if (this.configuration.apiKey) {
+            headers.set('Authorization', this.configuration.apiKey);
+        }
+
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
             headers: headers,
@@ -1358,7 +1377,6 @@ export class DefaultApi {
         }
 
         return this.http.request(path, requestOptions);
-        //return this.httpClient.get(path, requestOptions);
     }
 
     /**
@@ -1657,6 +1675,11 @@ export class DefaultApi {
             'application/json'
         ];
 
+        // authentication (secretAuthorizer2) required
+        if (this.configuration.apiKey) {
+            headers.set('Authorization', this.configuration.apiKey);
+        }
+
         headers.set('Content-Type', 'application/json');
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -1673,7 +1696,5 @@ export class DefaultApi {
 
         return this.http.request(path, requestOptions);
     }
-
-
 
 }

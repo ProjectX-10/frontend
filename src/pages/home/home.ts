@@ -5,6 +5,7 @@ import { SecretDetailsPage } from '../secret-details/secret-details';
 import { DefaultApi } from '../../providers/api/DefaultApi';
 import * as models  from '../../providers/model/models';
 import { Storage } from '@ionic/storage';
+import { Utils } from '../../utils/utils';
 
 /**
  * Generated class for the Home page.
@@ -34,16 +35,17 @@ export class HomePage implements OnInit {
               private storage: Storage, private loadingCtrl: LoadingController, private alertCtrl: AlertController) {
     this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
     'american-football', 'boat', 'bluetooth', 'build'];
-
-    this.items = [];
-    
+    this.items = [];    
   }
 
   ngOnInit(): any {
 
-    this.storage.get('user').then((val) => {      
-      this.QUERY_STR = 'userId:' + val.item.id;      
+    this.storage.get('user').then((val) => {     
+      let loginUser: models.LoginUserResponse = val; 
+      this.QUERY_STR = 'userId:' + loginUser.item.id;      
+      this.api.configuration = Utils.getConfiguration(loginUser);  
       this.getSecrets(this.QUERY_STR);
+      
     });    
   }
 

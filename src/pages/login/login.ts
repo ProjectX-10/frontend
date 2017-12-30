@@ -3,11 +3,9 @@ import { NavController, AlertController, LoadingController, Loading, IonicPage }
 import { AuthService } from '../../providers/auth-service';
 import { DefaultApi } from '../../providers/api/DefaultApi';
 
-import { Storage } from '@ionic/storage';
-
+import { Storage } from '@ionic/storage'
 import * as models  from '../../providers/model/models';
 import { Configuration } from '../../providers/configuration';
-import { UserToken } from '../../providers/user-token';
 
 /**
  * Generated class for the Login page.
@@ -41,9 +39,7 @@ export class LoginPage {
       request.email = this.registerCredentials.email;
       request.password = this.registerCredentials.password;
       this.api.loginPost(request).subscribe(response => {
-        if (response.token !== null) {                    
-          debugger;
-          //response.item = this.registerCredentials.password;          
+        if (response.token !== null) {                       
           this.storage.set('user', response);          
           this.storage.set('passcode', this.registerCredentials.password);          
           this.nav.setRoot('SecretKeyPage');
@@ -52,20 +48,10 @@ export class LoginPage {
         }
       },
         error => {
-          this.showError(error);
-        
+          this.showError(error);                  
       });
     }          
-  }
-
-  getConfiguration(login: models.LoginUserResponse): Configuration {
-    let configuration:Configuration = new Configuration();
-    configuration.apiKey = login.token;
-    configuration.accessToken = login.auth.token;
-    configuration.username = login.item.email;
-    configuration.withCredentials = true;
-    return configuration;
-  }
+  }  
  
   showLoading() {
     this.loading = this.loadingCtrl.create({

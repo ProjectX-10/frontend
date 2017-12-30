@@ -41,26 +41,19 @@ export class AddSecret implements OnInit {
       this.SECERET_KEY = loginUser.item.secretKey;
       this.secret.userId = loginUser.item.id;      
       this.api.configuration = Utils.getConfiguration(loginUser);     
-      
-
-      this.api.secretsIdGet('fee26f8d-5f51-46d1-ba2d-e6424785c9f3').subscribe(response => {  
-      //this.api.usersIdGet('e9aa26e6-5bca-4924-b3ea-422e94eb36e6').subscribe(response => {       
-        //this.navCtrl.push('HomePage');
-        console.log(response.item);
-      },
-        error => {
-          this.showError(error);
-        
-      }); 
     });
 
     
+    // this.myForm = this.formBuilder.group({
+    //   'domain': ['', [Validators.required, Validators.minLength(3), this.domainValidator.bind(this)]],
+    //   'username': ['', [Validators.required, this.usernameValidator.bind(this)]],
+    //   'password': ['', [Validators.required, this.passwordValidator.bind(this)]],
+    //   'encryptedPassword': ['', [Validators.required, this.passwordValidator.bind(this)]],
+    //   'note': ['', [Validators.required, this.noteValidator.bind(this)]]
+    // });
+
     this.myForm = this.formBuilder.group({
-      'domain': ['', [Validators.required, Validators.minLength(3), this.domainValidator.bind(this)]],
-      'username': ['', [Validators.required, this.usernameValidator.bind(this)]],
-      'password': ['', [Validators.required, this.passwordValidator.bind(this)]],
-      'encryptedPassword': ['', [Validators.required, this.passwordValidator.bind(this)]],
-      'note': ['', [Validators.required, this.noteValidator.bind(this)]]
+      'domain': ['', [Validators.required]]      
     });
     
   }
@@ -73,14 +66,16 @@ export class AddSecret implements OnInit {
     request.username = this.secret.username;
     request.password = this.secret.encryptedPassword;    
     request.note = this.secret.note;  
+
+    this.showError('Ok');
     
-    this.api.secretsPost(request).subscribe(response => {        
-        this.navCtrl.push('HomePage');
-      },
-        error => {
-          this.showError(error);
+    // this.api.secretsPost(request).subscribe(response => {        
+    //     this.navCtrl.push('HomePage');
+    //   },
+    //     error => {
+    //       this.showError(error);
         
-      });
+    //   });
 
       
   }
@@ -107,13 +102,16 @@ export class AddSecret implements OnInit {
   }
 
   isValid(field: string) {
-    //let formField = this.myForm.find(field);
-    //return formField.valid || formField.pristine;
-    return true;
+    let formField = this.myForm.controls[field];
+    let valid:boolean = formField.valid;
+    console.log('valid: ' + formField.valid);
+    console.log('pristine: ' + formField.pristine);
+    return valid;
   }
 
-  domainValidator(control: FormControl): {[s: string]: boolean} {
+  domain1Validator(control: FormControl): {[s: string]: boolean} {
     if (control.value !== '') {
+      console.log('domainValidator:' + control.valid);
       return {invalidDomain: true};
     }
   }

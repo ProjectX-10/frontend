@@ -25678,6 +25678,10 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
+page-add-secret .errors {
+  color: red;
+}
+
 page-home on-buttons {
   -webkit-box-ordinal-group: 2;
   -webkit-order: 1;

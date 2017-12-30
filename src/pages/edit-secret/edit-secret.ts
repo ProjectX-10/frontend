@@ -4,7 +4,7 @@ import { AlertController, IonicPage, NavController, NavParams, LoadingController
 import {FormGroup, FormBuilder, FormControl, Validators} from "@angular/forms";
 import { Storage } from '@ionic/storage';
 import { DefaultApi } from '../../providers/api/DefaultApi';
-//import { Configuration } from '../../providers/configuration';
+
 import { Utils } from '../../utils/utils';
 import * as models  from '../../providers/model/models';
 import * as CryptoJS from 'crypto-js/crypto-js';
@@ -80,9 +80,10 @@ export class EditSecretPage implements OnInit {
   }
 
   isValid(field: string) {
-    //let formField = this.myForm.find(field);
-    //return formField.valid || formField.pristine;
-    return true;
+    let formField = this.myForm.controls[field];
+    let valid = (formField.valid || formField.pristine);
+    
+    return valid;
   }
 
   domainValidator(control: FormControl): {[s: string]: boolean} {
