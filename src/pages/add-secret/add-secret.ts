@@ -8,6 +8,7 @@ import { Utils } from '../../utils/utils';
 
 import * as models  from '../../providers/model/models';
 import * as CryptoJS from 'crypto-js/crypto-js';
+
 /**
  * Generated class for the AddSecret page.
  *
@@ -22,16 +23,17 @@ import * as CryptoJS from 'crypto-js/crypto-js';
 export class AddSecret implements OnInit {
 
   loading: Loading;
-  myForm: FormGroup;
+  private addForm: FormGroup;
   SECERET_KEY: string = '';
+  submitAttempt: boolean = false;
 
-  secret: {userId: string, domain: string, username: string, password: string, encryptedPassword: string, note: string, secretKey: string} = 
-          {userId: '', domain: '', username: '', password: '', encryptedPassword: '', note: '', secretKey: ''};
+  secret: {userId: string, domain: string, username: string, password: string, confirmPassword: string, encryptedPassword: string, note: string, secretKey: string} = 
+          {userId: '', domain: '', username: '', password: '', confirmPassword: '', encryptedPassword: '', note: '', secretKey: ''};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController,
   	public formBuilder: FormBuilder, private api: DefaultApi, private loadingCtrl: LoadingController, private storage: Storage
     ) {
-
+    
   }
 
   ngOnInit(): any {
@@ -43,41 +45,37 @@ export class AddSecret implements OnInit {
       this.api.configuration = Utils.getConfiguration(loginUser);     
     });
 
-    
-    // this.myForm = this.formBuilder.group({
-    //   'domain': ['', [Validators.required, Validators.minLength(3), this.domainValidator.bind(this)]],
-    //   'username': ['', [Validators.required, this.usernameValidator.bind(this)]],
-    //   'password': ['', [Validators.required, this.passwordValidator.bind(this)]],
-    //   'encryptedPassword': ['', [Validators.required, this.passwordValidator.bind(this)]],
-    //   'note': ['', [Validators.required, this.noteValidator.bind(this)]]
-    // });
-
-    this.myForm = this.formBuilder.group({
-      'domain': ['', [Validators.required]]      
+    this.addForm = this.formBuilder.group({
+      domain: ['', [Validators.required, Validators.minLength(3)]],
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required, this.confirmPasswordValidator.bind(this)]],
+      encryptedPassword: ['', [Validators.required]],
+      note: ['', [Validators.required]],
     });
-    
+
   }
 
   onSubmit() {
     this.showLoading();
-    var request: models.InsertSecretRequest = {} as models.InsertSecretRequest;
-    request.userId = this.secret.userId;
-    request.domain = this.secret.domain;
-    request.username = this.secret.username;
-    request.password = this.secret.encryptedPassword;    
-    request.note = this.secret.note;  
-
-    this.showError('Ok');
-    
-    // this.api.secretsPost(request).subscribe(response => {        
-    //     this.navCtrl.push('HomePage');
-    //   },
-    //     error => {
-    //       this.showError(error);
-        
-    //   });
-
+    if (this.addForm.dirty && this.addForm.valid == true) {
+      var request: models.InsertSecretRequest = {} as models.InsertSecretRequest;
+      request.userId = this.secret.userId;
+      request.domain = this.secret.domain;
+      request.username = this.secret.username;
+      request.password = this.secret.encryptedPassword;    
+      request.note = this.secret.note;  
       
+      this.api.secretsPost(request).subscribe(response => {        
+          this.navCtrl.push('HomePage');
+        },
+          error => {
+            this.showError(error);     
+        });
+
+    } else {
+      this.showError('Please fix the error field.');
+    }   
   }
 
   inputTestData() {
@@ -102,14 +100,14 @@ export class AddSecret implements OnInit {
   }
 
   isValid(field: string) {
-    let formField = this.myForm.controls[field];
-    let valid:boolean = formField.valid;
-    console.log('valid: ' + formField.valid);
-    console.log('pristine: ' + formField.pristine);
-    return valid;
+    let formField = this.addForm.controls[field];
+    if (formField !== undefined) {
+      return formField.valid || formField.pristine;
+    }
+    return true;
   }
 
-  domain1Validator(control: FormControl): {[s: string]: boolean} {
+  domainValidator(control: FormControl): {[s: string]: boolean} {
     if (control.value !== '') {
       console.log('domainValidator:' + control.valid);
       return {invalidDomain: true};
@@ -125,6 +123,14 @@ export class AddSecret implements OnInit {
   passwordValidator(control: FormControl): {[s: string]: boolean} {
     if (control.value !== '') {      
         return {invalidPassword: true};      
+    }
+  }
+
+  confirmPasswordValidator(control: FormControl): {[s: string]: boolean} {
+    if (control !== undefined) {
+      if (control.value !== this.secret.password) {
+        return {invalidConfirmPassord: true};
+      }
     }
   }
 

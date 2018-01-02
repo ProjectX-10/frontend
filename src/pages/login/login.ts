@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 import { NavController, AlertController, LoadingController, Loading, IonicPage } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import { DefaultApi } from '../../providers/api/DefaultApi';
+import { AppConstants } from '../../constants/app.constants';
 
-import { Storage } from '@ionic/storage'
+import { Storage } from '@ionic/storage';
 import * as models  from '../../providers/model/models';
 import { Configuration } from '../../providers/configuration';
 
@@ -18,13 +19,24 @@ import { Configuration } from '../../providers/configuration';
   selector: 'page-login',
   templateUrl: 'login.html',
 })
-export class LoginPage {
+export class LoginPage implements OnInit {
   loading: Loading;
   registerCredentials = { email: '', password: '' };  
  
   constructor(private nav: NavController, private auth: AuthService, 
     private alertCtrl: AlertController, private loadingCtrl: LoadingController,
     private api: DefaultApi, private storage: Storage) { }
+
+  ngOnInit() {
+    this.storage.get('user').then((val) => {
+      if (val !== null) {
+        let loginUser: models.LoginUserResponse = val;
+        if (AppConstants.KEY_STATUS === loginUser.item.status) {
+          this.nav.setRoot('HomePage');
+        }    
+      }
+    });
+  }
  
   public createAccount(event) {
     this.nav.push('RegisterPage');
@@ -32,6 +44,7 @@ export class LoginPage {
 
   public login() {
     this.showLoading();
+    this.storage.set('user', null); 
     if (this.registerCredentials.email === null || this.registerCredentials.password === null) {
       return this.showError("Please insert credentials");
     } else {
@@ -40,9 +53,10 @@ export class LoginPage {
       request.password = this.registerCredentials.password;
       this.api.loginPost(request).subscribe(response => {
         if (response.token !== null) {                       
-          this.storage.set('user', response);          
+          this.storage.set('user', response); 
+          console.log(response);         
           this.storage.set('passcode', this.registerCredentials.password);          
-          this.nav.setRoot('SecretKeyPage');
+          this.nav.push('SecretKeyPage');
         } else {
           this.showError("Access Denied");
         }

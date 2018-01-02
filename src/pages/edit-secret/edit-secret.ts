@@ -23,15 +23,18 @@ export class EditSecretPage implements OnInit {
 
   secret: any;
   loading: Loading;
-  myForm: FormGroup;
+  editFrom: FormGroup;
   SECERET_KEY: string = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController,
   	public formBuilder: FormBuilder, private api: DefaultApi, private loadingCtrl: LoadingController, private storage: Storage
     ) {
 
+debugger;
     this.secret = this.navParams.get('secret');
-
+    this.secret.confirmPassword = this.secret.password;
+    
+    console.log(this.secret);
   }
 
   ngOnInit(): any {
@@ -39,51 +42,45 @@ export class EditSecretPage implements OnInit {
     this.storage.get('user').then((val) => {
       let loginUser: models.LoginUserResponse = val;
       this.SECERET_KEY = loginUser.item.secretKey;
-      this.api.configuration = Utils.getConfiguration(loginUser);      
+      this.secret.userId = loginUser.item.id;
+      this.secret.encryptedPassword = Utils.getEncryptCode(this.secret.password, this.SECERET_KEY);
+      this.api.configuration = Utils.getConfiguration(loginUser);     
     });
 
-    this.storage.get('user').then((val) => {
-      this.secret.userId = val.item.id;
-      this.storage.get('secretKey').then((value) => {
-        this.SECERET_KEY = value;
-           let bytes = CryptoJS.AES.decrypt(this.secret.password.toString(), this.SECERET_KEY);
-           let plaintext = bytes.toString(CryptoJS.enc.Utf8);
-           this.secret.password = plaintext.toString();
-           this.setPasswordEncrypted(this.secret.password.toString());
-      });
+    this.editFrom = this.formBuilder.group({
+      domain: ['', [Validators.required, Validators.minLength(3)]],
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required, this.confirmPasswordValidator.bind(this)]],
+      encryptedPassword: ['', [Validators.required]],
+      note: ['', [Validators.required]],
     });
-    
-    this.myForm = this.formBuilder.group({
-      'domain': ['', [Validators.required, Validators.minLength(3), this.domainValidator.bind(this)]],
-      'username': ['', [Validators.required, this.usernameValidator.bind(this)]],
-      'password': ['', [Validators.required, this.passwordValidator.bind(this)]],
-      'encryptedPassword': ['', [Validators.required, this.passwordValidator.bind(this)]],
-      'note': ['', [Validators.required, this.noteValidator.bind(this)]]
-    });
-    
   }
 
   onSubmit() {
     this.showLoading();
-    var request: models.UpdateSecretRequest = {} as models.UpdateSecretRequest;
-    request.id = this.secret.id;
-    request.password = this.secret.encryptedPassword;    
-    request.note = this.secret.note;
-    debugger;
-    this.api.secretsIdPut(request.id, request).subscribe(response => {        
-        this.navCtrl.push('HomePage');
-      },
-        error => {
-          this.showError(error);
-        
-      });
+    if (this.editFrom.valid == true) {
+      var request: models.UpdateSecretRequest = {} as models.UpdateSecretRequest;
+      request.id = this.secret.id;
+      request.password = this.secret.encryptedPassword;    
+      request.note = this.secret.note;
+      this.api.secretsIdPut(request.id, request).subscribe(response => {        
+          this.navCtrl.push('HomePage');
+        },
+          error => {
+            this.showError(error);
+          
+        });
+    }
+    
   }
 
   isValid(field: string) {
-    let formField = this.myForm.controls[field];
-    let valid = (formField.valid || formField.pristine);
-    
-    return valid;
+    let formField = this.editFrom.controls[field];
+    if (formField !== undefined) {
+       return (formField.valid || formField.pristine);
+    }
+    return true;
   }
 
   domainValidator(control: FormControl): {[s: string]: boolean} {
@@ -104,26 +101,21 @@ export class EditSecretPage implements OnInit {
     }
   }
 
+  confirmPasswordValidator(control: FormControl): {[s: string]: boolean} {
+    //debugger;
+    if (control !== undefined) {
+      if (control.value !== this.secret.password) {
+        return {invalidConfirmPassord: true};
+      }
+    }
+  }
+
   noteValidator(control: FormControl): {[s: string]: boolean} {
         return {invalidNote: true};
   }
 
   onInputTime(password: string){
-  	this.setPasswordEncrypted(password);
-    //console.log(this.getPasswordEcrypted(this.secret.encryptedPassword));
-  }
-
-  getPasswordEcrypted(pwd: string): string {
-    // Decrypt 
-    var bytes = CryptoJS.AES.decrypt(pwd.toString(), this.SECERET_KEY);
-    var plaintext = bytes.toString(CryptoJS.enc.Utf8);
-    return plaintext;
-  }
-
-  setPasswordEncrypted(pwd: string): void {
-    // Encrypt 
-    var ciphertext = CryptoJS.AES.encrypt(pwd, this.SECERET_KEY);
-    this.secret.encryptedPassword = ciphertext.toString();
+  	this.secret.encryptedPassword = Utils.getEncryptCode(this.secret.password, this.SECERET_KEY);
   }
 
   showLoading() {

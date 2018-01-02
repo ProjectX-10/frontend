@@ -51,11 +51,13 @@ export class HomePage implements OnInit {
 
   getSecrets(query:string) {
     this.api.secretsSearchGet(query, this.LIMIT, this.CURSOR).subscribe(response => {       
-        if (response != null) {
+        if (response != null && response.items.length > 0) {
           for (let i in response.items) {              
              this.items.push(response.items[i]);
           }
           this.CURSOR = response.nextPageToken;
+        } else {
+          this.CURSOR = undefined;
         }
       },
         error => {
@@ -74,12 +76,14 @@ export class HomePage implements OnInit {
         }
         
         infiniteScroll.complete();
-      }, 500);
+      }, 250);
     }
   }
 
 
   itemTapped(event, secret) {
+    console.log("itemTapped");
+    console.log(secret)
     this.navCtrl.push(SecretDetailsPage, { 'secret': secret });
   }
 

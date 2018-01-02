@@ -5,17 +5,34 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-  	<button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>profile</ion-title>
+  <ion-navbar primary>
+    <ion-title>User Settings</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
-<ion-content padding>
-
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      <ion-avatar item-start>
+        <img [src]="user.imageUrl ? user.imageUrl : placeholderPicture">
+      </ion-avatar>
+      <p class="username">{{user.displayName}}</p>
+    </ion-list-header>
+  </ion-list>
+  <ion-list no-border>
+    <ion-list-header>
+      General
+    </ion-list-header>
+    <ion-item>
+      <ion-icon name='settings' item-start></ion-icon>
+      <ion-label>App Language</ion-label>
+      <ion-select [(ngModel)]="language">
+        <ion-option *ngFor="let language of languages" [value]="language">{{language}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-icon name='mail' item-start></ion-icon>
+      <ion-label class="label"> {{user.email}} </ion-label>
+      
+    </ion-item>
+  </ion-list>
 </ion-content>

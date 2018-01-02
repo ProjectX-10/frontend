@@ -9,7 +9,7 @@ import { LogoutPage } from '../pages/logout/logout';
 import { HomePage } from '../pages/home/home';
 import { ProfilePage } from '../pages/profile/profile';
 
-
+import { Storage } from '@ionic/storage';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -28,7 +28,8 @@ export class MyApp {
     public platform: Platform,
     public menu: MenuController,
     public statusBar: StatusBar,
-    public splashScreen: SplashScreen
+    public splashScreen: SplashScreen,
+    private storage: Storage
   ) {
     this.initializeApp();
 
@@ -56,7 +57,7 @@ export class MyApp {
     this.menu.close();
     // navigate to the new page if it is not the current page
     if (page.title == 'Logout') {
-      // code...
+      this.storage.set('user', null);
       this.nav.setRoot(this.rootPage);
     } else {
       this.nav.setRoot(page.component);

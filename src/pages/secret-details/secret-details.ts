@@ -14,6 +14,7 @@ export class SecretDetailsPage implements OnInit {
   selectedItem: any;
   SECERET_KEY: string = '';
   decryptedPassword: string = '';
+  encryptedPassword: string = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
     // If we navigated to this page, we will have an item available as a nav param
@@ -25,11 +26,12 @@ export class SecretDetailsPage implements OnInit {
   ngOnInit(): any {
     this.storage.get('secretKey').then((value) => {
         this.SECERET_KEY = value;
-        let bytes = CryptoJS.AES.decrypt(this.selectedItem.password.toString(), this.SECERET_KEY);
+        this.encryptedPassword = this.selectedItem.password.toString();
+        let bytes = CryptoJS.AES.decrypt(this.encryptedPassword, this.SECERET_KEY);
         let plaintext = bytes.toString(CryptoJS.enc.Utf8);
         this.decryptedPassword = plaintext;
         console.log(this.decryptedPassword);
-
+        this.selectedItem.password = this.decryptedPassword;
       });
   }
 

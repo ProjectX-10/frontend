@@ -25678,7 +25678,7 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
-page-add-secret .errors {
+page-add-secret .invalid {
   color: red;
 }
 
@@ -25743,4 +25743,12 @@ page-login .login-content .submit-btn {
 page-login .login-content .register-btn {
   color: #ffffff;
   font-size: 0.8em;
+}
+
+page-profile .username {
+  font-size: 1.3em;
+}
+
+page-profile .label {
+  color: #7f7f7f;
 }

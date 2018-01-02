@@ -3,6 +3,7 @@ import { AlertController, IonicPage, NavController, NavParams, LoadingController
 import { FormGroup, FormBuilder, FormControl, Validators} from "@angular/forms";
 import { DefaultApi } from '../../providers/api/DefaultApi';
 import { Storage } from '@ionic/storage';
+import { AppConstants } from '../../constants/app.constants';
 
 import * as models  from '../../providers/model/models';
 import * as SHA256 from 'crypto-js/sha256';
@@ -28,14 +29,12 @@ export class SecretKeyPage implements OnInit{
   loginUser: models.LoginUserResponse = {} as models.LoginUserResponse;
 
   userInfo: {secretKey: string, userId: string, passcode: string} = 
-            {secretKey: 'phu12345', userId: '', passcode: ''};
-
-
+            {secretKey: '', userId: '', passcode: ''};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController,
   	public formBuilder: FormBuilder, private api: DefaultApi, private loadingCtrl: LoadingController,
     private storage: Storage) {
-
+    this.SECERET_KEY = '';
   }
 
   ngOnInit(): any {
@@ -45,6 +44,7 @@ export class SecretKeyPage implements OnInit{
       if (this.loginUser.item.secretKey !== undefined && this.loginUser.item.secretKey !== null) {
         this.hasKey = true;
         this.SECERET_KEY = this.loginUser.item.secretKey;
+        //console.log("ngOnInit: " + this.loginUser.item.secretKey);
       }    
     });
 
@@ -53,7 +53,7 @@ export class SecretKeyPage implements OnInit{
     });
 
     this.myForm = this.formBuilder.group({
-      'secretKey': ['', [Validators.required, this.secretKeyValidator.bind(this)]]
+      'secretKey': ['', [Validators.required]]
     });
   }
 
@@ -71,20 +71,20 @@ export class SecretKeyPage implements OnInit{
     request.userId = this.userInfo.userId;    
     let shaString = SHA256(this.userInfo.secretKey.toString());
     request.secretKey = shaString.toString();
-    console.log(shaString.toString());
+    //console.log(shaString.toString());
 
     this.api.usersUpdatesecretkeyPost(request).subscribe(response => {        
         this.updateStorage();
-        this.navCtrl.push('HomePage');
+        this.navCtrl.setRoot('HomePage');
       },
         error => {
           this.showError(error);
-        
       });
   }
 
   updateStorage(): void {
     this.loginUser.item.secretKey = this.userInfo.secretKey;
+    this.loginUser.item.status = AppConstants.KEY_STATUS;
     this.storage.set('user', this.loginUser); 
   }
 
@@ -92,20 +92,21 @@ export class SecretKeyPage implements OnInit{
     
     let shaString = SHA256(this.userInfo.secretKey.toString());
     let secretKey: string = shaString.toString();
-    console.log(secretKey);
+    //console.log(secretKey);
 
     if (secretKey === this.SECERET_KEY) {
       this.updateStorage();
-      this.navCtrl.push('HomePage');
+      this.navCtrl.setRoot('HomePage');
     } else {
       this.showError("Secret Key incorrect!")
     }
   }
 
   isValid(field: string) {
-    //let formField = this.myForm.find(field);
-    //return formField.valid || formField.pristine;
-    return true;
+    let formField = this.myForm.controls[field];
+    if (formField !== undefined) {
+      return formField.valid || formField.pristine;
+    }
   }
 
   secretKeyValidator(control: FormControl): {[s: string]: boolean} {
@@ -124,7 +125,6 @@ export class SecretKeyPage implements OnInit{
 
   showError(text) {
     this.loading.dismiss();
-   
     let errorMsg = this.getErrorMessage(text)
     let alert = this.alertCtrl.create({
       title: 'Fail',

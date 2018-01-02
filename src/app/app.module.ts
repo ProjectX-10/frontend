@@ -2,6 +2,7 @@ import { Http, XHRBackend, RequestOptions, HttpModule } from '@angular/http';
 import { AuthService } from './../providers/auth-service';
 import { DefaultApi } from './../providers/api/DefaultApi';
 import { Utils } from './../utils/utils';
+import { AppConstants } from './../constants/app.constants';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -54,7 +55,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     {provide: ErrorHandler, useClass: IonicErrorHandler},    
     AuthService,
     DefaultApi,
-    Utils
+    Utils,
+    AppConstants
   ]
 })
 export class AppModule {}

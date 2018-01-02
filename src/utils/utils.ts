@@ -4,8 +4,11 @@ import { Configuration } from '../providers/configuration';
 import {XHRBackend, Http, RequestOptions} from "@angular/http";
 import {HttpInterceptor} from "../providers/http/http-interceptor";
 
+import * as CryptoJS from 'crypto-js/crypto-js';
+
 @Injectable()
 export class Utils {
+
     static getConfiguration(loginUser: models.LoginUserResponse) : Configuration {
 	    let configuration:Configuration = new Configuration();
 	    configuration.apiKey = loginUser.token;
@@ -14,5 +17,18 @@ export class Utils {
 	    configuration.withCredentials = false;
 	    return configuration;
 	  }	
+
+	static getDEcryptedCode(pwd: string, key: string): string {
+	    // Decrypt 
+	    var bytes = CryptoJS.AES.decrypt(pwd.toString(), key);
+	    var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+	    return plaintext;
+	  }
+
+  	static getEncryptCode(pwd: string, key: string): string {
+	    // Encrypt 
+	    var ciphertext = CryptoJS.AES.encrypt(pwd, key);
+	    return ciphertext.toString();
+	  }
 	 
 }
