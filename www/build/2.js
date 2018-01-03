@@ -1,14 +1,14 @@
 webpackJsonp([2],{
 
-/***/ 404:
+/***/ 294:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddSecretModule", function() { return AddSecretModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChangePaswordModule", function() { return ChangePaswordModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_secret__ = __webpack_require__(413);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__change_password__ = __webpack_require__(305);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,42 +18,40 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AddSecretModule = (function () {
-    function AddSecretModule() {
+var ChangePaswordModule = (function () {
+    function ChangePaswordModule() {
     }
-    AddSecretModule = __decorate([
+    ChangePaswordModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__add_secret__["a" /* AddSecret */],
+                __WEBPACK_IMPORTED_MODULE_2__change_password__["a" /* ChangePasswordPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__add_secret__["a" /* AddSecret */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__change_password__["a" /* ChangePasswordPage */]),
             ],
             exports: [
-                __WEBPACK_IMPORTED_MODULE_2__add_secret__["a" /* AddSecret */]
+                __WEBPACK_IMPORTED_MODULE_2__change_password__["a" /* ChangePasswordPage */]
             ]
         })
-    ], AddSecretModule);
-    return AddSecretModule;
+    ], ChangePaswordModule);
+    return ChangePaswordModule;
 }());
 
-//# sourceMappingURL=add-secret.module.js.map
+//# sourceMappingURL=change-password.module.js.map
 
 /***/ }),
 
-/***/ 413:
+/***/ 305:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddSecret; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChangePasswordPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_api_DefaultApi__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_utils__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_crypto_js_crypto_js__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_crypto_js_crypto_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_crypto_js_crypto_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_api_DefaultApi__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_utils__ = __webpack_require__(52);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -69,15 +67,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 /**
  * Generated class for the AddSecret page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-var AddSecret = (function () {
-    function AddSecret(navCtrl, navParams, alertCtrl, formBuilder, api, loadingCtrl, storage) {
+var ChangePasswordPage = (function () {
+    function ChangePasswordPage(navCtrl, navParams, alertCtrl, formBuilder, api, loadingCtrl, storage) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.alertCtrl = alertCtrl;
@@ -86,120 +83,86 @@ var AddSecret = (function () {
         this.loadingCtrl = loadingCtrl;
         this.storage = storage;
         this.SECERET_KEY = '';
-        this.submitAttempt = false;
-        this.secret = { userId: '', domain: '', username: '', password: '', confirmPassword: '', encryptedPassword: '', note: '', secretKey: '' };
+        debugger;
+        this.secret = this.navParams.get('secret');
+        this.secret.confirmPassword = this.secret.password;
+        console.log(this.secret);
     }
-    AddSecret.prototype.ngOnInit = function () {
+    ChangePasswordPage.prototype.ngOnInit = function () {
         var _this = this;
         this.storage.get('user').then(function (val) {
             var loginUser = val;
             _this.SECERET_KEY = loginUser.item.secretKey;
             _this.secret.userId = loginUser.item.id;
+            _this.secret.encryptedPassword = __WEBPACK_IMPORTED_MODULE_5__utils_utils__["a" /* Utils */].getEncryptCode(_this.secret.password, _this.SECERET_KEY);
             _this.api.configuration = __WEBPACK_IMPORTED_MODULE_5__utils_utils__["a" /* Utils */].getConfiguration(loginUser);
         });
-        this.addForm = this.formBuilder.group({
-            domain: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(3)]],
-            username: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+        this.chnagePwdFrom = this.formBuilder.group({
+            email: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
             password: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
             confirmPassword: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, this.confirmPasswordValidator.bind(this)]],
-            encryptedPassword: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
-            note: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+            changeKey: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]]
         });
     };
-    AddSecret.prototype.onSubmit = function () {
+    ChangePasswordPage.prototype.onSubmit = function () {
         var _this = this;
         this.showLoading();
-        if (this.addForm.dirty && this.addForm.valid == true) {
+        if (this.chnagePwdFrom.valid == true) {
             var request = {};
-            request.userId = this.secret.userId;
-            request.domain = this.secret.domain;
-            request.username = this.secret.username;
+            request.id = this.secret.id;
             request.password = this.secret.encryptedPassword;
             request.note = this.secret.note;
-            this.api.secretsPost(request).subscribe(function (response) {
+            this.api.secretsIdPut(request.id, request).subscribe(function (response) {
                 _this.navCtrl.push('HomePage');
             }, function (error) {
                 _this.showError(error);
             });
         }
-        else {
-            this.showError('Please fix the error field.');
-        }
     };
-    AddSecret.prototype.inputTestData = function () {
-        var _this = this;
-        var request = {};
-        for (var i = 0; i < 40; i++) {
-            request.userId = this.secret.userId;
-            request.domain = 'domain' + i;
-            request.username = 'username' + i;
-            var ciphertext = __WEBPACK_IMPORTED_MODULE_6_crypto_js_crypto_js__["AES"].encrypt('password' + i, this.SECERET_KEY);
-            request.password = ciphertext.toString();
-            request.note = 'note' + i;
-            this.api.secretsPost(request).subscribe(function (response) {
-                //this.navCtrl.push('HomePage');
-                //console.log(response);
-            }, function (error) {
-                _this.showError(error);
-            });
-        }
-    };
-    AddSecret.prototype.isValid = function (field) {
-        var formField = this.addForm.controls[field];
+    ChangePasswordPage.prototype.isValid = function (field) {
+        var formField = this.chnagePwdFrom.controls[field];
         if (formField !== undefined) {
-            return formField.valid || formField.pristine;
+            return (formField.valid || formField.pristine);
         }
         return true;
     };
-    AddSecret.prototype.domainValidator = function (control) {
+    ChangePasswordPage.prototype.domainValidator = function (control) {
         if (control.value !== '') {
-            console.log('domainValidator:' + control.valid);
             return { invalidDomain: true };
         }
     };
-    AddSecret.prototype.usernameValidator = function (control) {
+    ChangePasswordPage.prototype.usernameValidator = function (control) {
         if (control.value !== '') {
             return { invalidUsername: true };
         }
     };
-    AddSecret.prototype.passwordValidator = function (control) {
+    ChangePasswordPage.prototype.passwordValidator = function (control) {
         if (control.value !== '') {
             return { invalidPassword: true };
         }
     };
-    AddSecret.prototype.confirmPasswordValidator = function (control) {
+    ChangePasswordPage.prototype.confirmPasswordValidator = function (control) {
+        //debugger;
         if (control !== undefined) {
             if (control.value !== this.secret.password) {
                 return { invalidConfirmPassord: true };
             }
         }
     };
-    AddSecret.prototype.noteValidator = function (control) {
+    ChangePasswordPage.prototype.noteValidator = function (control) {
         return { invalidNote: true };
     };
-    AddSecret.prototype.onInputTime = function (password) {
-        this.setPasswordEncrypted(password);
-        //console.log(this.getPasswordEcrypted(this.secret.encryptedPassword));
+    ChangePasswordPage.prototype.onInputTime = function (password) {
+        this.secret.encryptedPassword = __WEBPACK_IMPORTED_MODULE_5__utils_utils__["a" /* Utils */].getEncryptCode(this.secret.password, this.SECERET_KEY);
     };
-    AddSecret.prototype.getPasswordEcrypted = function (pwd) {
-        // Decrypt 
-        var bytes = __WEBPACK_IMPORTED_MODULE_6_crypto_js_crypto_js__["AES"].decrypt(pwd.toString(), this.SECERET_KEY);
-        var plaintext = bytes.toString(__WEBPACK_IMPORTED_MODULE_6_crypto_js_crypto_js__["enc"].Utf8);
-        return plaintext;
-    };
-    AddSecret.prototype.setPasswordEncrypted = function (pwd) {
-        // Encrypt 
-        var ciphertext = __WEBPACK_IMPORTED_MODULE_6_crypto_js_crypto_js__["AES"].encrypt(pwd, this.SECERET_KEY);
-        this.secret.encryptedPassword = ciphertext.toString();
-    };
-    AddSecret.prototype.showLoading = function () {
+    ChangePasswordPage.prototype.showLoading = function () {
         this.loading = this.loadingCtrl.create({
             content: 'Please wait...',
             dismissOnPageChange: true
         });
         this.loading.present();
     };
-    AddSecret.prototype.showError = function (text) {
+    ChangePasswordPage.prototype.showError = function (text) {
         this.loading.dismiss();
         var errorMsg = this.getErrorMessage(text);
         var alert = this.alertCtrl.create({
@@ -209,7 +172,7 @@ var AddSecret = (function () {
         });
         alert.present();
     };
-    AddSecret.prototype.getErrorMessage = function (text) {
+    ChangePasswordPage.prototype.getErrorMessage = function (text) {
         try {
             var object = JSON.parse(text._body);
             return object.errorMessage;
@@ -218,17 +181,17 @@ var AddSecret = (function () {
             return text;
         }
     };
-    AddSecret = __decorate([
+    ChangePasswordPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-add-secret',template:/*ion-inline-start:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\add-secret\add-secret.html"*/'<!--\n\n  Generated template for the AddSecret page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Add Secret</ion-title>\n\n    <ion-buttons end>\n\n		<button (click)="onSubmit()" ion-button [disabled]="!addForm.valid">\n\n			Save\n\n		</button>\n\n	</ion-buttons>\n\n\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n	<form [formGroup]="addForm" (ngSubmit)="onSubmit()">\n\n		<ion-list>\n\n			<ion-item >\n\n				<ion-label floating primary>Domain</ion-label>\n\n				<ion-input [(ngModel)]="secret.domain" formControlName="domain" type="text"\n\n                     id="domain" spellcheck="false" autocapitalize="off">\n\n          		</ion-input>\n\n			</ion-item>\n\n\n\n			<!-- <ion-item *ngIf="!myForm.controls.domain.valid  && (myForm.controls.domain.dirty || submitAttempt)">\n\n                <p class="invalid">Please enter a valid name.</p>\n\n            </ion-item> -->\n\n			<p *ngIf="!isValid(\'domain\')" danger padding-left class="invalid">Invalid domain</p>\n\n			<ion-item>\n\n	          <ion-label floating primary>Username</ion-label>\n\n	          <ion-input [(ngModel)]="secret.username" formControlName="username" type="text"\n\n                     id="username" spellcheck="false" autocapitalize="off">\n\n          		</ion-input>\n\n	        </ion-item>\n\n	        <p *ngIf="!isValid(\'username\')" danger padding-left class="invalid">Invalid username</p>\n\n	        <ion-item>\n\n	          <ion-label floating primary>Password</ion-label>\n\n	          <ion-input type="password" [(ngModel)]="secret.password" (input)=\'onInputTime($event.target.value)\' formControlName="password"\n\n	                     id="password" spellcheck="false" autocapitalize="off">\n\n	          </ion-input>\n\n	        </ion-item>\n\n	        <p *ngIf="!isValid(\'password\')" danger padding-left class="invalid">Invalid password</p>\n\n	        <ion-item>\n\n	          <ion-label floating primary>Confirm Password</ion-label>\n\n	          <ion-input [(ngModel)]="secret.confirmPassword" formControlName="confirmPassword" type="password"\n\n                     id="confirmPassword" spellcheck="false" autocapitalize="off">\n\n	          </ion-input>\n\n	        </ion-item>\n\n	        <p *ngIf="!isValid(\'confirmPassword\')" danger padding-left class="invalid">Invalid Password</p>    \n\n	        <ion-item>\n\n	          <ion-label floating primary>Note</ion-label>\n\n	          <ion-input type="text" [(ngModel)]="secret.note" formControlName="note"\n\n	                     id="note" spellcheck="false" autocapitalize="off">\n\n	          </ion-input>\n\n	        </ion-item> \n\n	        <ion-item>\n\n	         <ion-label floating primary>Generate Password</ion-label>\n\n	          <ion-input type="text" [(ngModel)]="secret.encryptedPassword" formControlName="encryptedPassword" disabled="true"\n\n	                      id="encryptedPassword" spellcheck="false" autocapitalize="off">\n\n	          </ion-input>\n\n	        </ion-item>\n\n		</ion-list>\n\n		<div padding>\n\n	      <button type="submit" ion-button color="primary" block [disabled]="!addForm.valid">Save</button>\n\n	    </div>\n\n	</form>\n\n</ion-content>'/*ion-inline-end:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\add-secret\add-secret.html"*/,
+            selector: 'page-change-password',template:/*ion-inline-start:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/change-password/change-password.html"*/'<!--\n  Generated template for the AddSecret page.\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Change Password</ion-title>\n    <ion-buttons end>\n		<button (click)="onSubmit()" ion-button [disabled]="!chnagePwdFrom.valid">\n			Save\n		</button>\n	</ion-buttons>\n  </ion-navbar>  \n</ion-header>\n\n<ion-content padding>\n	<form [formGroup]="chnagePwdFrom" (ngSubmit)="onSubmit()">\n		<ion-list>\n			<ion-item>\n	          <ion-label floating primary>Email</ion-label>\n	          <ion-input  [(ngModel)]="secret.email" formControlName="email"\n	                     type="text" id="email" spellcheck="false" autocapitalize="off">\n	          </ion-input>\n	        </ion-item>			\n	        <ion-item>\n	          <ion-label floating primary>Password</ion-label>\n	          <ion-input type="password" [(ngModel)]="secret.password" (input)=\'onInputTime($event.target.value)\' formControlName="password"\n	                     id="password" spellcheck="false" autocapitalize="off">\n	          </ion-input>\n	        </ion-item>\n	        <ion-item>\n	          <ion-label floating primary>Confirm Password</ion-label>\n	          <ion-input type="password" [(ngModel)]="secret.confirmPassword" formControlName="confirmPassword" \n	          			 id="confirmPassword" spellcheck="false" autocapitalize="off">\n	          </ion-input>\n	        </ion-item>\n	        <ion-item>\n	          <ion-label floating primary>Key</ion-label>\n	          <ion-input  [(ngModel)]="secret.changeKey" formControlName="changeKey"\n	                     type="text" id="changeKey" spellcheck="false" autocapitalize="off">\n	          </ion-input>\n	        </ion-item>	        \n		</ion-list>\n		<div padding>\n	      <button ion-button color="primary" block>Save</button>\n	    </div>\n	</form>\n</ion-content>'/*ion-inline-end:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/change-password/change-password.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_4__providers_api_DefaultApi__["a" /* DefaultApi */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]])
-    ], AddSecret);
-    return AddSecret;
+    ], ChangePasswordPage);
+    return ChangePasswordPage;
 }());
 
-//# sourceMappingURL=add-secret.js.map
+//# sourceMappingURL=change-password.js.map
 
 /***/ })
 

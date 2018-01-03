@@ -8,6 +8,7 @@ import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
 import { HomePage } from '../pages/home/home';
 import { ProfilePage } from '../pages/profile/profile';
+import { ResetPasswordPage } from '../pages/reset-password/reset-password';
 
 import { Storage } from '@ionic/storage';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -39,6 +40,7 @@ export class MyApp {
       //{ title: 'My First List', component: ListPage },
       { title: 'Home', component: HomePage },
       { title: 'Profile', component: ProfilePage },
+      { title: 'Reset Password', component: ResetPasswordPage },
       { title: 'Logout', component: LogoutPage }
     ];
   }
