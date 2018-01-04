@@ -44,7 +44,6 @@ export class SecretKeyPage implements OnInit{
       if (this.loginUser.item.secretKey !== undefined && this.loginUser.item.secretKey !== null) {
         this.hasKey = true;
         this.SECERET_KEY = this.loginUser.item.secretKey;
-        //console.log("ngOnInit: " + this.loginUser.item.secretKey);
       }    
     });
 
@@ -92,7 +91,6 @@ export class SecretKeyPage implements OnInit{
     
     let shaString = SHA256(this.userInfo.secretKey.toString());
     let secretKey: string = shaString.toString();
-    //console.log(secretKey);
 
     if (secretKey === this.SECERET_KEY) {
       this.updateStorage();

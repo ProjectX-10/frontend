@@ -1,4 +1,4 @@
-webpackJsonp([11],{
+webpackJsonp([10],{
 
 /***/ 106:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -6,7 +6,7 @@ webpackJsonp([11],{
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppConstants; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -45,7 +45,7 @@ var AppConstants = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditSecretPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_api_DefaultApi__ = __webpack_require__(33);
@@ -201,8 +201,8 @@ var EditSecretPage = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_service__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_service__ = __webpack_require__(121);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_api_DefaultApi__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__constants_app_constants__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(21);
@@ -240,16 +240,20 @@ var LoginPage = (function () {
     LoginPage.prototype.ngOnInit = function () {
         var _this = this;
         this.storage.get('user').then(function (val) {
-            if (val !== null) {
+            if (val !== undefined && val !== null) {
                 var loginUser = val;
                 if (__WEBPACK_IMPORTED_MODULE_4__constants_app_constants__["a" /* AppConstants */].KEY_STATUS === loginUser.item.status) {
-                    _this.nav.setRoot('HomePage');
+                    _this.nav.push('HomePage');
                 }
             }
         });
     };
     LoginPage.prototype.createAccount = function (event) {
         this.nav.push('RegisterPage');
+    };
+    LoginPage.prototype.forgetPassword = function (event) {
+        event.preventDefault();
+        this.nav.push('ResetPasswordPage');
     };
     LoginPage.prototype.login = function () {
         var _this = this;
@@ -305,7 +309,7 @@ var LoginPage = (function () {
     };
     LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-login',template:/*ion-inline-start:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/login/login.html"*/'<!--\n  Generated template for the Login page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-content class="login-content" padding>\n  <ion-row class="logo-row">\n    <ion-col></ion-col>\n    <ion-col width-67>\n      <img src="https://images.vexels.com/media/users/3/136307/isolated/lists/fe8cd8608b7d3623802d9c7b6a912a2a-lock-icon.png"/>\n    </ion-col>\n    <ion-col></ion-col>\n  </ion-row>\n  <div class="login-box">\n    <form (ngSubmit)="login()" #registerForm="ngForm">\n      <ion-row>\n        <ion-col>\n          <ion-list inset>\n            \n            <ion-item>\n              <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required \n              autocapitalize="off"></ion-input>\n            </ion-item>\n            \n            <ion-item>\n              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required autocapitalize="off"></ion-input>\n            </ion-item>\n            \n          </ion-list>\n        </ion-col>\n      </ion-row>\n      \n      <ion-row>\n        <ion-col class="signup-col">\n          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Login</button>\n          \n        </ion-col>\n      </ion-row>\n      \n    </form>\n    <button ion-button class="register-btn" block clear (click)="createAccount($event)">Create New Account</button>\n  </div>\n</ion-content>'/*ion-inline-end:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/login/login.html"*/,
+            selector: 'page-login',template:/*ion-inline-start:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/login/login.html"*/'<!--\n  Generated template for the Login page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-content class="login-content" padding>\n  <ion-row class="logo-row">\n    <ion-col></ion-col>\n    <ion-col width-67>\n      <img src="https://images.vexels.com/media/users/3/136307/isolated/lists/fe8cd8608b7d3623802d9c7b6a912a2a-lock-icon.png"/>\n    </ion-col>\n    <ion-col></ion-col>\n  </ion-row>\n  <div class="login-box">\n    <form (ngSubmit)="login()" #registerForm="ngForm">\n      <ion-row>\n        <ion-col>\n          <ion-list inset>\n            \n            <ion-item>\n              <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required \n              autocapitalize="off"></ion-input>\n            </ion-item>\n            \n            <ion-item>\n              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required autocapitalize="off"></ion-input>\n            </ion-item>\n            <button type="button" ion-button class="forget-btn" block clear (click)="forgetPassword($event)">Forget password</button>  \n          </ion-list>\n        </ion-col>\n      </ion-row>      \n      \n      <ion-row>\n        <ion-col class="signup-col">\n          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Login</button>\n          \n        </ion-col>\n      </ion-row>\n      \n    </form>\n    <button ion-button class="register-btn" block clear (click)="createAccount($event)">Create New Account</button>\n  </div>\n</ion-content>'/*ion-inline-end:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/login/login.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_auth_service__["a" /* AuthService */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */],
@@ -324,7 +328,7 @@ var LoginPage = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LogoutPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -422,119 +426,7 @@ var ProfilePage = (function () {
 
 /***/ }),
 
-/***/ 111:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ResetPasswordPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_api_DefaultApi__ = __webpack_require__(33);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-/**
- * Generated class for the AddSecret page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-var ResetPasswordPage = (function () {
-    function ResetPasswordPage(navCtrl, navParams, alertCtrl, formBuilder, api, loadingCtrl, storage) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.alertCtrl = alertCtrl;
-        this.formBuilder = formBuilder;
-        this.api = api;
-        this.loadingCtrl = loadingCtrl;
-        this.storage = storage;
-        this.SECERET_KEY = '';
-    }
-    ResetPasswordPage.prototype.ngOnInit = function () {
-        var _this = this;
-        this.storage.get('user').then(function (val) {
-            debugger;
-            var loginUser = val;
-            _this.email = loginUser.item.email;
-        });
-        this.resetPwdFrom = this.formBuilder.group({
-            email: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
-        });
-    };
-    ResetPasswordPage.prototype.onSubmit = function () {
-        var _this = this;
-        this.showLoading();
-        if (this.resetPwdFrom.valid == true) {
-            var request = {};
-            request.email = this.email;
-            this.api.usersForgetpasswordPost(request).subscribe(function (response) {
-                _this.navCtrl.push('ChangePasswordPage');
-            }, function (error) {
-                _this.showError(error);
-            });
-        }
-    };
-    ResetPasswordPage.prototype.isValid = function (field) {
-        var formField = this.resetPwdFrom.controls[field];
-        if (formField !== undefined) {
-            return (formField.valid || formField.pristine);
-        }
-        return true;
-    };
-    ResetPasswordPage.prototype.showLoading = function () {
-        this.loading = this.loadingCtrl.create({
-            content: 'Please wait...',
-            dismissOnPageChange: true
-        });
-        this.loading.present();
-    };
-    ResetPasswordPage.prototype.showError = function (text) {
-        this.loading.dismiss();
-        var errorMsg = this.getErrorMessage(text);
-        var alert = this.alertCtrl.create({
-            title: 'Fail',
-            subTitle: errorMsg,
-            buttons: ['OK']
-        });
-        alert.present();
-    };
-    ResetPasswordPage.prototype.getErrorMessage = function (text) {
-        try {
-            var object = JSON.parse(text._body);
-            return object.errorMessage;
-        }
-        catch (e) {
-            return text;
-        }
-    };
-    ResetPasswordPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-reset-password',template:/*ion-inline-start:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/reset-password/reset-password.html"*/'<!--\n  Generated template for the AddSecret page.\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Change Password</ion-title>\n    <ion-buttons end>\n		<button (click)="onSubmit()" ion-button [disabled]="!resetPwdFrom.valid">\n			Reset\n		</button>\n	</ion-buttons>\n  </ion-navbar>  \n</ion-header>\n\n<ion-content padding>\n	<form [formGroup]="resetPwdFrom" (ngSubmit)="onSubmit()">\n		<ion-list>\n			<ion-item>\n	          <ion-label floating primary>Email</ion-label>\n	          <ion-input  [(ngModel)]="email" formControlName="email"\n	                     type="text" id="email" spellcheck="false" autocapitalize="off">\n	          </ion-input>\n	        </ion-item>				            \n		</ion-list>\n		<div padding>\n	      <button ion-button color="primary" block>Reset</button>\n	    </div>\n	</form>\n</ion-content>'/*ion-inline-end:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/reset-password/reset-password.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_4__providers_api_DefaultApi__["a" /* DefaultApi */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]])
-    ], ResetPasswordPage);
-    return ResetPasswordPage;
-}());
-
-//# sourceMappingURL=reset-password.js.map
-
-/***/ }),
-
-/***/ 121:
+/***/ 120:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -547,11 +439,11 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 121;
+webpackEmptyAsyncContext.id = 120;
 
 /***/ }),
 
-/***/ 122:
+/***/ 121:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -560,7 +452,7 @@ webpackEmptyAsyncContext.id = 121;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(122);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -630,7 +522,7 @@ var AuthService = (function () {
 
 /***/ }),
 
-/***/ 125:
+/***/ 124:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -645,49 +537,48 @@ var Configuration = (function () {
 
 /***/ }),
 
-/***/ 166:
+/***/ 165:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"../pages/activate/activate.module": [
-		292,
+		293,
 		4
 	],
 	"../pages/add-secret/add-secret.module": [
-		293,
+		294,
 		3
 	],
 	"../pages/change-password/change-password.module": [
-		294,
+		295,
 		2
 	],
 	"../pages/edit-secret/edit-secret.module": [
-		295,
-		10
-	],
-	"../pages/home/home.module": [
 		296,
 		9
 	],
-	"../pages/login/login.module": [
+	"../pages/home/home.module": [
 		297,
 		8
 	],
-	"../pages/logout/logout.module": [
+	"../pages/login/login.module": [
 		298,
 		7
 	],
-	"../pages/profile/profile.module": [
+	"../pages/logout/logout.module": [
 		299,
 		6
 	],
-	"../pages/register/register.module": [
+	"../pages/profile/profile.module": [
 		300,
+		5
+	],
+	"../pages/register/register.module": [
+		301,
 		1
 	],
 	"../pages/reset-password/reset-password.module": [
-		301,
-		5
+		166
 	],
 	"../pages/secret-key/secret-key.module": [
 		302,
@@ -698,25 +589,183 @@ function webpackAsyncContext(req) {
 	var ids = map[req];
 	if(!ids)
 		return Promise.reject(new Error("Cannot find module '" + req + "'."));
-	return __webpack_require__.e(ids[1]).then(function() {
+	return Promise.all(ids.slice(1).map(__webpack_require__.e)).then(function() {
 		return __webpack_require__(ids[0]);
 	});
 };
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 166;
+webpackAsyncContext.id = 165;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 210:
+/***/ 166:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResetPasswordModule", function() { return ResetPasswordModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__reset_password__ = __webpack_require__(167);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var ResetPasswordModule = (function () {
+    function ResetPasswordModule() {
+    }
+    ResetPasswordModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_2__reset_password__["a" /* ResetPasswordPage */],
+            ],
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__reset_password__["a" /* ResetPasswordPage */]),
+            ],
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__reset_password__["a" /* ResetPasswordPage */]
+            ]
+        })
+    ], ResetPasswordModule);
+    return ResetPasswordModule;
+}());
+
+//# sourceMappingURL=reset-password.module.js.map
+
+/***/ }),
+
+/***/ 167:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ResetPasswordPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_api_DefaultApi__ = __webpack_require__(33);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+/**
+ * Generated class for the AddSecret page.
+ *
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
+ */
+var ResetPasswordPage = (function () {
+    function ResetPasswordPage(navCtrl, navParams, alertCtrl, formBuilder, api, loadingCtrl, storage) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.alertCtrl = alertCtrl;
+        this.formBuilder = formBuilder;
+        this.api = api;
+        this.loadingCtrl = loadingCtrl;
+        this.storage = storage;
+        this.SECERET_KEY = '';
+    }
+    ResetPasswordPage.prototype.ngOnInit = function () {
+        var _this = this;
+        this.storage.get('user').then(function (val) {
+            if (!(val === undefined || val === null)) {
+                var loginUser = val;
+                _this.email = loginUser.item.email;
+            }
+        });
+        this.resetPwdFrom = this.formBuilder.group({
+            email: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
+        });
+    };
+    ResetPasswordPage.prototype.onSubmit = function () {
+        var _this = this;
+        this.showLoading();
+        if (this.resetPwdFrom.valid == true) {
+            var request = {};
+            request.email = this.email;
+            this.api.usersForgetpasswordPost(request).subscribe(function (response) {
+                _this.storage.set('email', _this.email);
+                _this.navCtrl.push('ChangePasswordPage');
+            }, function (error) {
+                _this.showError(error);
+            });
+        }
+        else {
+            this.showError('Please fix the error field');
+        }
+    };
+    ResetPasswordPage.prototype.isValid = function (field) {
+        var formField = this.resetPwdFrom.controls[field];
+        if (formField !== undefined) {
+            return (formField.valid || formField.pristine);
+        }
+        return true;
+    };
+    ResetPasswordPage.prototype.showLoading = function () {
+        this.loading = this.loadingCtrl.create({
+            content: 'Please wait...',
+            dismissOnPageChange: true
+        });
+        this.loading.present();
+    };
+    ResetPasswordPage.prototype.showError = function (text) {
+        this.loading.dismiss();
+        var errorMsg = this.getErrorMessage(text);
+        var alert = this.alertCtrl.create({
+            title: 'Fail',
+            subTitle: errorMsg,
+            buttons: ['OK']
+        });
+        alert.present();
+    };
+    ResetPasswordPage.prototype.getErrorMessage = function (text) {
+        try {
+            var object = JSON.parse(text._body);
+            return object.errorMessage;
+        }
+        catch (e) {
+            return text;
+        }
+    };
+    ResetPasswordPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-reset-password',template:/*ion-inline-start:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/reset-password/reset-password.html"*/'<!--\n  Generated template for the AddSecret page.\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Reset Password</ion-title>\n    <ion-buttons end>\n		<button (click)="onSubmit()" ion-button [disabled]="!resetPwdFrom.valid">\n			Reset\n		</button>\n	</ion-buttons>\n  </ion-navbar>  \n</ion-header>\n\n<ion-content padding>\n	<form [formGroup]="resetPwdFrom" (ngSubmit)="onSubmit()">\n		<ion-list>\n			<ion-item>\n	          <ion-label floating primary>Email</ion-label>\n	          <ion-input  [(ngModel)]="email" formControlName="email"\n	                     type="text" id="email" spellcheck="false" autocapitalize="off">\n	          </ion-input>\n	        </ion-item>				            \n		</ion-list>\n		<div padding>\n	      <button ion-button color="primary" block>Reset</button>\n	    </div>\n	</form>\n</ion-content>'/*ion-inline-end:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/reset-password/reset-password.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_4__providers_api_DefaultApi__["a" /* DefaultApi */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]])
+    ], ResetPasswordPage);
+    return ResetPasswordPage;
+}());
+
+//# sourceMappingURL=reset-password.js.map
+
+/***/ }),
+
+/***/ 211:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__secret_details_secret_details__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_api_DefaultApi__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(21);
@@ -762,10 +811,15 @@ var HomePage = (function () {
     HomePage.prototype.ngOnInit = function () {
         var _this = this;
         this.storage.get('user').then(function (val) {
-            var loginUser = val;
-            _this.QUERY_STR = 'userId:' + loginUser.item.id;
-            _this.api.configuration = __WEBPACK_IMPORTED_MODULE_5__utils_utils__["a" /* Utils */].getConfiguration(loginUser);
-            _this.getSecrets(_this.QUERY_STR);
+            if (val === undefined || val === null) {
+                _this.navCtrl.setRoot('LoginPage');
+            }
+            else {
+                var loginUser = val;
+                _this.QUERY_STR = 'userId:' + loginUser.item.id;
+                _this.api.configuration = __WEBPACK_IMPORTED_MODULE_5__utils_utils__["a" /* Utils */].getConfiguration(loginUser);
+                _this.getSecrets(_this.QUERY_STR);
+            }
         });
     };
     HomePage.prototype.getSecrets = function (query) {
@@ -876,13 +930,13 @@ var HomePage = (function () {
 
 /***/ }),
 
-/***/ 211:
+/***/ 212:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(212);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(235);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(213);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(236);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -890,31 +944,31 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 235:
+/***/ 236:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_auth_service__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_auth_service__ = __webpack_require__(121);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_api_DefaultApi__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_utils__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__constants_app_constants__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_component__ = __webpack_require__(281);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_hello_ionic_hello_ionic__ = __webpack_require__(290);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_ionic_angular__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_component__ = __webpack_require__(282);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_hello_ionic_hello_ionic__ = __webpack_require__(291);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_secret_details_secret_details__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_edit_secret_edit_secret__ = __webpack_require__(107);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_list_list__ = __webpack_require__(291);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_list_list__ = __webpack_require__(292);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_login_login__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_logout_logout__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_reset_password_reset_password__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_profile_profile__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_profile_profile__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_reset_password_reset_password_module__ = __webpack_require__(166);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ionic_storage__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_status_bar__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_splash_screen__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_status_bar__ = __webpack_require__(207);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_splash_screen__ = __webpack_require__(210);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -954,8 +1008,7 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_12__pages_list_list__["a" /* ListPage */],
                 __WEBPACK_IMPORTED_MODULE_13__pages_login_login__["a" /* LoginPage */],
                 __WEBPACK_IMPORTED_MODULE_14__pages_logout_logout__["a" /* LogoutPage */],
-                __WEBPACK_IMPORTED_MODULE_16__pages_profile_profile__["a" /* ProfilePage */],
-                __WEBPACK_IMPORTED_MODULE_15__pages_reset_password_reset_password__["a" /* ResetPasswordPage */]
+                __WEBPACK_IMPORTED_MODULE_15__pages_profile_profile__["a" /* ProfilePage */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser__["a" /* BrowserModule */],
@@ -971,11 +1024,12 @@ var AppModule = (function () {
                         { loadChildren: '../pages/logout/logout.module#LogoutModule', name: 'LogoutPage', segment: 'logout', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/profile/profile.module#ProfileModule', name: 'ProfilePage', segment: 'profile', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/register/register.module#RegisterModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/reset-password/reset-password.module#ResetPaswordModule', name: 'ResetPasswordPage', segment: 'reset-password', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/reset-password/reset-password.module#ResetPasswordModule', name: 'ResetPasswordPage', segment: 'reset-password', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/secret-key/secret-key.module#SecretKeyPageModule', name: 'SecretKeyPage', segment: 'secret-key', priority: 'low', defaultHistory: [] }
                     ]
                 }),
-                __WEBPACK_IMPORTED_MODULE_17__ionic_storage__["a" /* IonicStorageModule */].forRoot()
+                __WEBPACK_IMPORTED_MODULE_17__ionic_storage__["a" /* IonicStorageModule */].forRoot(),
+                __WEBPACK_IMPORTED_MODULE_16__pages_reset_password_reset_password_module__["ResetPasswordModule"]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_7_ionic_angular__["b" /* IonicApp */]],
             entryComponents: [
@@ -986,8 +1040,7 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_12__pages_list_list__["a" /* ListPage */],
                 __WEBPACK_IMPORTED_MODULE_13__pages_login_login__["a" /* LoginPage */],
                 __WEBPACK_IMPORTED_MODULE_14__pages_logout_logout__["a" /* LogoutPage */],
-                __WEBPACK_IMPORTED_MODULE_16__pages_profile_profile__["a" /* ProfilePage */],
-                __WEBPACK_IMPORTED_MODULE_15__pages_reset_password_reset_password__["a" /* ResetPasswordPage */]
+                __WEBPACK_IMPORTED_MODULE_15__pages_profile_profile__["a" /* ProfilePage */]
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_18__ionic_native_status_bar__["a" /* StatusBar */],
@@ -1007,7 +1060,7 @@ var AppModule = (function () {
 
 /***/ }),
 
-/***/ 237:
+/***/ 238:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1026,21 +1079,21 @@ var COLLECTION_FORMATS = {
 
 /***/ }),
 
-/***/ 281:
+/***/ 282:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_login_login__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_logout_logout__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(211);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_profile_profile__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_reset_password_reset_password__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_reset_password_reset_password__ = __webpack_require__(167);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_storage__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__ = __webpack_require__(207);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__ = __webpack_require__(210);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1076,10 +1129,10 @@ var MyApp = (function () {
         this.pages = [
             //{ title: 'Hello Ionic', component: HelloIonicPage },
             //{ title: 'My First List', component: ListPage },
-            { title: 'Home', component: __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */] },
-            { title: 'Profile', component: __WEBPACK_IMPORTED_MODULE_5__pages_profile_profile__["a" /* ProfilePage */] },
-            { title: 'Reset Password', component: __WEBPACK_IMPORTED_MODULE_6__pages_reset_password_reset_password__["a" /* ResetPasswordPage */] },
-            { title: 'Logout', component: __WEBPACK_IMPORTED_MODULE_3__pages_logout_logout__["a" /* LogoutPage */] }
+            { title: 'Home', component: __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */], icon1: 'home' },
+            { title: 'Profile', component: __WEBPACK_IMPORTED_MODULE_5__pages_profile_profile__["a" /* ProfilePage */], icon1: 'person' },
+            { title: 'Reset Password', component: __WEBPACK_IMPORTED_MODULE_6__pages_reset_password_reset_password__["a" /* ResetPasswordPage */], icon1: 'key' },
+            { title: 'Logout', component: __WEBPACK_IMPORTED_MODULE_3__pages_logout_logout__["a" /* LogoutPage */], icon1: 'log-out' }
         ];
     }
     MyApp.prototype.initializeApp = function () {
@@ -1108,7 +1161,7 @@ var MyApp = (function () {
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */])
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/phultu/Phu/Samples/projectX/frontend/src/app/app.html"*/'<ion-menu [content]="content">\n\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Pages</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        {{p.title}}\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n'/*ion-inline-end:"/home/phultu/Phu/Samples/projectX/frontend/src/app/app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/phultu/Phu/Samples/projectX/frontend/src/app/app.html"*/'<ion-menu [content]="content">\n\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Pages</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        <ion-icon name="{{p.icon1}}" color="bright" item-left></ion-icon>\n        {{p.title}}\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n'/*ion-inline-end:"/home/phultu/Phu/Samples/projectX/frontend/src/app/app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */],
@@ -1123,7 +1176,7 @@ var MyApp = (function () {
 
 /***/ }),
 
-/***/ 290:
+/***/ 291:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1155,13 +1208,13 @@ var HelloIonicPage = (function () {
 
 /***/ }),
 
-/***/ 291:
+/***/ 292:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__secret_details_secret_details__ = __webpack_require__(82);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1215,10 +1268,10 @@ var ListPage = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DefaultApi; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(122);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__variables__ = __webpack_require__(237);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__configuration__ = __webpack_require__(125);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__variables__ = __webpack_require__(238);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__configuration__ = __webpack_require__(124);
 /**
  * secret
  * No description provided (generated by Swagger Codegen https://github.com/swagger-api/swagger-codegen)
@@ -2759,7 +2812,7 @@ var DefaultApi = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Utils; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_configuration__ = __webpack_require__(125);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_configuration__ = __webpack_require__(124);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_crypto_js_crypto_js__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_crypto_js_crypto_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_crypto_js_crypto_js__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2777,7 +2830,9 @@ var Utils = (function () {
     Utils.getConfiguration = function (loginUser) {
         var configuration = new __WEBPACK_IMPORTED_MODULE_1__providers_configuration__["a" /* Configuration */]();
         configuration.apiKey = loginUser.token;
-        configuration.accessToken = loginUser.auth.token;
+        if (loginUser.auth !== undefined) {
+            configuration.accessToken = loginUser.auth.token;
+        }
         configuration.username = loginUser.item.email;
         configuration.withCredentials = false;
         return configuration;
@@ -2809,7 +2864,7 @@ var Utils = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SecretDetailsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__edit_secret_edit_secret__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_crypto_js_crypto_js__ = __webpack_require__(105);
@@ -2867,5 +2922,5 @@ var SecretDetailsPage = (function () {
 
 /***/ })
 
-},[211]);
+},[212]);
 //# sourceMappingURL=main.js.map

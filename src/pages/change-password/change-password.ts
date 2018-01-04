@@ -7,7 +7,7 @@ import { DefaultApi } from '../../providers/api/DefaultApi';
 
 import { Utils } from '../../utils/utils';
 import * as models  from '../../providers/model/models';
-import * as CryptoJS from 'crypto-js/crypto-js';
+
 /**
  * Generated class for the AddSecret page.
  *
@@ -21,7 +21,8 @@ import * as CryptoJS from 'crypto-js/crypto-js';
 })
 export class ChangePasswordPage implements OnInit {
 
-  secret: any;
+  user: {email: string, password: string, confirmPassword: string, changeKey: string}  = 
+  {email: '', password: '', confirmPassword: '', changeKey: ''};
   loading: Loading;
   chnagePwdFrom: FormGroup;
   SECERET_KEY: string = '';
@@ -29,27 +30,16 @@ export class ChangePasswordPage implements OnInit {
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController,
   	public formBuilder: FormBuilder, private api: DefaultApi, private loadingCtrl: LoadingController, private storage: Storage
     ) {
-
-debugger;
-    this.secret = this.navParams.get('secret');
-    this.secret.confirmPassword = this.secret.password;
-    
-    console.log(this.secret);
   }
 
-  ngOnInit(): any {
-
-    this.storage.get('user').then((val) => {
-      let loginUser: models.LoginUserResponse = val;
-      this.SECERET_KEY = loginUser.item.secretKey;
-      this.secret.userId = loginUser.item.id;
-      this.secret.encryptedPassword = Utils.getEncryptCode(this.secret.password, this.SECERET_KEY);
-      this.api.configuration = Utils.getConfiguration(loginUser);     
+  ngOnInit(): any {    
+    this.storage.get('email').then((val) => {    
+      this.user.email = val;
     });
 
     this.chnagePwdFrom = this.formBuilder.group({      
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
+      password: ['', [Validators.required, Validators.pattern('((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})')]],
       confirmPassword: ['', [Validators.required, this.confirmPasswordValidator.bind(this)]],
       changeKey: ['', [Validators.required]]
     });
@@ -57,20 +47,23 @@ debugger;
 
   onSubmit() {
     this.showLoading();
-    if (this.chnagePwdFrom.valid == true) {
-      var request: models.UpdateSecretRequest = {} as models.UpdateSecretRequest;
-      request.id = this.secret.id;
-      request.password = this.secret.encryptedPassword;    
-      request.note = this.secret.note;
-      this.api.secretsIdPut(request.id, request).subscribe(response => {        
-          this.navCtrl.push('HomePage');
+    if (this.chnagePwdFrom.valid === true) {
+
+      var request: models.ChangePasswordRequest = {} as models.FogotPasswordRequest;
+      request.email = this.user.email;
+      request.password = this.user.password;    
+      request.changeKey = this.user.changeKey;
+      this.showError('Ok');
+      this.api.usersChangepasswordPost(request).subscribe(response => {
+          this.storage.set('user', response);         
+          this.navCtrl.push('SecretKeyPage');
         },
           error => {
-            this.showError(error);
-          
+            this.showError(error);          
         });
+    } else {
+      this.showError("Please fix the error field.");
     }
-    
   }
 
   isValid(field: string) {
@@ -81,39 +74,12 @@ debugger;
     return true;
   }
 
-  domainValidator(control: FormControl): {[s: string]: boolean} {
-    if (control.value !== '') {
-      return {invalidDomain: true};
-    }
-  }
-
-  usernameValidator(control: FormControl): {[s: string]: boolean} {
-    if (control.value !== '') {
-      return {invalidUsername: true};
-    }
-  }
-
-  passwordValidator(control: FormControl): {[s: string]: boolean} {
-    if (control.value !== '') {      
-        return {invalidPassword: true};      
-    }
-  }
-
   confirmPasswordValidator(control: FormControl): {[s: string]: boolean} {
-    //debugger;
-    if (control !== undefined) {
-      if (control.value !== this.secret.password) {
-        return {invalidConfirmPassord: true};
-      }
+    if (!(control.value === this.user.password)) {
+          console.log(control.value);
+          console.log(this.user.password);
+      return {invalidConfirmPassword: true};
     }
-  }
-
-  noteValidator(control: FormControl): {[s: string]: boolean} {
-        return {invalidNote: true};
-  }
-
-  onInputTime(password: string){
-  	this.secret.encryptedPassword = Utils.getEncryptCode(this.secret.password, this.SECERET_KEY);
   }
 
   showLoading() {

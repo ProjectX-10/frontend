@@ -25682,6 +25682,14 @@ page-add-secret .invalid {
   color: red;
 }
 
+page-change-password .invalid {
+  color: red;
+}
+
+page-edit-secret .invalid {
+  color: red;
+}
+
 page-home on-buttons {
   -webkit-box-ordinal-group: 2;
   -webkit-order: 1;
@@ -25745,10 +25753,19 @@ page-login .login-content .register-btn {
   font-size: 0.8em;
 }
 
+page-login .login-content .forget-btn {
+  color: #ffffff;
+  font-size: 0.8em;
+}
+
 page-profile .username {
   font-size: 1.3em;
 }
 
 page-profile .label {
   color: #7f7f7f;
+}
+
+page-register .invalid {
+  color: red;
 }

@@ -40,14 +40,17 @@ export class HomePage implements OnInit {
 
   ngOnInit(): any {
 
-    this.storage.get('user').then((val) => {     
-      let loginUser: models.LoginUserResponse = val; 
-      this.QUERY_STR = 'userId:' + loginUser.item.id;      
-      this.api.configuration = Utils.getConfiguration(loginUser);  
-      this.getSecrets(this.QUERY_STR);
-      
+    this.storage.get('user').then((val) => {  
+      if (val === undefined || val === null) {
+        this.navCtrl.setRoot('LoginPage');
+      } else {
+        let loginUser: models.LoginUserResponse = val; 
+        this.QUERY_STR = 'userId:' + loginUser.item.id;   
+        this.api.configuration = Utils.getConfiguration(loginUser);  
+        this.getSecrets(this.QUERY_STR);  
+      }        
     });    
-  }
+  }  
 
   getSecrets(query:string) {
     this.api.secretsSearchGet(query, this.LIMIT, this.CURSOR).subscribe(response => {       

@@ -43,7 +43,7 @@
                      id="password" spellcheck="false" autocapitalize="off">
           </ion-input>
         </ion-item>
-        <p *ngIf="!isValid('password')" danger padding-left>Invalid Email</p>
+        <p *ngIf="!isValid('password')" danger padding-left>Invalid Password</p>
         <ion-item>
           <ion-label floating primary>Confirm Password</ion-label>
           <ion-input type="password" [(ngModel)]="userInfo.confirmPassword" formControlName="confirmPassword"

@@ -1,13 +1,13 @@
 import { OnInit, Component } from '@angular/core';
 import { AlertController, IonicPage, NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
 
-import {FormGroup, FormBuilder, FormControl, Validators} from "@angular/forms";
+import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import { Storage } from '@ionic/storage';
 import { DefaultApi } from '../../providers/api/DefaultApi';
 
-import { Utils } from '../../utils/utils';
+// import { Utils } from '../../utils/utils';
 import * as models  from '../../providers/model/models';
-import * as CryptoJS from 'crypto-js/crypto-js';
+
 /**
  * Generated class for the AddSecret page.
  *
@@ -29,15 +29,15 @@ export class ResetPasswordPage implements OnInit {
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController,
   	public formBuilder: FormBuilder, private api: DefaultApi, private loadingCtrl: LoadingController, private storage: Storage
     ) {
-
   }
 
   ngOnInit(): any {
 
     this.storage.get('user').then((val) => {
-      debugger;
-      let loginUser: models.LoginUserResponse = val;
-      this.email = loginUser.item.email;      
+      if (!(val === undefined || val === null)) {
+        let loginUser: models.LoginUserResponse = val;
+        this.email = loginUser.item.email;      
+      }
     });
 
     this.resetPwdFrom = this.formBuilder.group({
@@ -49,14 +49,16 @@ export class ResetPasswordPage implements OnInit {
     this.showLoading();
     if (this.resetPwdFrom.valid == true) {
       var request: models.FogotPasswordRequest = {} as models.FogotPasswordRequest;
-      request.email = this.email;
-      
+      request.email = this.email;     
       this.api.usersForgetpasswordPost(request).subscribe(response => {        
-          this.navCtrl.push('ChangePasswordPage');
+          this.storage.set('email', this.email); 
+          this.navCtrl.push('ChangePasswordPage');          
         },
           error => {
             this.showError(error);          
         });
+    } else {
+      this.showError('Please fix the error field');          
     }
   }
 

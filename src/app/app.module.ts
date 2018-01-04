@@ -13,8 +13,8 @@ import { EditSecretPage } from '../pages/edit-secret/edit-secret';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
-import { ResetPasswordPage } from '../pages/reset-password/reset-password';
 import { ProfilePage } from '../pages/profile/profile';
+import { ResetPasswordModule } from '../pages/reset-password/reset-password.module';
 import { HttpInterceptor } from '../providers/http/http-interceptor';
 import { IonicStorageModule } from '@ionic/storage';
 
@@ -30,14 +30,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ListPage,
     LoginPage,
     LogoutPage,
-    ProfilePage,
-    ResetPasswordPage
+    ProfilePage
   ],
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    ResetPasswordModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -48,8 +48,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ListPage,
     LoginPage,
     LogoutPage,
-    ProfilePage,
-    ResetPasswordPage
+    ProfilePage
   ],
   providers: [
     StatusBar,

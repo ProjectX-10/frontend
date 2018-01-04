@@ -21,7 +21,7 @@ import { Configuration } from '../../providers/configuration';
 })
 export class LoginPage implements OnInit {
   loading: Loading;
-  registerCredentials = { email: '', password: '' };  
+  registerCredentials = { email: '', password: '' };    
  
   constructor(private nav: NavController, private auth: AuthService, 
     private alertCtrl: AlertController, private loadingCtrl: LoadingController,
@@ -29,10 +29,10 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.storage.get('user').then((val) => {
-      if (val !== null) {
+      if (val !== undefined && val !== null) {
         let loginUser: models.LoginUserResponse = val;
         if (AppConstants.KEY_STATUS === loginUser.item.status) {
-          this.nav.setRoot('HomePage');
+          this.nav.push('HomePage');
         }    
       }
     });
@@ -40,6 +40,11 @@ export class LoginPage implements OnInit {
  
   public createAccount(event) {
     this.nav.push('RegisterPage');
+  }
+
+  public forgetPassword(event) {
+    event.preventDefault();
+    this.nav.push('ResetPasswordPage');
   }
 
   public login() {

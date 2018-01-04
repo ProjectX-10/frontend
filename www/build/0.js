@@ -7,7 +7,7 @@ webpackJsonp([0],{
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SecretKeyPageModule", function() { return SecretKeyPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__secret_key__ = __webpack_require__(307);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -47,7 +47,7 @@ var SecretKeyPageModule = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SecretKeyPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_api_DefaultApi__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(21);
@@ -99,7 +99,6 @@ var SecretKeyPage = (function () {
             if (_this.loginUser.item.secretKey !== undefined && _this.loginUser.item.secretKey !== null) {
                 _this.hasKey = true;
                 _this.SECERET_KEY = _this.loginUser.item.secretKey;
-                //console.log("ngOnInit: " + this.loginUser.item.secretKey);
             }
         });
         this.storage.get('passcode').then(function (value) {
@@ -140,7 +139,6 @@ var SecretKeyPage = (function () {
     SecretKeyPage.prototype.validateSecretKey = function () {
         var shaString = __WEBPACK_IMPORTED_MODULE_6_crypto_js_sha256__(this.userInfo.secretKey.toString());
         var secretKey = shaString.toString();
-        //console.log(secretKey);
         if (secretKey === this.SECERET_KEY) {
             this.updateStorage();
             this.navCtrl.setRoot('HomePage');

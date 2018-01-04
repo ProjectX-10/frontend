@@ -23,7 +23,7 @@ export class MyApp {
 
   // make LoginPage the root (or first) page
   rootPage = LoginPage;
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any, icon1: any}>;
 
   constructor(
     public platform: Platform,
@@ -38,10 +38,10 @@ export class MyApp {
     this.pages = [
       //{ title: 'Hello Ionic', component: HelloIonicPage },
       //{ title: 'My First List', component: ListPage },
-      { title: 'Home', component: HomePage },
-      { title: 'Profile', component: ProfilePage },
-      { title: 'Reset Password', component: ResetPasswordPage },
-      { title: 'Logout', component: LogoutPage }
+      { title: 'Home', component: HomePage, icon1: 'home'},
+      { title: 'Profile', component: ProfilePage, icon1: 'person'},
+      { title: 'Reset Password', component: ResetPasswordPage, icon1: 'key'},
+      { title: 'Logout', component: LogoutPage, icon1: 'log-out'}
     ];
   }
 
