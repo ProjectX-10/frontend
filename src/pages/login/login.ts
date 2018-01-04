@@ -32,7 +32,8 @@ export class LoginPage implements OnInit {
       if (val !== undefined && val !== null) {
         let loginUser: models.LoginUserResponse = val;
         if (AppConstants.KEY_STATUS === loginUser.item.status) {
-          this.nav.push('HomePage');
+          debugger;
+          this.nav.setRoot('HomePage');
         }    
       }
     });

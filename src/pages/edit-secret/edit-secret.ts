@@ -7,7 +7,6 @@ import { DefaultApi } from '../../providers/api/DefaultApi';
 
 import { Utils } from '../../utils/utils';
 import * as models  from '../../providers/model/models';
-import * as CryptoJS from 'crypto-js/crypto-js';
 /**
  * Generated class for the AddSecret page.
  *
@@ -29,16 +28,11 @@ export class EditSecretPage implements OnInit {
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController,
   	public formBuilder: FormBuilder, private api: DefaultApi, private loadingCtrl: LoadingController, private storage: Storage
     ) {
-
-debugger;
     this.secret = this.navParams.get('secret');
     this.secret.confirmPassword = this.secret.password;
-    
-    console.log(this.secret);
   }
 
   ngOnInit(): any {
-
     this.storage.get('user').then((val) => {
       let loginUser: models.LoginUserResponse = val;
       this.SECERET_KEY = loginUser.item.secretKey;
@@ -69,7 +63,6 @@ debugger;
         },
           error => {
             this.showError(error);
-          
         });
     }
     

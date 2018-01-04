@@ -53,10 +53,14 @@ export class HomePage implements OnInit {
   }  
 
   getSecrets(query:string) {
-    this.api.secretsSearchGet(query, this.LIMIT, this.CURSOR).subscribe(response => {       
+    this.api.secretsSearchGet(query, this.LIMIT, this.CURSOR).subscribe(response => {   
+        console.log(this.CURSOR); 
+
         if (response != null && response.items.length > 0) {
           for (let i in response.items) {              
              this.items.push(response.items[i]);
+              console.log(i);
+             console.log(response.items[i]); 
           }
           this.CURSOR = response.nextPageToken;
         } else {
@@ -71,6 +75,7 @@ export class HomePage implements OnInit {
 
   doInfinite(infiniteScroll) {
     if (this.CURSOR !== undefined) {
+      console.log(this.CURSOR);
       setTimeout(() => {
         if (this.SEARCH_TEXT !== undefined) {
           this.getSecrets(this.SEARCH_TEXT);
@@ -79,7 +84,7 @@ export class HomePage implements OnInit {
         }
         
         infiniteScroll.complete();
-      }, 250);
+      }, 500);
     }
   }
 
