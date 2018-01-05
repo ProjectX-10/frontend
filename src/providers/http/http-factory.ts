@@ -1,4 +1,3 @@
-import { Injectable } from "@angular/core";
 import {XHRBackend, Http, RequestOptions} from "@angular/http";
 import {HttpInterceptor} from "./http-interceptor";
 

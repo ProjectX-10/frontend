@@ -23,6 +23,7 @@ export class HomePage implements OnInit {
   loading: Loading;
   icons: string[];
   items: Array<models.Secret>;
+  noMoreItemsAvailable: boolean = false; 
 
   searchInput: string = '';
 
@@ -54,17 +55,14 @@ export class HomePage implements OnInit {
 
   getSecrets(query:string) {
     this.api.secretsSearchGet(query, this.LIMIT, this.CURSOR).subscribe(response => {   
-        console.log(this.CURSOR); 
-
-        if (response != null && response.items.length > 0) {
+        if (response != null && response.items.length > 0) {          
           for (let i in response.items) {              
              this.items.push(response.items[i]);
-              console.log(i);
-             console.log(response.items[i]); 
+             //console.log(i);
+             //console.log(response.items[i]); 
           }
           this.CURSOR = response.nextPageToken;
-        } else {
-          this.CURSOR = undefined;
+          this.noMoreItemsAvailable = true;
         }
       },
         error => {
@@ -74,8 +72,9 @@ export class HomePage implements OnInit {
   }
 
   doInfinite(infiniteScroll) {
-    if (this.CURSOR !== undefined) {
-      console.log(this.CURSOR);
+    if (this.noMoreItemsAvailable == true) {
+      //console.log(this.CURSOR);
+      this.noMoreItemsAvailable = false;
       setTimeout(() => {
         if (this.SEARCH_TEXT !== undefined) {
           this.getSecrets(this.SEARCH_TEXT);
@@ -90,8 +89,8 @@ export class HomePage implements OnInit {
 
 
   itemTapped(event, secret) {
-    console.log("itemTapped");
-    console.log(secret)
+    //console.log("itemTapped");
+    //console.log(secret)
     this.navCtrl.push(SecretDetailsPage, { 'secret': secret });
   }
 
@@ -115,7 +114,31 @@ export class HomePage implements OnInit {
 
   }
 
-  deleteItem(event, secret) {  
+  presentConfirm(event, secret) {
+    let alert = this.alertCtrl.create({
+      title: 'Confirm delete',
+      message: 'Do you want to delete this secret?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            //console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Ok',
+          handler: () => {            
+            this.deleteItem(secret);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  deleteItem(secret) {  
+
     this.api.secretsIdDelete(secret.id).subscribe(response => {        
         //if (response != null) {
           let index: number = this.items.indexOf(secret);

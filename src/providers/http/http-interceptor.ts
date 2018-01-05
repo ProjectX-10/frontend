@@ -67,53 +67,5 @@ export class HttpInterceptor extends Http {
 
     }
 
-  // /**
-  //  * Before any Request.
-  //  */
-  // private beforeRequest(): void {
-  //   //this.notifyService.showPreloader();
-  // }
-  //
-  /**
-   * After any request.
-   */
-  private afterRequest(): void {
-    //this.notifyService.hidePreloader();
-    debugger;
-    console.log("after request")
-  }
-
-  /**
-   * Error handler.
-   * @param error
-   * @param caught
-   * @returns {ErrorObservable}
-   */
-  // private onCatch(error: any, caught: Observable<any>): Observable<any> {
-  //   //this.notifyService.popError();
-  //   return Observable.throw(error);
-  // }
-
-  /**
-   * onSuccess
-   * @param res
-   */
-  // private onSuccess(res: Response): void {
-  //   console.log(res);
-  // }
-
-  /**
-   * onError
-   * @param error
-   */
-  // private onError(error: any): void {
-  //   //this.notifyService.popError();
-  //   console.log(error);
-  // }
-  /**
-   * onFinally
-   */
-  // private onFinally(): void {
-  //   this.afterRequest();
-  // }
+  
 }

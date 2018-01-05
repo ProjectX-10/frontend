@@ -81,10 +81,8 @@ var EditSecretPage = (function () {
         this.loadingCtrl = loadingCtrl;
         this.storage = storage;
         this.SECERET_KEY = '';
-        debugger;
         this.secret = this.navParams.get('secret');
         this.secret.confirmPassword = this.secret.password;
-        console.log(this.secret);
     }
     EditSecretPage.prototype.ngOnInit = function () {
         var _this = this;
@@ -183,7 +181,7 @@ var EditSecretPage = (function () {
     };
     EditSecretPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-edit-secret',template:/*ion-inline-start:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\edit-secret\edit-secret.html"*/'<!--\n\n  Generated template for the AddSecret page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Edit Secret</ion-title>\n\n    <ion-buttons end>\n\n		<button (click)="onSubmit()" ion-button [disabled]="!editFrom.valid">\n\n			Save\n\n		</button>\n\n	</ion-buttons>\n\n  </ion-navbar>  \n\n</ion-header>\n\n\n\n<ion-content padding>\n\n	<form [formGroup]="editFrom" (ngSubmit)="onSubmit()">\n\n		<ion-list>\n\n			<ion-item>\n\n				<ion-label floating primary>Domain</ion-label>\n\n				<ion-input [(ngModel)]="secret.domain" formControlName="domain" type="text"\n\n                     id="domain" spellcheck="false" autocapitalize="off" disabled="true">\n\n          		</ion-input>\n\n			</ion-item>\n\n			<p *ngIf="!isValid(\'domain\')" danger padding-left>Invalid Domain</p>\n\n			<ion-item>\n\n	          <ion-label floating primary>Username</ion-label>\n\n	          <ion-input type="text" [(ngModel)]="secret.username" formControlName="username"\n\n	                     id="username" spellcheck="false" autocapitalize="off" disabled="true">\n\n	          </ion-input>\n\n	        </ion-item>\n\n	        <p *ngIf="!isValid(\'username\')" danger padding-left>Invalid Username</p>\n\n	        <ion-item>\n\n	          <ion-label floating primary>Password</ion-label>\n\n	          <ion-input type="password" [(ngModel)]="secret.password" (input)=\'onInputTime($event.target.value)\' formControlName="password"\n\n	                     id="password" spellcheck="false" autocapitalize="off">\n\n	          </ion-input>\n\n	        </ion-item>\n\n	        <ion-item>\n\n	          <ion-label floating primary>Confirm Password</ion-label>\n\n	          <ion-input type="password" [(ngModel)]="secret.confirmPassword" formControlName="confirmPassword" \n\n	          			 id="confirmPassword" spellcheck="false" autocapitalize="off">\n\n	          </ion-input>\n\n	        </ion-item>\n\n	        <ion-item>\n\n	          <ion-label floating primary>Note</ion-label>\n\n	          <ion-input  [(ngModel)]="secret.note" formControlName="note"\n\n	                     type="text" id="note" spellcheck="false" autocapitalize="off">\n\n	          </ion-input>\n\n	        </ion-item>\n\n	        <ion-item>\n\n	         <ion-label floating primary>Generate Password</ion-label>\n\n	          <ion-input type="text" [(ngModel)]="secret.encryptedPassword" formControlName="encryptedPassword" disabled="true"\n\n	                      id="encryptedPassword" spellcheck="false" autocapitalize="off">\n\n	          </ion-input>\n\n	        </ion-item>\n\n		</ion-list>\n\n		<div padding>\n\n	      <button ion-button color="primary" block>Save</button>\n\n	    </div>\n\n	</form>\n\n</ion-content>'/*ion-inline-end:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\edit-secret\edit-secret.html"*/,
+            selector: 'page-edit-secret',template:/*ion-inline-start:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/edit-secret/edit-secret.html"*/'<!--\n  Generated template for the AddSecret page.\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Edit Secret</ion-title>\n    <ion-buttons end>\n		<button (click)="onSubmit()" ion-button [disabled]="!editFrom.valid">\n			Save\n		</button>\n	</ion-buttons>\n  </ion-navbar>  \n</ion-header>\n\n<ion-content padding>\n	<form [formGroup]="editFrom" (ngSubmit)="onSubmit()">\n		<ion-list>\n			<ion-item>\n				<ion-label floating primary>Domain</ion-label>\n				<ion-input [(ngModel)]="secret.domain" formControlName="domain" type="text"\n                     id="domain" spellcheck="false" autocapitalize="off" disabled="true">\n          		</ion-input>\n			</ion-item>\n			<p *ngIf="!isValid(\'domain\')" danger padding-left>Invalid Domain</p>\n			<ion-item>\n	          <ion-label floating primary>Username</ion-label>\n	          <ion-input type="text" [(ngModel)]="secret.username" formControlName="username"\n	                     id="username" spellcheck="false" autocapitalize="off" disabled="true">\n	          </ion-input>\n	        </ion-item>\n	        <p *ngIf="!isValid(\'username\')" danger padding-left>Invalid Username</p>\n	        <ion-item>\n	          <ion-label floating primary>Password</ion-label>\n	          <ion-input type="password" [(ngModel)]="secret.password" (input)=\'onInputTime($event.target.value)\' formControlName="password"\n	                     id="password" spellcheck="false" autocapitalize="off">\n	          </ion-input>\n	        </ion-item>\n	        <ion-item>\n	          <ion-label floating primary>Confirm Password</ion-label>\n	          <ion-input type="password" [(ngModel)]="secret.confirmPassword" formControlName="confirmPassword" \n	          			 id="confirmPassword" spellcheck="false" autocapitalize="off">\n	          </ion-input>\n	        </ion-item>\n	        <ion-item>\n	          <ion-label floating primary>Note</ion-label>\n	          <ion-input  [(ngModel)]="secret.note" formControlName="note"\n	                     type="text" id="note" spellcheck="false" autocapitalize="off">\n	          </ion-input>\n	        </ion-item>\n	        <ion-item>\n	         <ion-label floating primary>Generate Password</ion-label>\n	          <ion-input type="text" [(ngModel)]="secret.encryptedPassword" formControlName="encryptedPassword" disabled="true"\n	                      id="encryptedPassword" spellcheck="false" autocapitalize="off">\n	          </ion-input>\n	        </ion-item>\n		</ion-list>\n		<div padding>\n	      <button ion-button color="primary" block>Save</button>\n	    </div>\n	</form>\n</ion-content>'/*ion-inline-end:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/edit-secret/edit-secret.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_4__providers_api_DefaultApi__["a" /* DefaultApi */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]])
@@ -202,10 +200,9 @@ var EditSecretPage = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_service__ = __webpack_require__(121);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_api_DefaultApi__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__constants_app_constants__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_api_DefaultApi__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__constants_app_constants__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(21);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -220,7 +217,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 /**
  * Generated class for the Login page.
  *
@@ -228,9 +224,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * on Ionic pages and navigation.
  */
 var LoginPage = (function () {
-    function LoginPage(nav, auth, alertCtrl, loadingCtrl, api, storage) {
+    function LoginPage(nav, alertCtrl, loadingCtrl, api, storage) {
         this.nav = nav;
-        this.auth = auth;
         this.alertCtrl = alertCtrl;
         this.loadingCtrl = loadingCtrl;
         this.api = api;
@@ -242,7 +237,7 @@ var LoginPage = (function () {
         this.storage.get('user').then(function (val) {
             if (val !== undefined && val !== null) {
                 var loginUser = val;
-                if (__WEBPACK_IMPORTED_MODULE_4__constants_app_constants__["a" /* AppConstants */].KEY_STATUS === loginUser.item.status) {
+                if (__WEBPACK_IMPORTED_MODULE_3__constants_app_constants__["a" /* AppConstants */].KEY_STATUS === loginUser.item.status) {
                     debugger;
                     _this.nav.setRoot('HomePage');
                 }
@@ -310,12 +305,13 @@ var LoginPage = (function () {
     };
     LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-login',template:/*ion-inline-start:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\login\login.html"*/'<!--\n\n  Generated template for the Login page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-content class="login-content" padding>\n\n  <ion-row class="logo-row">\n\n    <ion-col></ion-col>\n\n    <ion-col width-67>\n\n      <img src="https://images.vexels.com/media/users/3/136307/isolated/lists/fe8cd8608b7d3623802d9c7b6a912a2a-lock-icon.png"/>\n\n    </ion-col>\n\n    <ion-col></ion-col>\n\n  </ion-row>\n\n  <div class="login-box">\n\n    <form (ngSubmit)="login()" #registerForm="ngForm">\n\n      <ion-row>\n\n        <ion-col>\n\n          <ion-list inset>\n\n            \n\n            <ion-item>\n\n              <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required \n\n              autocapitalize="off"></ion-input>\n\n            </ion-item>\n\n            \n\n            <ion-item>\n\n              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required autocapitalize="off"></ion-input>\n\n            </ion-item>\n\n            <button type="button" ion-button class="forget-btn" block clear (click)="forgetPassword($event)">Forget password</button>  \n\n          </ion-list>\n\n        </ion-col>\n\n      </ion-row>      \n\n      \n\n      <ion-row>\n\n        <ion-col class="signup-col">\n\n          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Login</button>\n\n          \n\n        </ion-col>\n\n      </ion-row>\n\n      \n\n    </form>\n\n    <button ion-button class="register-btn" block clear (click)="createAccount($event)">Create New Account</button>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\login\login.html"*/,
+            selector: 'page-login',template:/*ion-inline-start:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/login/login.html"*/'<!--\n  Generated template for the Login page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-content class="login-content" padding>\n  <ion-row class="logo-row">\n    <ion-col></ion-col>\n    <ion-col width-67>\n      <img src="https://images.vexels.com/media/users/3/136307/isolated/lists/fe8cd8608b7d3623802d9c7b6a912a2a-lock-icon.png"/>\n    </ion-col>\n    <ion-col></ion-col>\n  </ion-row>\n  <div class="login-box">\n    <form (ngSubmit)="login()" #registerForm="ngForm">\n      <ion-row>\n        <ion-col>\n          <ion-list inset>\n            \n            <ion-item>\n              <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required \n              autocapitalize="off"></ion-input>\n            </ion-item>\n            \n            <ion-item>\n              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required autocapitalize="off"></ion-input>\n            </ion-item>\n            <button type="button" ion-button class="forget-btn" block clear (click)="forgetPassword($event)">Forget password</button>  \n          </ion-list>\n        </ion-col>\n      </ion-row>      \n      \n      <ion-row>\n        <ion-col class="signup-col">\n          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Login</button>\n          \n        </ion-col>\n      </ion-row>\n      \n    </form>\n    <button ion-button class="register-btn" block clear (click)="createAccount($event)">Create New Account</button>\n  </div>\n</ion-content>'/*ion-inline-end:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/login/login.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_auth_service__["a" /* AuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_auth_service__["a" /* AuthService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__providers_api_DefaultApi__["a" /* DefaultApi */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_api_DefaultApi__["a" /* DefaultApi */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */]) === "function" && _f || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_api_DefaultApi__["a" /* DefaultApi */], __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */]])
     ], LoginPage);
     return LoginPage;
-    var _a, _b, _c, _d, _e, _f;
 }());
 
 //# sourceMappingURL=login.js.map
@@ -356,7 +352,7 @@ var LogoutPage = (function () {
     };
     LogoutPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-logout',template:/*ion-inline-start:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\logout\logout.html"*/'<!--\n\n  Generated template for the Logout page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>logout</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\logout\logout.html"*/,
+            selector: 'page-logout',template:/*ion-inline-start:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/logout/logout.html"*/'<!--\n  Generated template for the Logout page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>logout</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/logout/logout.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], LogoutPage);
@@ -385,11 +381,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-//import { ToastService } from '../../../providers/util/toast.service';
-//import { AlertService } from '../../../providers/util/alert.service';
-//import { Component } from '@angular/core';
-//import { Camera } from '@ionic-native/camera';
-//import { IonicPage } from 'ionic-angular';
 /**
  * Generated class for the Profile page.
  *
@@ -415,7 +406,7 @@ var ProfilePage = (function () {
     };
     ProfilePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-profile',template:/*ion-inline-start:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\profile\profile.html"*/'<!--\n\n  Generated template for the Profile page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar primary>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>User Settings</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <ion-list>\n\n    <ion-list-header>\n\n      <ion-avatar item-start>\n\n        <img [src]="user.imageUrl ? user.imageUrl : placeholderPicture">\n\n      </ion-avatar>\n\n      <p class="username">{{user.displayName}}</p>\n\n    </ion-list-header>\n\n  </ion-list>\n\n  <ion-list no-border>\n\n    <ion-list-header>\n\n      General\n\n    </ion-list-header>\n\n    <ion-item>\n\n      <ion-icon name=\'settings\' item-start></ion-icon>\n\n      <ion-label>App Language</ion-label>\n\n      <ion-select [(ngModel)]="language">\n\n        <ion-option *ngFor="let language of languages" [value]="language">{{language}}</ion-option>\n\n      </ion-select>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-icon name=\'mail\' item-start></ion-icon>\n\n      <ion-label class="label"> {{user.email}} </ion-label>\n\n      \n\n    </ion-item>\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\profile\profile.html"*/,
+            selector: 'page-profile',template:/*ion-inline-start:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/profile/profile.html"*/'<!--\n  Generated template for the Profile page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar primary>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>User Settings</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <ion-list>\n    <ion-list-header>\n      <ion-avatar item-start>\n        <img [src]="user.imageUrl ? user.imageUrl : placeholderPicture">\n      </ion-avatar>\n      <p class="username">{{user.displayName}}</p>\n    </ion-list-header>\n  </ion-list>\n  <ion-list no-border>\n    <ion-list-header>\n      General\n    </ion-list-header>\n    <ion-item>\n      <ion-icon name=\'settings\' item-start></ion-icon>\n      <ion-label>App Language</ion-label>\n      <ion-select [(ngModel)]="language">\n        <ion-option *ngFor="let language of languages" [value]="language">{{language}}</ion-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-icon name=\'mail\' item-start></ion-icon>\n      <ion-label class="label"> {{user.email}} </ion-label>\n      \n    </ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/profile/profile.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */]])
     ], ProfilePage);
@@ -443,86 +434,7 @@ webpackEmptyAsyncContext.id = 120;
 
 /***/ }),
 
-/***/ 121:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony export User */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(122);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-var User = (function () {
-    function User(name, email) {
-        this.name = name;
-        this.email = email;
-    }
-    return User;
-}());
-
-var AuthService = (function () {
-    function AuthService() {
-    }
-    AuthService.prototype.login = function (credentials) {
-        var _this = this;
-        if (credentials.email === null || credentials.password === null) {
-            return __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"].throw("Please insert credentials");
-        }
-        else {
-            return __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"].create(function (observer) {
-                // At this point make a request to your backend to make a real check!
-                var access = (credentials.password === "pass" && credentials.email === "email");
-                _this.currentUser = new User('Simon', 'saimon@devdactic.com');
-                observer.next(access);
-                observer.complete();
-            });
-        }
-    };
-    AuthService.prototype.register = function (credentials) {
-        if (credentials.email === null || credentials.password === null) {
-            return __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"].throw("Please insert credentials");
-        }
-        else {
-            // At this point store the credentials to your backend!
-            return __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"].create(function (observer) {
-                observer.next(true);
-                observer.complete();
-            });
-        }
-    };
-    AuthService.prototype.getUserInfo = function () {
-        return this.currentUser;
-    };
-    AuthService.prototype.logout = function () {
-        var _this = this;
-        return __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"].create(function (observer) {
-            _this.currentUser = null;
-            observer.next(true);
-            observer.complete();
-        });
-    };
-    AuthService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])()
-    ], AuthService);
-    return AuthService;
-}());
-
-//# sourceMappingURL=auth-service.js.map
-
-/***/ }),
-
-/***/ 124:
+/***/ 123:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -537,12 +449,12 @@ var Configuration = (function () {
 
 /***/ }),
 
-/***/ 165:
+/***/ 164:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"../pages/activate/activate.module": [
-		296,
+		293,
 		4
 	],
 	"../pages/add-secret/add-secret.module": [
@@ -550,11 +462,11 @@ var map = {
 		3
 	],
 	"../pages/change-password/change-password.module": [
-		293,
+		295,
 		2
 	],
 	"../pages/edit-secret/edit-secret.module": [
-		295,
+		296,
 		9
 	],
 	"../pages/home/home.module": [
@@ -570,18 +482,18 @@ var map = {
 		6
 	],
 	"../pages/profile/profile.module": [
-		302,
+		300,
 		5
 	],
 	"../pages/register/register.module": [
-		300,
+		301,
 		1
 	],
 	"../pages/reset-password/reset-password.module": [
-		166
+		165
 	],
 	"../pages/secret-key/secret-key.module": [
-		301,
+		302,
 		0
 	]
 };
@@ -596,12 +508,12 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 165;
+webpackAsyncContext.id = 164;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 166:
+/***/ 165:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -609,7 +521,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResetPasswordModule", function() { return ResetPasswordModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__reset_password__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__reset_password__ = __webpack_require__(166);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -642,7 +554,7 @@ var ResetPasswordModule = (function () {
 
 /***/ }),
 
-/***/ 167:
+/***/ 166:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -747,7 +659,7 @@ var ResetPasswordPage = (function () {
     };
     ResetPasswordPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-reset-password',template:/*ion-inline-start:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\reset-password\reset-password.html"*/'<!--\n\n  Generated template for the AddSecret page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n  	<button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Reset Password</ion-title>\n\n    <ion-buttons end>\n\n		<button (click)="onSubmit()" ion-button [disabled]="!resetPwdFrom.valid">\n\n			Reset\n\n		</button>\n\n	</ion-buttons>\n\n  </ion-navbar>  \n\n</ion-header>\n\n\n\n<ion-content padding>\n\n	<form [formGroup]="resetPwdFrom" (ngSubmit)="onSubmit()">\n\n		<ion-list>\n\n			<ion-item>\n\n	          <ion-label floating primary>Email</ion-label>\n\n	          <ion-input  [(ngModel)]="email" formControlName="email"\n\n	                     type="text" id="email" spellcheck="false" autocapitalize="off">\n\n	          </ion-input>\n\n	        </ion-item>				            \n\n		</ion-list>\n\n		<div padding>\n\n	      <button ion-button color="primary" block>Reset</button>\n\n	    </div>\n\n	</form>\n\n</ion-content>'/*ion-inline-end:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\reset-password\reset-password.html"*/,
+            selector: 'page-reset-password',template:/*ion-inline-start:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/reset-password/reset-password.html"*/'<!--\n  Generated template for the AddSecret page.\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n  	<button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Reset Password</ion-title>\n    <ion-buttons end>\n		<button (click)="onSubmit()" ion-button [disabled]="!resetPwdFrom.valid">\n			Reset\n		</button>\n	</ion-buttons>\n  </ion-navbar>  \n</ion-header>\n\n<ion-content padding>\n	<form [formGroup]="resetPwdFrom" (ngSubmit)="onSubmit()">\n		<ion-list>\n			<ion-item>\n	          <ion-label floating primary>Email</ion-label>\n	          <ion-input  [(ngModel)]="email" formControlName="email"\n	                     type="text" id="email" spellcheck="false" autocapitalize="off">\n	          </ion-input>\n	        </ion-item>				            \n		</ion-list>\n		<div padding>\n	      <button ion-button color="primary" block>Reset</button>\n	    </div>\n	</form>\n</ion-content>'/*ion-inline-end:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/reset-password/reset-password.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_4__providers_api_DefaultApi__["a" /* DefaultApi */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]])
@@ -759,7 +671,7 @@ var ResetPasswordPage = (function () {
 
 /***/ }),
 
-/***/ 211:
+/***/ 210:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -799,6 +711,7 @@ var HomePage = (function () {
         this.storage = storage;
         this.loadingCtrl = loadingCtrl;
         this.alertCtrl = alertCtrl;
+        this.noMoreItemsAvailable = false;
         this.searchInput = '';
         this.QUERY_STR = '';
         this.LIMIT = '15';
@@ -825,17 +738,14 @@ var HomePage = (function () {
     HomePage.prototype.getSecrets = function (query) {
         var _this = this;
         this.api.secretsSearchGet(query, this.LIMIT, this.CURSOR).subscribe(function (response) {
-            console.log(_this.CURSOR);
             if (response != null && response.items.length > 0) {
                 for (var i in response.items) {
                     _this.items.push(response.items[i]);
-                    console.log(i);
-                    console.log(response.items[i]);
+                    //console.log(i);
+                    //console.log(response.items[i]); 
                 }
                 _this.CURSOR = response.nextPageToken;
-            }
-            else {
-                _this.CURSOR = undefined;
+                _this.noMoreItemsAvailable = true;
             }
         }, function (error) {
             _this.showError(error);
@@ -843,8 +753,9 @@ var HomePage = (function () {
     };
     HomePage.prototype.doInfinite = function (infiniteScroll) {
         var _this = this;
-        if (this.CURSOR !== undefined) {
-            console.log(this.CURSOR);
+        if (this.noMoreItemsAvailable == true) {
+            //console.log(this.CURSOR);
+            this.noMoreItemsAvailable = false;
             setTimeout(function () {
                 if (_this.SEARCH_TEXT !== undefined) {
                     _this.getSecrets(_this.SEARCH_TEXT);
@@ -857,8 +768,8 @@ var HomePage = (function () {
         }
     };
     HomePage.prototype.itemTapped = function (event, secret) {
-        console.log("itemTapped");
-        console.log(secret);
+        //console.log("itemTapped");
+        //console.log(secret)
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__secret_details_secret_details__["a" /* SecretDetailsPage */], { 'secret': secret });
     };
     HomePage.prototype.onInput = function (event) {
@@ -878,7 +789,30 @@ var HomePage = (function () {
     };
     HomePage.prototype.onCancel = function (event) {
     };
-    HomePage.prototype.deleteItem = function (event, secret) {
+    HomePage.prototype.presentConfirm = function (event, secret) {
+        var _this = this;
+        var alert = this.alertCtrl.create({
+            title: 'Confirm delete',
+            message: 'Do you want to delete this secret?',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: function () {
+                        //console.log('Cancel clicked');
+                    }
+                },
+                {
+                    text: 'Ok',
+                    handler: function () {
+                        _this.deleteItem(secret);
+                    }
+                }
+            ]
+        });
+        alert.present();
+    };
+    HomePage.prototype.deleteItem = function (secret) {
         var _this = this;
         this.api.secretsIdDelete(secret.id).subscribe(function (response) {
             //if (response != null) {
@@ -922,25 +856,25 @@ var HomePage = (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\home\home.html"*/'<!--\n\n  Generated template for the Home page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Home</ion-title>\n\n    <ion-buttons end>\n\n		<button (click)="openAdd()" ion-button>\n\n			Add\n\n		</button>\n\n	</ion-buttons>\n\n  \n\n </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-searchbar [(ngModel)]="searchInput" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)"(ionCancel)="onCancel($event)">\n\n  </ion-searchbar>  \n\n  <ion-list>\n\n    <!--<button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">\n\n      <ion-icon name="star" color="bright" item-left></ion-icon>\n\n      {{item.domain}}\n\n      <div class="item-note" item-right>\n\n        {{item.username}}\n\n      </div>\n\n    </button>-->\n\n    <ion-item-sliding *ngFor="let item of items">\n\n      <button ion-item (click)="itemTapped($event, item)">\n\n        <ion-icon name="star" color="bright" item-left></ion-icon>\n\n          {{item.domain}}\n\n        <div class="item-note" item-right>\n\n          {{item.username}}\n\n        </div>\n\n      </button>      \n\n      <!--<ion-item-options side="left">\n\n        <button ion-button (click)="favorite(item)">Favorite</button>\n\n        <button ion-button color="danger" (click)="share(item)">Share</button>\n\n      </ion-item-options>-->\n\n\n\n      <ion-item-options side="right">\n\n        <button ion-button color="danger" (click)="deleteItem($event, item)">Delete</button>\n\n      </ion-item-options>\n\n    </ion-item-sliding>\n\n  </ion-list>\n\n  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">\n\n    <ion-infinite-scroll-content></ion-infinite-scroll-content>\n\n  </ion-infinite-scroll>\n\n</ion-content>'/*ion-inline-end:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\home\home.html"*/,
+            selector: 'page-home',template:/*ion-inline-start:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/home/home.html"*/'<!--\n  Generated template for the Home page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Home</ion-title>\n    <ion-buttons end>\n		<button (click)="openAdd()" ion-button>\n			Add\n		</button>\n	</ion-buttons>\n  \n </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-searchbar [(ngModel)]="searchInput" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)"(ionCancel)="onCancel($event)">\n  </ion-searchbar>  \n  <ion-list>\n    <!--<button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">\n      <ion-icon name="star" color="bright" item-left></ion-icon>\n      {{item.domain}}\n      <div class="item-note" item-right>\n        {{item.username}}\n      </div>\n    </button>-->\n    <ion-item-sliding *ngFor="let item of items">\n      <button ion-item (click)="itemTapped($event, item)">\n        <ion-icon name="star" color="bright" item-left></ion-icon>\n          {{item.domain}}\n        <div class="item-note" item-right>\n          {{item.username}}\n        </div>\n      </button>      \n      <!--<ion-item-options side="left">\n        <button ion-button (click)="favorite(item)">Favorite</button>\n        <button ion-button color="danger" (click)="share(item)">Share</button>\n      </ion-item-options>-->\n\n      <ion-item-options side="right">\n        <button ion-button color="danger" (click)="presentConfirm($event, item)">Delete</button>\n      </ion-item-options>\n    </ion-item-sliding>\n  </ion-list>\n  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="noMoreItemsAvailable==true">\n    <ion-infinite-scroll-content>Loading...</ion-infinite-scroll-content>\n  </ion-infinite-scroll>\n</ion-content>'/*ion-inline-end:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/home/home.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__providers_api_DefaultApi__["a" /* DefaultApi */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_api_DefaultApi__["a" /* DefaultApi */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _f || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__providers_api_DefaultApi__["a" /* DefaultApi */],
+            __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
     ], HomePage);
     return HomePage;
-    var _a, _b, _c, _d, _e, _f;
 }());
 
 //# sourceMappingURL=home.js.map
 
 /***/ }),
 
-/***/ 212:
+/***/ 211:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(213);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(236);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(235);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -948,13 +882,13 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 236:
+/***/ 235:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_auth_service__ = __webpack_require__(121);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_auth_service__ = __webpack_require__(236);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_api_DefaultApi__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_utils__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__constants_app_constants__ = __webpack_require__(106);
@@ -969,10 +903,10 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_login_login__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_logout_logout__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_profile_profile__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_reset_password_reset_password_module__ = __webpack_require__(166);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_reset_password_reset_password_module__ = __webpack_require__(165);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ionic_storage__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_status_bar__ = __webpack_require__(207);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_splash_screen__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_status_bar__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_splash_screen__ = __webpack_require__(209);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1019,17 +953,17 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_0__angular_http__["c" /* HttpModule */],
                 __WEBPACK_IMPORTED_MODULE_7_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_8__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/change-password/change-password.module#ChangePaswordModule', name: 'ChangePasswordPage', segment: 'change-password', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/add-secret/add-secret.module#AddSecretModule', name: 'AddSecret', segment: 'add-secret', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/edit-secret/edit-secret.module#EditSecretModule', name: 'EditSecretPage', segment: 'edit-secret', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/activate/activate.module#ActivatePageModule', name: 'ActivatePage', segment: 'activate', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/add-secret/add-secret.module#AddSecretModule', name: 'AddSecret', segment: 'add-secret', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/change-password/change-password.module#ChangePaswordModule', name: 'ChangePasswordPage', segment: 'change-password', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/edit-secret/edit-secret.module#EditSecretModule', name: 'EditSecretPage', segment: 'edit-secret', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/home.module#HomeModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/logout/logout.module#LogoutModule', name: 'LogoutPage', segment: 'logout', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/profile/profile.module#ProfileModule', name: 'ProfilePage', segment: 'profile', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/register/register.module#RegisterModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/reset-password/reset-password.module#ResetPasswordModule', name: 'ResetPasswordPage', segment: 'reset-password', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/secret-key/secret-key.module#SecretKeyPageModule', name: 'SecretKeyPage', segment: 'secret-key', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/profile/profile.module#ProfileModule', name: 'ProfilePage', segment: 'profile', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/secret-key/secret-key.module#SecretKeyPageModule', name: 'SecretKeyPage', segment: 'secret-key', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_17__ionic_storage__["a" /* IonicStorageModule */].forRoot(),
@@ -1064,6 +998,85 @@ var AppModule = (function () {
 
 /***/ }),
 
+/***/ 236:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export User */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(121);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var User = (function () {
+    function User(name, email) {
+        this.name = name;
+        this.email = email;
+    }
+    return User;
+}());
+
+var AuthService = (function () {
+    function AuthService() {
+    }
+    AuthService.prototype.login = function (credentials) {
+        var _this = this;
+        if (credentials.email === null || credentials.password === null) {
+            return __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"].throw("Please insert credentials");
+        }
+        else {
+            return __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"].create(function (observer) {
+                // At this point make a request to your backend to make a real check!
+                var access = (credentials.password === "pass" && credentials.email === "email");
+                _this.currentUser = new User('Simon', 'saimon@devdactic.com');
+                observer.next(access);
+                observer.complete();
+            });
+        }
+    };
+    AuthService.prototype.register = function (credentials) {
+        if (credentials.email === null || credentials.password === null) {
+            return __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"].throw("Please insert credentials");
+        }
+        else {
+            // At this point store the credentials to your backend!
+            return __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"].create(function (observer) {
+                observer.next(true);
+                observer.complete();
+            });
+        }
+    };
+    AuthService.prototype.getUserInfo = function () {
+        return this.currentUser;
+    };
+    AuthService.prototype.logout = function () {
+        var _this = this;
+        return __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"].create(function (observer) {
+            _this.currentUser = null;
+            observer.next(true);
+            observer.complete();
+        });
+    };
+    AuthService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])()
+    ], AuthService);
+    return AuthService;
+}());
+
+//# sourceMappingURL=auth-service.js.map
+
+/***/ }),
+
 /***/ 238:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1092,12 +1105,12 @@ var COLLECTION_FORMATS = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_login_login__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_logout_logout__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_profile_profile__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_reset_password_reset_password__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_reset_password_reset_password__ = __webpack_require__(166);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_storage__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__ = __webpack_require__(207);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__ = __webpack_require__(209);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1133,10 +1146,10 @@ var MyApp = (function () {
         this.pages = [
             //{ title: 'Hello Ionic', component: HelloIonicPage },
             //{ title: 'My First List', component: ListPage },
-            { title: 'Home', component: __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */], icon1: 'home' },
-            { title: 'Profile', component: __WEBPACK_IMPORTED_MODULE_5__pages_profile_profile__["a" /* ProfilePage */], icon1: 'person' },
-            { title: 'Reset Password', component: __WEBPACK_IMPORTED_MODULE_6__pages_reset_password_reset_password__["a" /* ResetPasswordPage */], icon1: 'key' },
-            { title: 'Logout', component: __WEBPACK_IMPORTED_MODULE_3__pages_logout_logout__["a" /* LogoutPage */], icon1: 'log-out' }
+            { title: 'Home', component: __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */], icon: 'home' },
+            { title: 'Profile', component: __WEBPACK_IMPORTED_MODULE_5__pages_profile_profile__["a" /* ProfilePage */], icon: 'person' },
+            { title: 'Reset Password', component: __WEBPACK_IMPORTED_MODULE_6__pages_reset_password_reset_password__["a" /* ResetPasswordPage */], icon: 'key' },
+            { title: 'Logout', component: __WEBPACK_IMPORTED_MODULE_3__pages_logout_logout__["a" /* LogoutPage */], icon: 'log-out' }
         ];
     }
     MyApp.prototype.initializeApp = function () {
@@ -1165,7 +1178,7 @@ var MyApp = (function () {
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */])
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"C:\Users\FPT LA\samples\secretX\frontend\src\app\app.html"*/'<ion-menu [content]="content">\n\n\n\n  <ion-header>\n\n    <ion-toolbar>\n\n      <ion-title>Pages</ion-title>\n\n    </ion-toolbar>\n\n  </ion-header>\n\n\n\n  <ion-content>\n\n    <ion-list>\n\n      <button ion-item *ngFor="let p of pages" (click)="openPage(p)">\n\n        <ion-icon name="{{p.icon1}}" color="bright" item-left></ion-icon>\n\n        {{p.title}}\n\n      </button>\n\n    </ion-list>\n\n  </ion-content>\n\n\n\n</ion-menu>\n\n\n\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n\n'/*ion-inline-end:"C:\Users\FPT LA\samples\secretX\frontend\src\app\app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/phultu/Phu/Samples/projectX/frontend/src/app/app.html"*/'<ion-menu [content]="content">\n\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Pages</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        <ion-icon name="{{p.icon}}" color="bright" item-left></ion-icon>\n        {{p.title}}\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n'/*ion-inline-end:"/home/phultu/Phu/Samples/projectX/frontend/src/app/app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */],
@@ -1201,7 +1214,7 @@ var HelloIonicPage = (function () {
     }
     HelloIonicPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-hello-ionic',template:/*ion-inline-start:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\hello-ionic\hello-ionic.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Hello Ionic</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n  <h3>Welcome to your first Ionic app!</h3>\n\n\n\n  <p>\n\n    This starter project is our way of helping you get a functional app running in record time.\n\n  </p>\n\n  <p>\n\n    Follow along on the tutorial section of the Ionic docs!\n\n  </p>\n\n  <p>\n\n    <button ion-button color="primary" menuToggle>Toggle Menu</button>\n\n  </p>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\hello-ionic\hello-ionic.html"*/
+            selector: 'page-hello-ionic',template:/*ion-inline-start:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/hello-ionic/hello-ionic.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Hello Ionic</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n\n  <h3>Welcome to your first Ionic app!</h3>\n\n  <p>\n    This starter project is our way of helping you get a functional app running in record time.\n  </p>\n  <p>\n    Follow along on the tutorial section of the Ionic docs!\n  </p>\n  <p>\n    <button ion-button color="primary" menuToggle>Toggle Menu</button>\n  </p>\n\n</ion-content>\n'/*ion-inline-end:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/hello-ionic/hello-ionic.html"*/
         }),
         __metadata("design:paramtypes", [])
     ], HelloIonicPage);
@@ -1254,7 +1267,7 @@ var ListPage = (function () {
     };
     ListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-list',template:/*ion-inline-start:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\list\list.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>My First List</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <button ion-button class="register-btn" block clear >Create New Account</button>\n\n  <!--<ion-list>\n\n    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">\n\n      <ion-icon name="{{item.icon}}" item-left></ion-icon>\n\n      {{item.title}}\n\n      <div class="item-note" item-right>\n\n        {{item.note}}\n\n      </div>\n\n    </button>\n\n  </ion-list>-->\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\list\list.html"*/
+            selector: 'page-list',template:/*ion-inline-start:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/list/list.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>My First List</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <button ion-button class="register-btn" block clear >Create New Account</button>\n  <!--<ion-list>\n    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">\n      <ion-icon name="{{item.icon}}" item-left></ion-icon>\n      {{item.title}}\n      <div class="item-note" item-right>\n        {{item.note}}\n      </div>\n    </button>\n  </ion-list>-->\n\n</ion-content>\n'/*ion-inline-end:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/list/list.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], ListPage);
@@ -1272,10 +1285,10 @@ var ListPage = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DefaultApi; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(121);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__variables__ = __webpack_require__(238);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__configuration__ = __webpack_require__(124);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__configuration__ = __webpack_require__(123);
 /**
  * secret
  * No description provided (generated by Swagger Codegen https://github.com/swagger-api/swagger-codegen)
@@ -2816,7 +2829,7 @@ var DefaultApi = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Utils; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_configuration__ = __webpack_require__(124);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_configuration__ = __webpack_require__(123);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_crypto_js_crypto_js__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_crypto_js_crypto_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_crypto_js_crypto_js__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2888,14 +2901,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var SecretDetailsPage = (function () {
-    function SecretDetailsPage(navCtrl, navParams, storage) {
-        // If we navigated to this page, we will have an item available as a nav param
+    function SecretDetailsPage(navCtrl, navParams, storage, alertCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.storage = storage;
+        this.alertCtrl = alertCtrl;
         this.SECERET_KEY = '';
         this.decryptedPassword = '';
         this.encryptedPassword = '';
+        // If we navigated to this page, we will have an item available as a nav param    
         this.selectedItem = this.navParams.get('secret');
     }
     SecretDetailsPage.prototype.ngOnInit = function () {
@@ -2903,21 +2917,64 @@ var SecretDetailsPage = (function () {
         this.storage.get('secretKey').then(function (value) {
             _this.SECERET_KEY = value;
             _this.encryptedPassword = _this.selectedItem.password.toString();
-            var bytes = __WEBPACK_IMPORTED_MODULE_4_crypto_js_crypto_js__["AES"].decrypt(_this.encryptedPassword, _this.SECERET_KEY);
-            var plaintext = bytes.toString(__WEBPACK_IMPORTED_MODULE_4_crypto_js_crypto_js__["enc"].Utf8);
-            _this.decryptedPassword = plaintext;
-            console.log(_this.decryptedPassword);
-            _this.selectedItem.password = _this.decryptedPassword;
+            _this.decryptedPassword = _this.selectedItem.password.toString();
         });
     };
     SecretDetailsPage.prototype.openEdit = function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__edit_secret_edit_secret__["a" /* EditSecretPage */], { 'secret': this.selectedItem });
     };
+    SecretDetailsPage.prototype.presentPrompt = function () {
+        var _this = this;
+        var alert = this.alertCtrl.create({
+            title: 'Secret Key',
+            message: 'Enter your key to decrypt password.',
+            inputs: [
+                {
+                    name: 'key',
+                    placeholder: 'key',
+                    type: 'password'
+                }
+            ],
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: function (data) {
+                        console.log('Cancel clicked');
+                    }
+                },
+                {
+                    text: 'Decrypt',
+                    handler: function (data) {
+                        if (data.key == _this.SECERET_KEY) {
+                            var bytes = __WEBPACK_IMPORTED_MODULE_4_crypto_js_crypto_js__["AES"].decrypt(_this.encryptedPassword, _this.SECERET_KEY);
+                            var plaintext = bytes.toString(__WEBPACK_IMPORTED_MODULE_4_crypto_js_crypto_js__["enc"].Utf8);
+                            _this.decryptedPassword = plaintext;
+                            console.log(_this.decryptedPassword);
+                        }
+                        else {
+                            _this.showError('Incorrect key!');
+                        }
+                    }
+                }
+            ]
+        });
+        alert.present();
+    };
+    SecretDetailsPage.prototype.showError = function (text) {
+        var alert = this.alertCtrl.create({
+            title: 'Fail',
+            subTitle: text,
+            buttons: ['OK']
+        });
+        alert.present();
+    };
     SecretDetailsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-secret-details',template:/*ion-inline-start:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\secret-details\secret-details.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Secret Details</ion-title>\n\n    <ion-buttons end>\n\n    <button (click)="openEdit()" ion-button>\n\n      Edit\n\n    </button>\n\n  </ion-buttons>\n\n  \n\n </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <!--<h3 text-center *ngIf="selectedItem">\n\n    {{selectedItem.title}}\n\n    <ion-icon [name]="selectedItem.icon"></ion-icon>\n\n  </h3>\n\n  <h4 text-center *ngIf="selectedItem">\n\n    You navigated here from <b>{{selectedItem.title}}</b>\n\n  </h4>-->\n\n  <ion-list *ngIf="selectedItem">\n\n    <ion-item>\n\n      <ion-label stacked> Domain </ion-label>\n\n      <ion-label> {{selectedItem.domain}} </ion-label>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label stacked> Username </ion-label>\n\n      <ion-label> {{selectedItem.username}} </ion-label>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label stacked> Password </ion-label>\n\n      <ion-label> {{encryptedPassword}} </ion-label>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label stacked> Decrypted Password </ion-label>\n\n      <ion-label> {{decryptedPassword}} </ion-label>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label stacked> Note </ion-label>\n\n      <ion-label> {{selectedItem.note}} </ion-label>\n\n    </ion-item>\n\n</ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\secret-details\secret-details.html"*/
+            selector: 'page-secret-details',template:/*ion-inline-start:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/secret-details/secret-details.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Secret Details</ion-title>\n    <ion-buttons end>\n    <button (click)="openEdit()" ion-button>\n      Edit\n    </button>\n  </ion-buttons>\n  \n </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <!--<h3 text-center *ngIf="selectedItem">\n    {{selectedItem.title}}\n    <ion-icon [name]="selectedItem.icon"></ion-icon>\n  </h3>\n  <h4 text-center *ngIf="selectedItem">\n    You navigated here from <b>{{selectedItem.title}}</b>\n  </h4>-->\n  <ion-list *ngIf="selectedItem">\n    <ion-item>\n      <ion-label stacked> Domain </ion-label>\n      <ion-label> {{selectedItem.domain}} </ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-label stacked> Username </ion-label>\n      <ion-label> {{selectedItem.username}} </ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-label stacked> Password </ion-label>\n      <ion-label> {{decryptedPassword}} </ion-label>\n    </ion-item>\n    <!-- <ion-item>\n      <ion-label stacked> Decrypted Password </ion-label>\n      <ion-label> {{decryptedPassword}} </ion-label>\n    </ion-item> -->\n    <ion-item>\n      <ion-label stacked> Note </ion-label>\n      <ion-label> {{selectedItem.note}} </ion-label>\n    </ion-item>\n  </ion-list>\n\n  <button type="submit" ion-button color="primary" block class="submit-btn" (click)="presentPrompt()">View</button>\n</ion-content>\n'/*ion-inline-end:"/home/phultu/Phu/Samples/projectX/frontend/src/pages/secret-details/secret-details.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
     ], SecretDetailsPage);
     return SecretDetailsPage;
 }());
@@ -2926,5 +2983,5 @@ var SecretDetailsPage = (function () {
 
 /***/ })
 
-},[212]);
+},[211]);
 //# sourceMappingURL=main.js.map

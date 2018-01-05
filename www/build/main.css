@@ -25769,3 +25769,7 @@ page-profile .label {
 page-register .invalid {
   color: red;
 }
+
+page-secret-details .submit-btn {
+  border-radius: 10px !important;
+}

@@ -44,11 +44,11 @@
       </ion-item-options>-->
 
       <ion-item-options side="right">
-        <button ion-button color="danger" (click)="deleteItem($event, item)">Delete</button>
+        <button ion-button color="danger" (click)="presentConfirm($event, item)">Delete</button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="noMoreItemsAvailable==true">
+    <ion-infinite-scroll-content>Loading...</ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

@@ -1,14 +1,8 @@
 import { OnInit, Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import * as models  from '../../providers/model/models';
-
-//import { ToastService } from '../../../providers/util/toast.service';
-//import { AlertService } from '../../../providers/util/alert.service';
-//import { Component } from '@angular/core';
-//import { Camera } from '@ionic-native/camera';
-//import { IonicPage } from 'ionic-angular';
 
 /**
  * Generated class for the Profile page.

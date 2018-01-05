@@ -5,7 +5,6 @@ import {FormGroup, FormBuilder, FormControl, Validators} from "@angular/forms";
 import { Storage } from '@ionic/storage';
 import { DefaultApi } from '../../providers/api/DefaultApi';
 
-import { Utils } from '../../utils/utils';
 import * as models  from '../../providers/model/models';
 
 /**

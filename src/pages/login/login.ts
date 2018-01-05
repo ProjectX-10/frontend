@@ -1,12 +1,10 @@
 import { OnInit, Component } from '@angular/core';
 import { NavController, AlertController, LoadingController, Loading, IonicPage } from 'ionic-angular';
-import { AuthService } from '../../providers/auth-service';
 import { DefaultApi } from '../../providers/api/DefaultApi';
 import { AppConstants } from '../../constants/app.constants';
 
 import { Storage } from '@ionic/storage';
 import * as models  from '../../providers/model/models';
-import { Configuration } from '../../providers/configuration';
 
 /**
  * Generated class for the Login page.
@@ -23,7 +21,7 @@ export class LoginPage implements OnInit {
   loading: Loading;
   registerCredentials = { email: '', password: '' };    
  
-  constructor(private nav: NavController, private auth: AuthService, 
+  constructor(private nav: NavController,
     private alertCtrl: AlertController, private loadingCtrl: LoadingController,
     private api: DefaultApi, private storage: Storage) { }
 

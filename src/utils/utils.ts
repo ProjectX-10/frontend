@@ -1,8 +1,6 @@
 import { Injectable } from "@angular/core";
 import * as models  from '../providers/model/models';
 import { Configuration } from '../providers/configuration';
-import {XHRBackend, Http, RequestOptions} from "@angular/http";
-import {HttpInterceptor} from "../providers/http/http-interceptor";
 
 import * as CryptoJS from 'crypto-js/crypto-js';
 

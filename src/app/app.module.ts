@@ -1,4 +1,4 @@
-import { Http, XHRBackend, RequestOptions, HttpModule } from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { AuthService } from './../providers/auth-service';
 import { DefaultApi } from './../providers/api/DefaultApi';
 import { Utils } from './../utils/utils';
@@ -15,7 +15,6 @@ import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
 import { ProfilePage } from '../pages/profile/profile';
 import { ResetPasswordModule } from '../pages/reset-password/reset-password.module';
-import { HttpInterceptor } from '../providers/http/http-interceptor';
 import { IonicStorageModule } from '@ionic/storage';
 
 import { StatusBar } from '@ionic-native/status-bar';
