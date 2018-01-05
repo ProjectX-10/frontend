@@ -52,7 +52,6 @@ export class ChangePasswordPage implements OnInit {
       request.email = this.user.email;
       request.password = this.user.password;    
       request.changeKey = this.user.changeKey;
-      this.showError('Ok');
       this.api.usersChangepasswordPost(request).subscribe(response => {
           this.storage.set('user', response);         
           this.navCtrl.push('SecretKeyPage');

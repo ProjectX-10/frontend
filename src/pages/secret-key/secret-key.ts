@@ -82,8 +82,8 @@ export class SecretKeyPage implements OnInit{
   }
 
   updateStorage(): void {
-    this.loginUser.item.secretKey = this.userInfo.secretKey;
-    this.loginUser.item.status = AppConstants.KEY_STATUS;
+    this.loginUser.item.secretKey = this.userInfo.secretKey;    
+    this.loginUser.item.status = AppConstants.KEY_STATUS;    
     this.storage.set('user', this.loginUser); 
   }
 

@@ -24,8 +24,8 @@ export class SecretDetailsPage implements OnInit {
   }
 
   ngOnInit(): any {
-    this.storage.get('secretKey').then((value) => {
-        this.SECERET_KEY = value;
+    this.storage.get('user').then((value) => {
+        this.SECERET_KEY = value.item.secretKey;
         this.encryptedPassword = this.selectedItem.password.toString();
         this.decryptedPassword = this.selectedItem.password.toString();
       });
@@ -56,12 +56,11 @@ export class SecretDetailsPage implements OnInit {
         },
         {
           text: 'Decrypt',
-          handler: data => {
-            if (data.key == this.SECERET_KEY) {
+          handler: data => {             
+            if (data.key === this.SECERET_KEY) {
               let bytes = CryptoJS.AES.decrypt(this.encryptedPassword, this.SECERET_KEY);
               let plaintext = bytes.toString(CryptoJS.enc.Utf8);
               this.decryptedPassword = plaintext;
-              console.log(this.decryptedPassword);             
             } else {
               this.showError('Incorrect key!');
             }

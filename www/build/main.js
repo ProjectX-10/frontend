@@ -2914,8 +2914,8 @@ var SecretDetailsPage = (function () {
     }
     SecretDetailsPage.prototype.ngOnInit = function () {
         var _this = this;
-        this.storage.get('secretKey').then(function (value) {
-            _this.SECERET_KEY = value;
+        this.storage.get('user').then(function (value) {
+            _this.SECERET_KEY = value.item.secretKey;
             _this.encryptedPassword = _this.selectedItem.password.toString();
             _this.decryptedPassword = _this.selectedItem.password.toString();
         });
@@ -2946,11 +2946,10 @@ var SecretDetailsPage = (function () {
                 {
                     text: 'Decrypt',
                     handler: function (data) {
-                        if (data.key == _this.SECERET_KEY) {
+                        if (data.key === _this.SECERET_KEY) {
                             var bytes = __WEBPACK_IMPORTED_MODULE_4_crypto_js_crypto_js__["AES"].decrypt(_this.encryptedPassword, _this.SECERET_KEY);
                             var plaintext = bytes.toString(__WEBPACK_IMPORTED_MODULE_4_crypto_js_crypto_js__["enc"].Utf8);
                             _this.decryptedPassword = plaintext;
-                            console.log(_this.decryptedPassword);
                         }
                         else {
                             _this.showError('Incorrect key!');
