@@ -20,7 +20,6 @@ export class SecretDetailsPage implements OnInit {
         private alertCtrl: AlertController,) {
     // If we navigated to this page, we will have an item available as a nav param    
     this.selectedItem = this.navParams.get('secret');
-    
   }
 
   ngOnInit(): any {

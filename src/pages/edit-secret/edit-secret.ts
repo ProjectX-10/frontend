@@ -29,7 +29,6 @@ export class EditSecretPage implements OnInit {
   	public formBuilder: FormBuilder, private api: DefaultApi, private loadingCtrl: LoadingController, private storage: Storage
     ) {
     this.secret = this.navParams.get('secret');
-    this.secret.confirmPassword = this.secret.password;
   }
 
   ngOnInit(): any {
@@ -37,7 +36,11 @@ export class EditSecretPage implements OnInit {
       let loginUser: models.LoginUserResponse = val;
       this.SECERET_KEY = loginUser.item.secretKey;
       this.secret.userId = loginUser.item.id;
-      this.secret.encryptedPassword = Utils.getEncryptCode(this.secret.password, this.SECERET_KEY);
+      this.secret.encryptedPassword = this.secret.password;
+      this.secret.password = Utils.getDEcryptedCode(this.secret.password, this.SECERET_KEY);
+      this.secret.confirmPassword = this.secret.password;
+      console.log(this.secret.password);
+      console.log(this.secret.confirmPassword);
       this.api.configuration = Utils.getConfiguration(loginUser);     
     });
 
@@ -65,7 +68,6 @@ export class EditSecretPage implements OnInit {
             this.showError(error);
         });
     }
-    
   }
 
   isValid(field: string) {
