@@ -28,7 +28,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class DefaultApi {
 
-    protected basePath = 'https://dyfq02qhr1.execute-api.us-east-1.amazonaws.com/dev';
+    protected basePath = 'https://tkbl964yv9.execute-api.us-west-1.amazonaws.com/prod';
     public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
 

@@ -54,6 +54,7 @@ var SecretKeyPageModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__constants_app_constants__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_crypto_js_sha256__ = __webpack_require__(308);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_crypto_js_sha256___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_crypto_js_sha256__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils_utils__ = __webpack_require__(52);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -63,6 +64,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -100,6 +102,7 @@ var SecretKeyPage = (function () {
                 _this.hasKey = true;
                 _this.SECERET_KEY = _this.loginUser.item.secretKey;
             }
+            _this.api.configuration = __WEBPACK_IMPORTED_MODULE_7__utils_utils__["a" /* Utils */].getConfiguration(_this.loginUser);
         });
         this.storage.get('passcode').then(function (value) {
             _this.userInfo.passcode = value;

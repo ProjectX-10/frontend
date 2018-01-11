@@ -7,6 +7,7 @@ import { AppConstants } from '../../constants/app.constants';
 
 import * as models  from '../../providers/model/models';
 import * as SHA256 from 'crypto-js/sha256';
+import { Utils } from '../../utils/utils';
 
 /**
  * Generated class for the ActivatePage page.
@@ -44,7 +45,8 @@ export class SecretKeyPage implements OnInit{
       if (this.loginUser.item.secretKey !== undefined && this.loginUser.item.secretKey !== null) {
         this.hasKey = true;
         this.SECERET_KEY = this.loginUser.item.secretKey;
-      }    
+      }   
+      this.api.configuration = Utils.getConfiguration(this.loginUser);    
     });
 
     this.storage.get('passcode').then((value) => {

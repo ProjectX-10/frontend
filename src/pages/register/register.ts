@@ -52,8 +52,7 @@ export class RegisterPage implements OnInit {
           this.navCtrl.push('ActivatePage');
         },
           error => {
-            this.showError(error);
-          
+            this.showError(error);          
         });
 
     } else {
