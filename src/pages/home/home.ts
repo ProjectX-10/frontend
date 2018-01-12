@@ -26,7 +26,6 @@ export class HomePage implements OnInit {
   noMoreItemsAvailable: boolean = false; 
 
   searchInput: string = '';
-
   QUERY_STR: string = '';
   LIMIT: string = '15'
   CURSOR: string = undefined;

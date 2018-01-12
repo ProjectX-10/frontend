@@ -11,6 +11,7 @@ import * as CryptoJS from 'crypto-js/crypto-js';
   templateUrl: 'secret-details.html'
 })
 export class SecretDetailsPage implements OnInit {
+  
   selectedItem: any;
   SECERET_KEY: string = '';
   decryptedPassword: string = '';
