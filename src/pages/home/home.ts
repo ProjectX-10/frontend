@@ -46,13 +46,16 @@ export class HomePage implements OnInit {
       } else {
         let loginUser: models.LoginUserResponse = val; 
         this.QUERY_STR = 'userId:' + loginUser.item.id;   
-        this.api.configuration = Utils.getConfiguration(loginUser);  
+        this.api.configuration = Utils.getConfiguration(loginUser); 
         this.getSecrets(this.QUERY_STR);  
       }        
     });    
   }  
 
   getSecrets(query:string) {
+    if (this.noMoreItemsAvailable == false) {
+      this.showLoading(); 
+    }
     this.api.secretsSearchGet(query, this.LIMIT, this.CURSOR).subscribe(response => {   
         if (response != null && response.items.length > 0) {          
           for (let i in response.items) {              
@@ -63,10 +66,10 @@ export class HomePage implements OnInit {
           this.CURSOR = response.nextPageToken;
           this.noMoreItemsAvailable = true;
         }
+        this.closeLoading();
       },
         error => {
           this.showError(error);
-        
       });
   }
 
@@ -158,10 +161,13 @@ export class HomePage implements OnInit {
 
   showLoading() {
     this.loading = this.loadingCtrl.create({
-      content: 'Please wait...',
-      dismissOnPageChange: true
+      content: 'Please wait...'
     });
     this.loading.present();
+  }
+
+  closeLoading() {
+    this.loading.dismiss();
   }
 
   showError(text) {

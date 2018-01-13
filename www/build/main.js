@@ -740,6 +740,9 @@ var HomePage = (function () {
     };
     HomePage.prototype.getSecrets = function (query) {
         var _this = this;
+        if (this.noMoreItemsAvailable == false) {
+            this.showLoading();
+        }
         this.api.secretsSearchGet(query, this.LIMIT, this.CURSOR).subscribe(function (response) {
             if (response != null && response.items.length > 0) {
                 for (var i in response.items) {
@@ -750,6 +753,7 @@ var HomePage = (function () {
                 _this.CURSOR = response.nextPageToken;
                 _this.noMoreItemsAvailable = true;
             }
+            _this.closeLoading();
         }, function (error) {
             _this.showError(error);
         });
@@ -833,10 +837,12 @@ var HomePage = (function () {
     };
     HomePage.prototype.showLoading = function () {
         this.loading = this.loadingCtrl.create({
-            content: 'Please wait...',
-            dismissOnPageChange: true
+            content: 'Please wait...'
         });
         this.loading.present();
+    };
+    HomePage.prototype.closeLoading = function () {
+        this.loading.dismiss();
     };
     HomePage.prototype.showError = function (text) {
         this.loading.dismiss();
@@ -964,8 +970,8 @@ var AppModule = (function () {
                         { loadChildren: '../pages/login/login.module#LoginModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/logout/logout.module#LogoutModule', name: 'LogoutPage', segment: 'logout', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/profile/profile.module#ProfileModule', name: 'ProfilePage', segment: 'profile', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/register/register.module#RegisterModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/reset-password/reset-password.module#ResetPasswordModule', name: 'ResetPasswordPage', segment: 'reset-password', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/register/register.module#RegisterModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/secret-key/secret-key.module#SecretKeyPageModule', name: 'SecretKeyPage', segment: 'secret-key', priority: 'low', defaultHistory: [] }
                     ]
                 }),
@@ -2973,7 +2979,7 @@ var SecretDetailsPage = (function () {
     };
     SecretDetailsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-secret-details',template:/*ion-inline-start:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\secret-details\secret-details.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Secret Details</ion-title>\n\n    <ion-buttons end>\n\n    <button (click)="openEdit()" ion-button>\n\n      Edit\n\n    </button>\n\n  </ion-buttons>\n\n  \n\n </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-list *ngIf="selectedItem">\n\n    <ion-item>\n\n      <ion-label stacked> Domain </ion-label>\n\n      <ion-label> {{selectedItem.domain}} </ion-label>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label stacked> Username </ion-label>\n\n      <ion-label> {{selectedItem.username}} </ion-label>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label stacked> Password </ion-label>\n\n      <ion-label> {{decryptedPassword}} </ion-label>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label stacked> Note </ion-label>\n\n      <ion-label> {{selectedItem.note}} </ion-label>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label stacked> Created At </ion-label>\n\n      <ion-label> {{selectedItem.createdAt}} </ion-label>\n\n    </ion-item>\n\n  </ion-list>\n\n\n\n  <button type="submit" ion-button color="primary" block class="submit-btn" (click)="presentPrompt()">View</button>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\secret-details\secret-details.html"*/
+            selector: 'page-secret-details',template:/*ion-inline-start:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\secret-details\secret-details.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Secret Details</ion-title>\n\n    <ion-buttons end>\n\n    <button (click)="openEdit()" ion-button>\n\n      Edit\n\n    </button>\n\n  </ion-buttons>\n\n  \n\n </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-list *ngIf="selectedItem">\n\n    <ion-item>\n\n      <ion-label stacked> Domain </ion-label>\n\n      <ion-label> {{selectedItem.domain}} </ion-label>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label stacked> Username </ion-label>\n\n      <ion-label> {{selectedItem.username}} </ion-label>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label stacked> Password </ion-label>\n\n      <ion-label> {{decryptedPassword}} </ion-label>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label stacked> Note </ion-label>\n\n      <ion-label> {{selectedItem.note}} </ion-label>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label stacked> Updated At </ion-label>\n\n      <ion-label> {{selectedItem.createdAt}} </ion-label>\n\n    </ion-item>\n\n  </ion-list>\n\n\n\n  <button type="submit" ion-button color="primary" block class="submit-btn" (click)="presentPrompt()">View</button>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\FPT LA\samples\secretX\frontend\src\pages\secret-details\secret-details.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
