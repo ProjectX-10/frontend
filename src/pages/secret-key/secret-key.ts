@@ -59,7 +59,7 @@ export class SecretKeyPage implements OnInit{
   }
 
   onSubmit() {
-    this.showLoading();   
+       
     if (this.SECERET_KEY === undefined || this.SECERET_KEY === null || this.SECERET_KEY === '') {
       this.setupSecretkey();
     } else {
@@ -67,7 +67,8 @@ export class SecretKeyPage implements OnInit{
     }
   }
 
-  setupSecretkey() {    
+  setupSecretkey() { 
+    this.showLoading();   
     var request: models.UpdateSecretKeyRequest = {} as models.UpdateSecretKeyRequest;    
     request.userId = this.userInfo.userId;    
     let shaString = SHA256(this.userInfo.secretKey.toString());
@@ -77,6 +78,7 @@ export class SecretKeyPage implements OnInit{
     this.api.usersUpdatesecretkeyPost(request).subscribe(response => {        
         this.updateStorage();
         this.navCtrl.setRoot('HomePage');
+        this.loading.dismiss();
       },
         error => {
           this.showError(error);

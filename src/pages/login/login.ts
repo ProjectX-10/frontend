@@ -30,7 +30,6 @@ export class LoginPage implements OnInit {
       if (val !== undefined && val !== null) {
         let loginUser: models.LoginUserResponse = val;
         if (AppConstants.KEY_STATUS === loginUser.item.status) {
-          debugger;
           this.nav.setRoot('HomePage');
         }    
       }
@@ -64,6 +63,7 @@ export class LoginPage implements OnInit {
         } else {
           this.showError("Access Denied");
         }
+        this.loading.dismiss();
       },
         error => {
           this.showError(error);                  
